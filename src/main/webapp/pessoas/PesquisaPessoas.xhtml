@@ -1,0 +1,82 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+ 	  xmlns="http://www.w3.org/1999/xhtml" 
+       xmlns:ui="http://java.sun.com/jsf/facelets" 
+       xmlns:h="http://java.sun.com/jsf/html" 
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+ 
+    <ui:define name="titulo">Pesquisa Pessoas</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form>
+    		<h1>Pesquisa Pessoas</h1>
+    		
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:commandButton value="Pesquisar"/>
+    			</p:toolbarGroup>
+    			
+    			<p:toolbarGroup align="right">
+    				<p:button value="Novo" outcome="/pessoas/CadastroPessoa"/>
+    			</p:toolbarGroup>
+    		</p:toolbar>
+    		
+    		
+    		<p:panelGrid columns="2" id="painel1" style="width: 100%; margin-top: 20px"
+    			columnClasses="rotulo, campo">
+    			
+    			<p:outputLabel value="Nome" for="nomePessoa"/>
+    			<p:inputText id="nomePessoa" size="50" />
+    			
+    			<p:outputLabel value="Idade" for="idade"/>
+    			<p:inputText id="idade" size="2" />
+    			
+    			<p:outputLabel value="Nome Mãe" for="nomeMae"/>
+    			<p:inputText id="nomeMae" size="50" />
+    				  			
+    		</p:panelGrid>
+			
+			<p:panelGrid columns="2" id="painel2" style="width: 100%; margin-top: 20px"
+    			columnClasses="rotulo, campo">
+    			
+    			<p:outputLabel value="Nome Grupo" for="nomeGrupo"/>
+    			<p:inputText id="nomeGrupo" size="50" />
+    			
+    			<p:outputLabel value="Status do Grupo" for="statusGrupo"/>
+    			<p:selectOneMenu id="statusGrupo">
+    				<f:selectItem itemLabel="Selecione o status"/>
+    			</p:selectOneMenu>
+    				  			
+    		</p:panelGrid>
+    	
+			
+			    		
+    		<p:dataTable id="pessoasTable" value="#{pesquisarGruposBean.gruposFiltrados}" var="pessoa"
+    			style="margin-top: 20px" emptyMessage="Nenhuma pessoa encontrada." 
+    			rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+    			
+    			<p:column headerText="Nome Pessoa" style="text-align: center; width: 100px">
+    				<h:outputText value="Caic Souza Passos" />
+    			</p:column>
+    		
+    			<p:column headerText="Idade" style="text-align: center">
+    				<h:outputText value="20" />
+    			</p:column>
+    			
+    			<p:column headerText="Nome Grupo" style="text-align: center; width: 100px">
+    				<h:outputText value="GAM" />
+    			</p:column>
+    			
+    			<p:column headerText="Status" style="width:250px; text-align: center">
+    				<h:outputText value="Pastoral" />
+    			</p:column>
+    			
+    			<p:column headerText="Ações" style="text-align: center; width: 100px">
+    				<p:button icon="ui-icon-pencil" title="Editar"/>
+    				<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+    			</p:column>
+    		
+    		</p:dataTable>
+    	</h:form>
+    </ui:define>
+ </ui:composition>

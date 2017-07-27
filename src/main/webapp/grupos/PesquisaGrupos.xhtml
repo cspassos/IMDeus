@@ -1,0 +1,58 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+ 	  xmlns="http://www.w3.org/1999/xhtml" 
+       xmlns:ui="http://java.sun.com/jsf/facelets" 
+       xmlns:h="http://java.sun.com/jsf/html" 
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+ 
+    <ui:define name="titulo">Pesquisa Grupo</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form>
+    		<h1>Pesquisa Grupo</h1>
+    		
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:commandButton value="Pesquisar"/>
+    			</p:toolbarGroup>
+    			
+    			<p:toolbarGroup align="right">
+    				<p:button value="Novo" outcome="/grupos/CadastroGrupos"/>
+    			</p:toolbarGroup>
+    		</p:toolbar>
+    		
+    		<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+    			columnClasses="rotulo, campo">
+    			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
+    			<p:inputText id="nomeGrupo" size="20" />
+    			
+    			<p:outputLabel value="Status" for="status"/>
+    			<p:selectOneMenu id="status">
+    				<f:selectItem itemLabel="Selecione o status"/>
+    			</p:selectOneMenu>    			
+    		</p:panelGrid>
+    		
+    		<p:dataTable id="gruposTable" value="#{pesquisarGruposBean.gruposFiltrados}" var="produto"
+    			style="margin-top: 20px" emptyMessage="Nenhum grupo encontrado." rows="20"
+    			paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+    			
+    			<p:column headerText="Nome do grupo" style="text-align: center; width: 100px">
+    				<h:outputText value="GAM" />
+    			</p:column>
+    			<p:column headerText="Status" style="width:250px; text-align: center">
+    				<h:outputText value="Pastoral" />
+    			</p:column>
+    			
+    			<p:column headerText="Data criação" style="text-align: center">
+    				<h:outputText value="19/07/2017" />
+    			</p:column>
+    			
+    			<p:column headerText="Ações" style="text-align: center; width: 100px">
+    				<p:button icon="ui-icon-pencil" title="Editar"/>
+    				<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+    			</p:column>
+    			
+    		</p:dataTable>
+    	</h:form>
+    </ui:define>
+ </ui:composition>

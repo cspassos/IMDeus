@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+       xmlns:ui="http://java.sun.com/jsf/facelets" 
+       xmlns:h="http://java.sun.com/jsf/html" 
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+	 <p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo">
+	 	
+	 	<p:outputLabel value="Nome Completo" for="nomeCompleto"/>
+	 	<p:inputText id="nomeCompleto" size="50" />
+	 	
+	 	<p:outputLabel value="Idade" for="idade"/>
+	 	<p:inputText id="idade" size="2" />
+	 	
+	 	<p:outputLabel value="Celular" for="celularPessoa"/>
+	 	<p:inputText id="celularPessoa" size="15" />
+	 	
+	 	<p:outputLabel value="E-mail" for="email"/>
+	 	<p:inputText id="email" size="30" />
+	 	
+	 	<p:outputLabel value="Nome Mãe" for="nomeMae"/>
+	 	<p:inputText id="nomeMae" size="50" />
+	 	
+	 	<p:outputLabel value="Celular Mãe" for="celularMae"/>
+	 	<p:inputText id="celularMae" size="15" />
+	 	
+	 	<p:outputLabel value="Nome Pai" for="nomePai"/>
+	 	<p:inputText id="nomePai" size="50" />
+	 	
+	 	<p:outputLabel value="Celular Pai" for="celularPai"/>
+	 	<p:inputText id="celularPai" size="15" />
+
+		<p:outputLabel value="Status" for="status" />
+		<p:selectOneMenu id="status">
+			<f:selectItem itemLabel="Selecione o status" />
+			<f:selectItem itemLabel="Pastoral" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Grupo" for="statusGrupo" />
+		<p:selectOneMenu id="statusGrupo">
+			<f:selectItem itemLabel="Selecione o status" />
+			<f:selectItem itemLabel="GAM" />
+		</p:selectOneMenu>
+
+	 	<p:outputLabel value="Toma algum medicamento?"/>
+	 	<p:selectManyCheckbox>
+	 		<f:selectItem itemLabel="Sim"/>
+	 		<f:selectItem itemLabel="Não"/>
+	 	</p:selectManyCheckbox>
+	 	<p:outputLabel value="Qual?" for="medicamento"/>
+	 	<p:inputText id="medicamento" size="20" />
+	 	
+	 	<p:outputLabel value="Tem alergia, intolerância ou restrição a algum alimento?"/>
+	 	<p:selectManyCheckbox>
+	 		<f:selectItem itemLabel="Sim"/>
+	 		<f:selectItem itemLabel="Não"/>
+	 	</p:selectManyCheckbox>
+	 	<p:outputLabel value="Qual?" for="alergia"/>
+	 	<p:inputText id="alergia" size="20" />
+	 	
+	 		 	
+	 </p:panelGrid>
+
+</ui:composition>
