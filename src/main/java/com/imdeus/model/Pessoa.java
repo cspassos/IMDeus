@@ -14,8 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "pessoa")
@@ -25,9 +28,10 @@ public class Pessoa implements Serializable {
 
 	private Long id;
 	private String nome;
+	private String idade;
 	private String email;
 	private String celular;
-	private List<Endereco> enderecos = new ArrayList<>();
+	private Endereco endereco;
 	private List<Grupo> grupo = new ArrayList<>();
 	private ComplementoPessoa complementoPessoa;
 	
@@ -42,6 +46,7 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 	
+	@NotBlank @Size(max = 100)
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -51,15 +56,28 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 	
+	@Size(max = 2)
+	@Column(nullable = false, length = 2)
+	public String getIdade() {
+		return idade;
+	}
+	
+	public void setIdade(String idade) {
+		this.idade = idade;
+	}
+	
+	@NotBlank @Size(max = 255)
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	
+	@NotBlank @Size(max = 17)
 	@Column(nullable = false, length = 17)
 	public String getCelular() {
 		return celular;
@@ -72,13 +90,13 @@ public class Pessoa implements Serializable {
 	//uma pessoa possui muitos endereços
 	//mappedBy -> esse relacionamento que criei é o inverso do que mapiei na entidade endereço.
 	//cascade -> quando salvar uma pessoa automaticamente vai persistir os endereços do cliente
-	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-	public List<Endereco> getEnderecos() {
-		return enderecos;
+	@OneToOne
+	public Endereco getEndereco() {
+		return endereco;
 	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
+	
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	@ManyToMany

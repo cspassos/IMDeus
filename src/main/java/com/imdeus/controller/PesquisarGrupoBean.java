@@ -8,11 +8,11 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class PesquisarGruposBean {
+public class PesquisarGrupoBean {
 
 	private List<Integer> gruposFiltrados;
 	
-	public PesquisarGruposBean() {
+	public PesquisarGrupoBean() {
 		gruposFiltrados = new ArrayList<>();
 		for(int i=0; i < 50; i++) {
 			gruposFiltrados.add(i);

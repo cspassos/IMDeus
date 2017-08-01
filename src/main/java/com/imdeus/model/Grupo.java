@@ -14,6 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "grupo")
@@ -23,7 +27,7 @@ public class Grupo implements Serializable {
 
 	private Long id;
 	private String nome;
-	private StatusGrupo status;
+	private String status;
 	private List<Pessoa> pessoa = new ArrayList<>();
 
 	@Id
@@ -36,6 +40,7 @@ public class Grupo implements Serializable {
 		this.id = id;
 	}
 	
+	@NotBlank
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -45,16 +50,16 @@ public class Grupo implements Serializable {
 		this.nome = nome;
 	}
 	
-	@Enumerated(EnumType.STRING)
+	@NotNull
 	@Column(nullable = false, length = 20)
-	public StatusGrupo getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusGrupo status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	@ManyToMany
 	public List<Pessoa> getPessoa() {
 		return pessoa;

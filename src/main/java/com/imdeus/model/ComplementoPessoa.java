@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "complemento_pessoa")
@@ -24,6 +27,8 @@ public class ComplementoPessoa implements Serializable {
 	private String celularMae;
 	private String celularPai;
 	private String observacao;
+	private String qualMedicamento;
+	private String qualAlergia;
 	private Pessoa pessoa;
 
 	@Id
@@ -36,6 +41,7 @@ public class ComplementoPessoa implements Serializable {
 		this.id = id;
 	}
 	
+	@NotBlank @Size(max = 100)
 	@Column(name = "nome_mae",nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
@@ -44,7 +50,7 @@ public class ComplementoPessoa implements Serializable {
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-	
+	@NotBlank @Size(max = 17)
 	@Column(name = "celular_mae", length = 17)
 	public String getCelularMae() {
 		return celularMae;
@@ -54,6 +60,7 @@ public class ComplementoPessoa implements Serializable {
 		this.celularMae = celularMae;
 	}
 	
+	@NotBlank @Size(max = 100)
 	@Column(name = "nome_pai", nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;
@@ -63,6 +70,7 @@ public class ComplementoPessoa implements Serializable {
 		this.nomePai = nomePai;
 	}
 	
+	@NotBlank @Size(max = 17)
 	@Column(name = "celular_pai", length = 17)
 	public String getCelularPai() {
 		return celularPai;
@@ -72,6 +80,7 @@ public class ComplementoPessoa implements Serializable {
 		this.celularPai = celularPai;
 	}
 	
+	@Size(max = 300)
 	@Column(length = 300)
 	public String getObservacao() {
 		return observacao;
@@ -79,6 +88,26 @@ public class ComplementoPessoa implements Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	
+	@Size(max = 300)
+	@Column(length = 255)
+	public String getQualMedicamento() {
+		return qualMedicamento;
+	}
+
+	public void setQualMedicamento(String qualMedicamento) {
+		this.qualMedicamento = qualMedicamento;
+	}
+	
+	@Size(max = 300)
+	@Column(length = 255)
+	public String getQualAlergia() {
+		return qualAlergia;
+	}
+
+	public void setQualAlergia(String qualAlergia) {
+		this.qualAlergia = qualAlergia;
 	}
 	
 	@OneToOne
@@ -90,7 +119,7 @@ public class ComplementoPessoa implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

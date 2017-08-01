@@ -33,7 +33,7 @@ public class teste {
 		endereco.setUf("BA");
 		endereco.setPessoa(pessoa);
 		
-		pessoa.getEnderecos().add(endereco);
+		//pessoa.getEndereco().add(endereco);
 		
 		manager.persist(pessoa);
 		

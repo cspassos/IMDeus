@@ -11,11 +11,13 @@
     	<h:form>
     	
     		<h1>Novo Grupo</h1>
+    		<!-- closable -> Permitir que a mensagem seja fechada. -->
+    		<p:messages autoUpdate="true" closable="true"/>
     		
     		<p:toolbar style="margin-top: 20px">
     			<p:toolbarGroup>
     				<p:button value="Novo" outcome="/grupos/CadastroGrupos"/>
-    				<p:commandButton value="Salvar" id="botaoSalvar"/>
+    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroGrupoBean.salvar}"/>
     			</p:toolbarGroup>
     			
     			<p:toolbarGroup align="right">
@@ -25,13 +27,18 @@
     		
     		<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
     			columnClasses="rotulo, campo">
-    			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
-    			<p:inputText id="nomeGrupo" size="20" maxlength="20"/>
     			
     			<p:outputLabel value="Status" for="status"/>
     			<p:selectOneMenu id="status">
-    				<f:selectItem itemLabel="Selecione o status"/>
+    				<f:selectItem itemLabel="Pastoral"/>
+    				<f:selectItem itemLabel="Movimento"/>
+    				<f:selectItem itemLabel="Grupo de Jovens"/>
     			</p:selectOneMenu>
+    			
+    			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
+    			<p:inputText id="nomeGrupo" size="80" maxlength="100"
+    				value="#{cadastroGrupoBean.grupo.nome}"/>
+    			
     		</p:panelGrid>
     		
     	</h:form>
