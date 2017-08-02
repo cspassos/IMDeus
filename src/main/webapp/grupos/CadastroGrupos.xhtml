@@ -8,6 +8,11 @@
     <ui:define name="titulo">Novo Grupo</ui:define>
     
     <ui:define name="corpo">
+    
+    	<f:metadata>
+    		<f:event listener="#{cadastroGrupoBean.inicializar}" type="preRenderView" />
+    	</f:metadata>
+    	
     	<h:form>
     	
     		<h1>Novo Grupo</h1>
@@ -28,12 +33,12 @@
     		<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
     			columnClasses="rotulo, campo">
     			
-    			<p:outputLabel value="Status" for="status"/>
-    			<p:selectOneMenu id="status">
-    				<f:selectItem itemLabel="Pastoral"/>
-    				<f:selectItem itemLabel="Movimento"/>
-    				<f:selectItem itemLabel="Grupo de Jovens"/>
-    			</p:selectOneMenu>
+    			<p:outputLabel value="Status Grupo" for="statusGrupo"/>
+	    		<p:selectOneMenu id="statusGrupo">
+	    			<f:selectItem itemLabel="Selecione um Status"/>
+	    			<f:selectItems value="#{cadastroGrupoBean.statusGrupoRaizes}" var="statusGrupo"
+	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
+	    		</p:selectOneMenu>
     			
     			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
     			<p:inputText id="nomeGrupo" size="80" maxlength="100"

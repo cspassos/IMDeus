@@ -4,19 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -27,7 +33,7 @@ public class Grupo implements Serializable {
 
 	private Long id;
 	private String nome;
-	private String status;
+	private StatusGrupo statusGrupo;
 	private List<Pessoa> pessoa = new ArrayList<>();
 
 	@Id
@@ -40,7 +46,7 @@ public class Grupo implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank
+	@NotBlank(message = "é obrigatorio")
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -50,16 +56,6 @@ public class Grupo implements Serializable {
 		this.nome = nome;
 	}
 	
-	@NotNull
-	@Column(nullable = false, length = 20)
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	@ManyToMany
 	public List<Pessoa> getPessoa() {
 		return pessoa;
@@ -67,6 +63,17 @@ public class Grupo implements Serializable {
 
 	public void setPessoa(List<Pessoa> pessoa) {
 		this.pessoa = pessoa;
+	}
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "status_grupo_id", nullable = false)
+	public StatusGrupo getStatusGrupo() {
+		return statusGrupo;
+	}
+
+	public void setStatusGrupo(StatusGrupo statusGrupo) {
+		this.statusGrupo = statusGrupo;
 	}
 
 	@Override
@@ -95,5 +102,6 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

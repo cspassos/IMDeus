@@ -28,7 +28,7 @@ public class Pessoa implements Serializable {
 
 	private Long id;
 	private String nome;
-	private String idade;
+	private Integer idade;
 	private String email;
 	private String celular;
 	private Endereco endereco;
@@ -56,21 +56,22 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 	
-	@Size(max = 2)
-	@Column(nullable = false, length = 2)
-	public String getIdade() {
+	@NotNull
+	@Column(nullable = false, length = 11)
+	public Integer getIdade() {
 		return idade;
 	}
 	
-	public void setIdade(String idade) {
+	public void setIdade(Integer idade) {
 		this.idade = idade;
-	}
+	}	
 	
 	@NotBlank @Size(max = 255)
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
 		return email;
 	}
+
 
 
 	public void setEmail(String email) {
