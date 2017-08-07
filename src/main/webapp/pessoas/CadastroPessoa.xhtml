@@ -8,6 +8,14 @@
     <ui:define name="titulo">Nova Pessoa</ui:define>
     
     <ui:define name="corpo">
+    
+    	<!-- viewParam -> para executar o listener apenas uma vez no inicio. -->
+    	<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
+    	<f:metadata>
+    	<f:viewParam name="dummy" />
+    		<f:event listener="#{cadastroPessoaBean.consultaStatusGrupo}" type="preRenderView" />
+    	</f:metadata>
+    	
     	<h:form>
     		<h1>Nova Pessoa</h1>
     		

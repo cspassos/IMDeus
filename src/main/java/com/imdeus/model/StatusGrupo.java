@@ -40,7 +40,7 @@ public class StatusGrupo {
 		this.nomeStatus = nomeStatus;
 	}
 	
-	@OneToMany(mappedBy = "statusGrupo", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "statusGrupo", cascade = CascadeType.ALL)
 	public List<Grupo> getGrupo() {
 		return grupo;
 	}

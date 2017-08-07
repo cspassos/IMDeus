@@ -7,9 +7,12 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.validation.constraints.NotNull;
 
 import com.imdeus.model.Grupo;
 import com.imdeus.model.StatusGrupo;
+import com.imdeus.repository.StatusGrupoRepository;
+import com.imdeus.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -18,11 +21,12 @@ public class CadastroGrupoBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private EntityManager manager;
+	private StatusGrupoRepository statusGrupoRepository;
 	
 	private Grupo grupo;
 	
 	private List<StatusGrupo> statusGrupoRaizes;
+	
 
 	public CadastroGrupoBean() {
 		grupo = new Grupo();
@@ -30,8 +34,9 @@ public class CadastroGrupoBean implements Serializable{
 	
 	public void inicializar() {
 		
-		statusGrupoRaizes = manager.createQuery("from StatusGrupo", StatusGrupo.class).getResultList();
-		
+		if(FacesUtil.isNotPostback()) {
+			statusGrupoRaizes = statusGrupoRepository.consultaStatusGrupo();
+		}
 	}
 	
 	public void salvar() {
@@ -52,6 +57,14 @@ public class CadastroGrupoBean implements Serializable{
 
 	public void setStatusGrupoRaizes(List<StatusGrupo> statusGrupoRaizes) {
 		this.statusGrupoRaizes = statusGrupoRaizes;
+	}
+	
+	public StatusGrupoRepository getStatusGrupoRepository() {
+		return statusGrupoRepository;
+	}
+
+	public void setStatusGrupoRepository(StatusGrupoRepository statusGrupoRepository) {
+		this.statusGrupoRepository = statusGrupoRepository;
 	}
 	
 }

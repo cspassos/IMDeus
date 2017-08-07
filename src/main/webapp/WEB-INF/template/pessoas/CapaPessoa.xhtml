@@ -1,61 +1,78 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
-       xmlns:ui="http://java.sun.com/jsf/facelets" 
-       xmlns:h="http://java.sun.com/jsf/html" 
-       xmlns:f="http://java.sun.com/jsf/core"
-       xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-	 <p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo">
-	 	
-	 	<p:outputLabel value="Nome Completo" for="nomeCompleto"/>
-	 	<p:inputText id="nomeCompleto" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.nome}"/>
-	 	
-	 	<p:outputLabel value="Idade" for="idade"/>
-	 	<p:inputText id="idade" size="2" maxlength="2" value="#{cadastroPessoaBean.pessoa.idade}"/>
-	 	
-	 	<p:outputLabel value="Celular" for="celularPessoa"/>
-	 	<p:inputText id="celularPessoa" size="15" maxlength="17" value="#{cadastroPessoaBean.pessoa.celular}"/>
-	 	
-	 	<p:outputLabel value="E-mail" for="email"/>
-	 	<p:inputText id="email" size="30" maxlength="255" value="#{cadastroPessoaBean.pessoa.email}"/>
-	 	
-	 	<p:outputLabel value="Nome Mãe" for="nomeMae"/>
-	 	<p:inputText id="nomeMae" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}"/>
-	 	
-	 	<p:outputLabel value="Celular Mãe" for="celularMae"/>
-	 	<p:inputText id="celularMae" size="15" maxlength="17" value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}"/>
-	 	
-	 	<p:outputLabel value="Nome Pai" for="nomePai"/>
-	 	<p:inputText id="nomePai" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}"/>
-	 	
-	 	<p:outputLabel value="Celular Pai" for="celularPai"/>
-	 	<p:inputText id="celularPai" size="15" maxlength="17" value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}"/>
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
 
-		<p:outputLabel value="Status" for="status" />
-		<p:selectOneMenu id="status">
-			<f:selectItem itemLabel="Pastoral" />
+		<p:outputLabel value="Nome Completo" for="nomeCompleto" />
+		<p:inputText id="nomeCompleto" size="50" maxlength="150"
+			value="#{cadastroPessoaBean.pessoa.nome}" />
+
+		<p:outputLabel value="Idade" for="idade" />
+		<p:inputText id="idade" size="2" maxlength="2"
+			value="#{cadastroPessoaBean.pessoa.idade}" />
+
+		<p:outputLabel value="Celular" for="celularPessoa" />
+		<p:inputText id="celularPessoa" size="15" maxlength="17"
+			value="#{cadastroPessoaBean.pessoa.celular}" />
+
+		<p:outputLabel value="E-mail" for="email" />
+		<p:inputText id="email" size="30" maxlength="255"
+			value="#{cadastroPessoaBean.pessoa.email}" />
+
+		<p:outputLabel value="Nome Mãe" for="nomeMae" />
+		<p:inputText id="nomeMae" size="50" maxlength="150"
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}" />
+
+		<p:outputLabel value="Celular Mãe" for="celularMae" />
+		<p:inputText id="celularMae" size="15" maxlength="17"
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}" />
+
+		<p:outputLabel value="Nome Pai" for="nomePai" />
+		<p:inputText id="nomePai" size="50" maxlength="150"
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}" />
+
+		<p:outputLabel value="Celular Pai" for="celularPai" />
+		<p:inputText id="celularPai" size="15" maxlength="17"
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" />
+
+		<p:outputLabel value="Status Grupo" for="statusGrupo" />
+		<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}">
+			<f:selectItem itemLabel="Selecione um Status" />
+			<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
+	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
+	    	<p:ajax listener="#{cadastroPessoaBean.carregarNomeGrupo}" update="nomeGrupo"/>
 		</p:selectOneMenu>
 
-		<p:outputLabel value="Grupo" for="statusGrupo" />
-		<p:selectOneMenu id="statusGrupo">
-			<f:selectItem itemLabel="GAM" />
+		<p:outputLabel value="Grupo" for="nomeGrupo" />
+		<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}">
+			<f:selectItem itemLabel="Selecione um Status" />
+			<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo"
+				itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 		</p:selectOneMenu>
 
-	 	<p:outputLabel value="Toma algum medicamento?"/>
-	 	<p:selectManyCheckbox>
-	 		<f:selectItem itemLabel="Sim"/>
-	 		<f:selectItem itemLabel="Não"/>
-	 	</p:selectManyCheckbox>
-	 	<p:outputLabel value="Qual?" for="medicamento"/>
-	 	<p:inputText id="medicamento" size="60" maxlength="255" value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualMedicamento}"/>
-	 	
-	 	<p:outputLabel value="Tem alergia, intolerância ou restrição a algum alimento?"/>
-	 	<p:selectManyCheckbox>
-	 		<f:selectItem itemLabel="Sim"/>
-	 		<f:selectItem itemLabel="Não"/>
-	 	</p:selectManyCheckbox>
-	 	<p:outputLabel value="Qual?" for="alergia"/>
-	 	<p:inputText id="alergia" size="60" maxlength="255" value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}"/>
-	 		 	
-	 </p:panelGrid>
+		<p:outputLabel value="Toma algum medicamento?" />
+		<p:selectManyCheckbox>
+			<f:selectItem itemLabel="Sim" />
+			<f:selectItem itemLabel="Não" />
+		</p:selectManyCheckbox>
+		<p:outputLabel value="Qual?" for="medicamento" />
+		<p:inputText id="medicamento" size="60" maxlength="255"
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualMedicamento}" />
+
+		<p:outputLabel
+			value="Tem alergia, intolerância ou restrição a algum alimento?" />
+		<p:selectManyCheckbox>
+			<f:selectItem itemLabel="Sim" />
+			<f:selectItem itemLabel="Não" />
+		</p:selectManyCheckbox>
+		<p:outputLabel value="Qual?" for="alergia" />
+		<p:inputText id="alergia" size="60" maxlength="255"
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}" />
+
+	</p:panelGrid>
 
 </ui:composition>

@@ -46,7 +46,6 @@ public class Grupo implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank(message = "é obrigatorio")
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;

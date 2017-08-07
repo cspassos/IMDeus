@@ -8,8 +8,11 @@
     <ui:define name="titulo">Novo Grupo</ui:define>
     
     <ui:define name="corpo">
-    
+    	
+    	<!-- viewParam -> para executar o listener apenas uma vez no inicio. -->
+    	<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
     	<f:metadata>
+    	<f:viewParam name="dummy" />
     		<f:event listener="#{cadastroGrupoBean.inicializar}" type="preRenderView" />
     	</f:metadata>
     	
@@ -35,7 +38,6 @@
     			
     			<p:outputLabel value="Status Grupo" for="statusGrupo"/>
 	    		<p:selectOneMenu id="statusGrupo">
-	    			<f:selectItem itemLabel="Selecione um Status"/>
 	    			<f:selectItems value="#{cadastroGrupoBean.statusGrupoRaizes}" var="statusGrupo"
 	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
 	    		</p:selectOneMenu>
