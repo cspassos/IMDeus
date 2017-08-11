@@ -25,7 +25,8 @@
     		<p:toolbar style="margin-top: 20px" styleClass="toolbar-geral">
     			<p:toolbarGroup styleClass="toolbar-butoon-geral">
     				<p:button styleClass="toolbar-butoon" value="Novo" outcome="/grupos/CadastroGrupos"/>
-    				<p:commandButton styleClass="toolbar-command" value="Salvar" id="botaoSalvar" action="#{cadastroGrupoBean.salvar}"/>
+    				<p:commandButton styleClass="toolbar-command" value="Salvar" id="botaoSalvar" action="#{cadastroGrupoBean.salvar}"
+    					update="@form"/>
     			</p:toolbarGroup>
     			
     			<p:toolbarGroup align="right">
@@ -37,8 +38,8 @@
     			columnClasses="rotulo, campo">
     			
     			<p:outputLabel value="Status Grupo" for="statusGrupo"/>
-	    		<p:selectOneMenu id="statusGrupo">
-	    			<f:selectItems value="#{cadastroGrupoBean.statusGrupoRaizes}" var="statusGrupo"
+	    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}">
+	    			<f:selectItems value="#{cadastroGrupoBean.statusGrupo}" var="statusGrupo"
 	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
 	    		</p:selectOneMenu>
     			

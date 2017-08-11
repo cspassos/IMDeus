@@ -10,22 +10,20 @@ import javax.persistence.Persistence;
 
 @ApplicationScoped
 public class EntityManagerProducer {
-	
-private EntityManagerFactory factory;
-	
-	public EntityManagerProducer(){
+
+	private EntityManagerFactory factory;
+
+	public EntityManagerProducer() {
 		factory = Persistence.createEntityManagerFactory("ImDeusPU");
 	}
-	
-	// O resultado da produção desse metodo tem o scopo de requisição
-	@Produces @RequestScoped
-	public EntityManager createEntyManager(){
+
+	@Produces
+	@RequestScoped
+	public EntityManager createEntyManager() {
 		return factory.createEntityManager();
 	}
-	
-	//@Disposes -> quando o escopo de requisição finalizar, este metodo é chamado, assim fechando o EntityManager
-	public void closeEntityManager(@Disposes EntityManager manager){
-		
+
+	public void closeEntityManager(@Disposes EntityManager manager) {
 		manager.close();
 	}
 }
