@@ -35,7 +35,6 @@ public class StatusGrupoRepository implements Serializable{
 		List<Grupo> resultList = manager.createQuery("select grupo from Grupo grupo where grupo.statusGrupo = :status", Grupo.class)		
 				.setParameter("status", statusGrupoPai).getResultList();
 		return resultList;
-
 	}
 	
 }
