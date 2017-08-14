@@ -24,6 +24,9 @@ public class CadastroGrupoBean implements Serializable {
 	
 	@Inject
 	private GrupoRepository grupoRepository;
+	
+	@Inject
+	private GrupoService cadastroProdutoService;
 
 	private Grupo grupo;
 
@@ -44,8 +47,9 @@ public class CadastroGrupoBean implements Serializable {
 	}
 
 	public void salvar() {
-		grupoRepository.salvar(grupo);
+		this.grupo = cadastroProdutoService.salvar(this.grupo);
 		limparFormulario();
+		FacesUtil.addInfoMessage("Grupo salvo com sucesso!");
 	}
 
 	public Grupo getGrupo() {

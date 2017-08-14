@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.imdeus.model.Grupo;
+import com.imdeus.model.StatusGrupo;
 import com.imdeus.util.jpa.Transactional;
 
 public class GrupoRepository implements Serializable{
@@ -15,9 +16,14 @@ public class GrupoRepository implements Serializable{
 	@Inject
 	private EntityManager manager;
 	
-	@Transactional
-	public void salvar(Grupo grupo) {
-		manager.persist(grupo);
+	
+	//Buscar o status do grupo pelo ID
+	public Grupo porId(Long id) {
+		return manager.find(Grupo.class, id);
+	}
+	
+	public Grupo salvar(Grupo grupo) {
+		return manager.merge(grupo);
 	}
 
 }

@@ -42,12 +42,12 @@ public class CadastroPessoaBean implements Serializable{
 	
 	public void consultaStatusGrupo() {
 		if(FacesUtil.isNotPostback()) {
-			statusGrupoRaizes = statusGrupoRepository.consultaStatusGrupoPessoa();
+			statusGrupoRaizes = statusGrupoRepository.consultaStatusGrupo();
 		}
 	}
 	
 	public void carregarNomeGrupo() {
-		grupos = statusGrupoRepository.carregarNomeGrupoDe(statusGrupoSelecionado);
+		grupos = statusGrupoRepository.carregarNomeGrupo(statusGrupoSelecionado);
 	}
 	
 	public void salvar() {

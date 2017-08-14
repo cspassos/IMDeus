@@ -1,25 +1,125 @@
 package com.imdeus.controller.grupo;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
-@RequestScoped
-public class PesquisarGrupoBean {
+import com.imdeus.model.Grupo;
+import com.imdeus.model.StatusGrupo;
+import com.imdeus.repository.StatusGrupoRepository;
+import com.imdeus.repository.filter.GrupoFilter;
+import com.imdeus.util.jsf.FacesUtil;
 
-	private List<Integer> gruposFiltrados;
-	
+@Named
+@ViewScoped
+public class PesquisarGrupoBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private StatusGrupoRepository statusGrupoRepository;
+
+	private List<StatusGrupo> statusGrupoRaizes;
+
+	private StatusGrupo statusGrupoSelecionado;
+
+	private List<Grupo> grupos;
+
+	private List<Grupo> pesquisaStatusGrupoFiltrados;
+
+	private Grupo grupo;
+
+	private StatusGrupo statusGrupoPai;
+
+	@Inject
+	private GrupoFilter filtro;
+
 	public PesquisarGrupoBean() {
-		gruposFiltrados = new ArrayList<>();
-		for(int i=0; i < 50; i++) {
-			gruposFiltrados.add(i);
+		grupo = new Grupo();
+	}
+
+	public void pesquisar() {
+		pesquisaStatusGrupoFiltrados = statusGrupoRepository.pesquisarGrupo(filtro);
+	}
+
+	public void consultaStatusGrupo() {
+		if (FacesUtil.isNotPostback()) {
+			statusGrupoRaizes = statusGrupoRepository.consultaStatusGrupo();
 		}
 	}
-	
-	public List<Integer> getGruposFiltrados(){
-		return gruposFiltrados;
+
+	public void carregarNomeGrupo() {
+		grupos = statusGrupoRepository.carregarNomeGrupoDe(filtro);
 	}
+
+	// ********GET E
+	// SET*****************************************************************************************///
+
+	public StatusGrupoRepository getStatusGrupoRepository() {
+		return statusGrupoRepository;
+	}
+
+	public void setStatusGrupoRepository(StatusGrupoRepository statusGrupoRepository) {
+		this.statusGrupoRepository = statusGrupoRepository;
+	}
+
+	public StatusGrupo getStatusGrupoSelecionado() {
+		return statusGrupoSelecionado;
+	}
+
+	public void setStatusGrupoSelecionado(StatusGrupo statusGrupoSelecionado) {
+		this.statusGrupoSelecionado = statusGrupoSelecionado;
+	}
+
+	public List<StatusGrupo> getStatusGrupoRaizes() {
+		return statusGrupoRaizes;
+	}
+
+	public void setStatusGrupoRaizes(List<StatusGrupo> statusGrupoRaizes) {
+		this.statusGrupoRaizes = statusGrupoRaizes;
+	}
+
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+	public StatusGrupo getStatusGrupoPai() {
+		return statusGrupoPai;
+	}
+
+	public void setStatusGrupoPai(StatusGrupo statusGrupoPai) {
+		this.statusGrupoPai = statusGrupoPai;
+	}
+
+	public List<Grupo> getPesquisaStatusGrupoFiltrados() {
+		return pesquisaStatusGrupoFiltrados;
+	}
+
+	public void setPesquisaStatusGrupoFiltrados(List<Grupo> pesquisaStatusGrupoFiltrados) {
+		this.pesquisaStatusGrupoFiltrados = pesquisaStatusGrupoFiltrados;
+	}
+
+	public GrupoFilter getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(GrupoFilter filtro) {
+		this.filtro = filtro;
+	}
+
 }

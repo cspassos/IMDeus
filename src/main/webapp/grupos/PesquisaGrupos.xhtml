@@ -8,14 +8,24 @@
     <ui:define name="titulo">Pesquisa Grupo</ui:define>
     
     <ui:define name="corpo">
-    	<h:form>
+
+		<!-- viewParam -> para executar o listener apenas uma vez no inicio. -->
+		<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
+		<f:metadata>
+			<f:viewParam name="dummy" />
+			<f:event listener="#{pesquisarGrupoBean.consultaStatusGrupo}"
+				type="preRenderView" />
+		</f:metadata>
+
+		<h:form>
     		<h1>Pesquisa Grupo</h1>
     		
     		<p:messages autoUpdate="true" closable="true"/>
     		
     		<p:toolbar style="margin-top: 20px">
     			<p:toolbarGroup>
-    				<p:commandButton value="Pesquisar"/>
+    				<p:commandButton value="Pesquisar" action="#{pesquisarGrupoBean.pesquisar}"
+    					update="@form"/>
     			</p:toolbarGroup>
     			
     			<p:toolbarGroup align="right">
@@ -25,28 +35,35 @@
     		
     		<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
     			columnClasses="rotulo, campo">
-    			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
-    			<p:inputText id="nomeGrupo" size="20" />
     			
-    			<p:outputLabel value="Status" for="status"/>
-    			<p:selectOneMenu id="status">
-    				<f:selectItem itemLabel="Selecione o status"/>
-    			</p:selectOneMenu>    			
+    			<p:outputLabel value="Status Grupo" for="statusGrupo" />
+					<p:selectOneMenu id="statusGrupo" value="#{pesquisarGrupoBean.filtro.nomeStatus}">
+						<f:selectItem itemLabel="Selecione um Status" />
+						<f:selectItems value="#{pesquisarGrupoBean.statusGrupoRaizes}" var="statusGrupo"
+	    					itemValue="#{statusGrupo.nomeStatus}" itemLabel="#{statusGrupo.nomeStatus}"/>
+	    				<p:ajax listener="#{pesquisarGrupoBean.carregarNomeGrupo}" update="nomeGrupo"/>
+					</p:selectOneMenu>
+
+				<p:outputLabel value="Grupo" for="nomeGrupo" />
+					<p:selectOneMenu id="nomeGrupo" value="#{pesquisarGrupoBean.filtro.nomeGrupo}">
+						<f:selectItem itemLabel="Selecione um Status" />
+						<f:selectItems value="#{pesquisarGrupoBean.grupos}" var="grupo"
+							itemValue="#{grupo.nome}" itemLabel="#{grupo.nome}"/>
+					</p:selectOneMenu>
+    			
+    					
     		</p:panelGrid>
     		
-    		<p:dataTable id="gruposTable" value="#{pesquisarGruposBean.gruposFiltrados}" var="produto"
+    		<p:dataTable id="gruposTable" value="#{pesquisarGrupoBean.pesquisaStatusGrupoFiltrados}" var="grupo"
     			style="margin-top: 20px" emptyMessage="Nenhum grupo encontrado." rows="20"
     			paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
     			
-    			<p:column headerText="Nome do grupo" style="text-align: center; width: 100px">
-    				<h:outputText value="GAM" />
-    			</p:column>
     			<p:column headerText="Status" style="width:250px; text-align: center">
-    				<h:outputText value="Pastoral" />
+    				<h:outputText value="#{grupo.nome}" />
     			</p:column>
-    			
-    			<p:column headerText="Data criação" style="text-align: center">
-    				<h:outputText value="19/07/2017" />
+  
+    			<p:column headerText="Nome do grupo" style="text-align: center; width: 100px">
+    				<h:outputText value="#{grupo.statusGrupo.nomeStatus}" />
     			</p:column>
     			
     			<p:column headerText="Ações" style="text-align: center; width: 100px">
