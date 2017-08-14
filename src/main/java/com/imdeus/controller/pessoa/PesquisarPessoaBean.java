@@ -1,4 +1,4 @@
-package com.imdeus.controller;
+package com.imdeus.controller.pessoa;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,16 +16,18 @@
     		<f:event listener="#{cadastroPessoaBean.consultaStatusGrupo}" type="preRenderView" />
     	</f:metadata>
     	
-    	<h:form>
+    	<h:form id="cadastroPessoaForm">
     		<h1>Nova Pessoa</h1>
     		
     		<p:messages autoUpdate="true" closable="true"/>
+    		
+    		
     		
     		<ui:include src="/WEB-INF/template/pessoas/BotoesPessoa.xhtml" />
     		
     		<ui:include src="/WEB-INF/template/pessoas/CapaPessoa.xhtml" />
     		
-    		<p:tabView style="margin-top: 20px">
+    		<p:tabView style="margin-top: 20px" id="tabPanel" cache="false">
     		
     			<p:tab title="Restrições">
     				<ui:include src="/WEB-INF/template/pessoas/Restricoes.xhtml" />

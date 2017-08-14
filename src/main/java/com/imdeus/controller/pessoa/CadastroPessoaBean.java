@@ -1,4 +1,4 @@
-package com.imdeus.controller;
+package com.imdeus.controller.pessoa;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import com.imdeus.model.Grupo;
 import com.imdeus.model.Pessoa;
 import com.imdeus.model.StatusGrupo;
+import com.imdeus.repository.PessoaRepository;
 import com.imdeus.repository.StatusGrupoRepository;
 import com.imdeus.util.jsf.FacesUtil;
 
@@ -23,6 +24,9 @@ public class CadastroPessoaBean implements Serializable{
 	@Inject
 	private StatusGrupoRepository statusGrupoRepository;
 	
+	@Inject
+	private PessoaService pessoaService;
+	
 	private List<StatusGrupo> statusGrupoRaizes;
 	
 	private StatusGrupo statusGrupoSelecionado;
@@ -33,8 +37,11 @@ public class CadastroPessoaBean implements Serializable{
 	
 	private Grupo grupo;
 	
-	private StatusGrupo statusGrupoPai;
+	private boolean tipoCadastroMedicamento = true;
 	
+	private boolean tipoCadastroIntolerancia = true;
+	
+//*********** METODOS **************************************************************************************************************************//
 	
 	public CadastroPessoaBean() {
 		pessoa = new Pessoa();
@@ -51,11 +58,12 @@ public class CadastroPessoaBean implements Serializable{
 	}
 	
 	public void salvar() {
-		System.out.println("Categoria pai selecionada: " + statusGrupoPai.getNomeStatus());
-		//System.out.println("Nome Grupo: " + grupo.getNome().length();
+		this.pessoa = pessoaService.salvar(this.pessoa);
+		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}
 	
-//*********** GET E SET *****************************************************************
+//************* GET E SET ************************************************************************************************************************//
+	
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -64,15 +72,6 @@ public class CadastroPessoaBean implements Serializable{
 		this.pessoa = pessoa;
 	}
 	
-	@NotNull
-	public StatusGrupo getStatusGrupoPai() {
-		return statusGrupoPai;
-	}
-
-	public void setStatusGrupoPai(StatusGrupo statusGrupoPai) {
-		this.statusGrupoPai = statusGrupoPai;
-	}
-
 	public List<StatusGrupo> getStatusGrupoRaizes() {
 		return statusGrupoRaizes;
 	}
@@ -99,6 +98,22 @@ public class CadastroPessoaBean implements Serializable{
 	
 	public List<Grupo> getGrupos() {
 		return grupos;
+	}
+
+	public boolean isTipoCadastroMedicamento() {
+		return tipoCadastroMedicamento;
+	}
+
+	public void setTipoCadastroMedicamento(boolean tipoCadastroMedicamento) {
+		this.tipoCadastroMedicamento = tipoCadastroMedicamento;
+	}
+
+	public boolean isTipoCadastroIntolerancia() {
+		return tipoCadastroIntolerancia;
+	}
+
+	public void setTipoCadastroIntolerancia(boolean tipoCadastroIntolerancia) {
+		this.tipoCadastroIntolerancia = tipoCadastroIntolerancia;
 	}
 	
 }

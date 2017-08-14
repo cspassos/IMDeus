@@ -6,8 +6,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.imdeus.model.Grupo;
-import com.imdeus.model.StatusGrupo;
-import com.imdeus.util.jpa.Transactional;
 
 public class GrupoRepository implements Serializable{
 

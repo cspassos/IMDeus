@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import com.imdeus.model.Grupo;
 import com.imdeus.model.StatusGrupo;
-import com.imdeus.repository.GrupoRepository;
 import com.imdeus.repository.StatusGrupoRepository;
 import com.imdeus.util.jsf.FacesUtil;
 
@@ -23,14 +22,13 @@ public class CadastroGrupoBean implements Serializable {
 	private StatusGrupoRepository statusGrupoRepository;
 	
 	@Inject
-	private GrupoRepository grupoRepository;
-	
-	@Inject
 	private GrupoService cadastroProdutoService;
 
 	private Grupo grupo;
 
 	private List<StatusGrupo> statusGrupo;
+	
+//*********** METODOS **************************************************************************************************************************//
 
 	public CadastroGrupoBean() {
 		limparFormulario();
@@ -51,6 +49,8 @@ public class CadastroGrupoBean implements Serializable {
 		limparFormulario();
 		FacesUtil.addInfoMessage("Grupo salvo com sucesso!");
 	}
+	
+//************* GET E SET ************************************************************************************************************************//
 
 	public Grupo getGrupo() {
 		return grupo;
