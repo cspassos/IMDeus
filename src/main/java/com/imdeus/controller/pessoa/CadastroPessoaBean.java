@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
+import com.imdeus.model.ComplementoPessoa;
+import com.imdeus.model.Endereco;
 import com.imdeus.model.Grupo;
 import com.imdeus.model.Pessoa;
 import com.imdeus.model.StatusGrupo;
@@ -45,6 +47,8 @@ public class CadastroPessoaBean implements Serializable{
 	
 	public CadastroPessoaBean() {
 		pessoa = new Pessoa();
+		pessoa.setComplementoPessoa(new ComplementoPessoa());
+		pessoa.setEndereco(new Endereco());
 	}
 	
 	public void consultaStatusGrupo() {
@@ -58,6 +62,7 @@ public class CadastroPessoaBean implements Serializable{
 	}
 	
 	public void salvar() {
+		
 		this.pessoa = pessoaService.salvar(this.pessoa);
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}

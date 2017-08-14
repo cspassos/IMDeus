@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import com.imdeus.model.Pessoa;
 import com.imdeus.repository.PessoaRepository;
+import com.imdeus.util.jpa.Transactional;
 
 public class PessoaService implements Serializable{
 
@@ -14,6 +15,7 @@ public class PessoaService implements Serializable{
 	@Inject
 	private PessoaRepository pessoaRepository;
 	
+	@Transactional
 	public Pessoa salvar(Pessoa pessoa){
 		return pessoaRepository.salvar(pessoa);
 	}

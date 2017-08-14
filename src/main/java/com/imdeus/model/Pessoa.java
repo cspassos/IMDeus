@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -37,7 +38,7 @@ public class Pessoa implements Serializable {
 	
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -46,7 +47,7 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank @Size(max = 100)
+//	@NotBlank @Size(max = 100)
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -56,7 +57,7 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 	
-	@NotNull
+//	@NotNull
 	@Column(nullable = false, length = 11)
 	public Integer getIdade() {
 		return idade;
@@ -66,7 +67,7 @@ public class Pessoa implements Serializable {
 		this.idade = idade;
 	}	
 	
-	@NotBlank @Size(max = 255)
+//	@NotBlank @Size(max = 255)
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
 		return email;
@@ -78,7 +79,7 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 	
-	@NotBlank @Size(max = 17)
+//	@NotBlank @Size(max = 17)
 	@Column(nullable = false, length = 17)
 	public String getCelular() {
 		return celular;
@@ -91,7 +92,7 @@ public class Pessoa implements Serializable {
 	//uma pessoa possui muitos endereços
 	//mappedBy -> esse relacionamento que criei é o inverso do que mapiei na entidade endereço.
 	//cascade -> quando salvar uma pessoa automaticamente vai persistir os endereços do cliente
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, mappedBy= "pessoa")
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -109,7 +110,7 @@ public class Pessoa implements Serializable {
 		this.grupo = grupo;
 	}
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, mappedBy = "pessoa")
 	public ComplementoPessoa getComplementoPessoa() {
 		return complementoPessoa;
 	}

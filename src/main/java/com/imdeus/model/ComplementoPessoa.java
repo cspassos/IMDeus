@@ -41,7 +41,7 @@ public class ComplementoPessoa implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank @Size(max = 100)
+//	@NotBlank @Size(max = 100)
 	@Column(name = "nome_mae",nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
@@ -50,7 +50,7 @@ public class ComplementoPessoa implements Serializable {
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-	@NotBlank @Size(max = 17)
+//	@NotBlank @Size(max = 17)
 	@Column(name = "celular_mae", length = 17)
 	public String getCelularMae() {
 		return celularMae;
@@ -60,7 +60,7 @@ public class ComplementoPessoa implements Serializable {
 		this.celularMae = celularMae;
 	}
 	
-	@NotBlank @Size(max = 100)
+//	@NotBlank @Size(max = 100)
 	@Column(name = "nome_pai", nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;
@@ -70,7 +70,7 @@ public class ComplementoPessoa implements Serializable {
 		this.nomePai = nomePai;
 	}
 	
-	@NotBlank @Size(max = 17)
+//	@NotBlank @Size(max = 17)
 	@Column(name = "celular_pai", length = 17)
 	public String getCelularPai() {
 		return celularPai;
@@ -80,7 +80,7 @@ public class ComplementoPessoa implements Serializable {
 		this.celularPai = celularPai;
 	}
 	
-	@Size(max = 300)
+//	@Size(max = 300)
 	@Column(length = 300)
 	public String getObservacao() {
 		return observacao;
@@ -90,7 +90,7 @@ public class ComplementoPessoa implements Serializable {
 		this.observacao = observacao;
 	}
 	
-	@Size(max = 300)
+//	@Size(max = 300)
 	@Column(length = 255)
 	public String getQualMedicamento() {
 		return qualMedicamento;
@@ -100,7 +100,7 @@ public class ComplementoPessoa implements Serializable {
 		this.qualMedicamento = qualMedicamento;
 	}
 	
-	@Size(max = 300)
+//	@Size(max = 300)
 	@Column(length = 255)
 	public String getQualAlergia() {
 		return qualAlergia;
@@ -111,7 +111,6 @@ public class ComplementoPessoa implements Serializable {
 	}
 	
 	@OneToOne
-	@JoinColumn(nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

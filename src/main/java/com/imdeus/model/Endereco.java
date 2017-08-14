@@ -38,7 +38,7 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank @Size(max = 150)
+//	@NotBlank @Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
@@ -48,7 +48,7 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 	
-	@NotBlank @Size(max = 20)
+//	@NotBlank @Size(max = 20)
 	@Column(nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
@@ -58,7 +58,7 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 	
-	@NotBlank @Size(max = 60)
+//	@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -68,7 +68,7 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 	
-	@NotBlank @Size(max = 150)
+//	@NotBlank @Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getUf() {
 		return uf;
@@ -78,7 +78,7 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 	}
 	
-	@NotBlank @Size(max = 9)
+//	@NotBlank @Size(max = 9)
 	@Column(length = 9)
 	public String getCep() {
 		return cep;
@@ -88,7 +88,7 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 	
-	@Size(max = 150)
+//	@Size(max = 150)
 	@Column( length = 150)
 	public String getComplemento() {
 		return complemento;
@@ -100,7 +100,6 @@ public class Endereco implements Serializable {
 	
 	//muitos endereços possui um cliente
 	@OneToOne
-	@JoinColumn(nullable = false)
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
