@@ -54,25 +54,6 @@
 				itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 		</p:selectOneMenu>
 
-		<p:outputLabel value="Toma algum medicamento?" />
-		<p:selectManyCheckbox>
-			<f:selectItem itemLabel="Sim" />
-			<f:selectItem itemLabel="Não" />
-		</p:selectManyCheckbox>
-		<p:outputLabel value="Qual?" for="medicamento" />
-		<p:inputText id="medicamento" size="60" maxlength="255"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualMedicamento}" />
-
-		<p:outputLabel
-			value="Tem alergia, intolerância ou restrição a algum alimento?" />
-		<p:selectManyCheckbox>
-			<f:selectItem itemLabel="Sim" />
-			<f:selectItem itemLabel="Não" />
-		</p:selectManyCheckbox>
-		<p:outputLabel value="Qual?" for="alergia" />
-		<p:inputText id="alergia" size="60" maxlength="255"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}" />
-
 	</p:panelGrid>
 
 </ui:composition>
