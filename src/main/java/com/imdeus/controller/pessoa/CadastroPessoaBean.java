@@ -6,14 +6,12 @@ import java.util.List;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
 
 import com.imdeus.model.ComplementoPessoa;
 import com.imdeus.model.Endereco;
 import com.imdeus.model.Grupo;
 import com.imdeus.model.Pessoa;
 import com.imdeus.model.StatusGrupo;
-import com.imdeus.repository.PessoaRepository;
 import com.imdeus.repository.StatusGrupoRepository;
 import com.imdeus.util.jsf.FacesUtil;
 
@@ -62,7 +60,6 @@ public class CadastroPessoaBean implements Serializable{
 	}
 	
 	public void salvar() {
-		
 		this.pessoa = pessoaService.salvar(this.pessoa);
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}

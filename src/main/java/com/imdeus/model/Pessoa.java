@@ -1,25 +1,18 @@
 package com.imdeus.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "pessoa")
@@ -33,12 +26,12 @@ public class Pessoa implements Serializable {
 	private String email;
 	private String celular;
 	private Endereco endereco;
-	private List<Grupo> grupo = new ArrayList<>();
 	private ComplementoPessoa complementoPessoa;
+	private Grupo grupo;
 	
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -46,8 +39,8 @@ public class Pessoa implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-//	@NotBlank @Size(max = 100)
+
+	// @NotBlank @Size(max = 100)
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -56,30 +49,28 @@ public class Pessoa implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-//	@NotNull
+
+	// @NotNull
 	@Column(nullable = false, length = 11)
 	public Integer getIdade() {
 		return idade;
 	}
-	
+
 	public void setIdade(Integer idade) {
 		this.idade = idade;
-	}	
-	
-//	@NotBlank @Size(max = 255)
+	}
+
+	// @NotBlank @Size(max = 255)
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
 		return email;
 	}
 
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-//	@NotBlank @Size(max = 17)
+
+	// @NotBlank @Size(max = 17)
 	@Column(nullable = false, length = 17)
 	public String getCelular() {
 		return celular;
@@ -88,36 +79,44 @@ public class Pessoa implements Serializable {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-	
-	//uma pessoa possui muitos endereços
-	//mappedBy -> esse relacionamento que criei é o inverso do que mapiei na entidade endereço.
-	//cascade -> quando salvar uma pessoa automaticamente vai persistir os endereços do cliente
-	@OneToOne(cascade=CascadeType.ALL, mappedBy= "pessoa")
+
+	// uma pessoa possui muitos endereços
+	// mappedBy -> esse relacionamento que criei é o inverso do que mapiei na
+	// entidade endereço.
+	// cascade -> quando salvar uma pessoa automaticamente vai persistir os
+	// endereços do cliente
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch=FetchType.LAZY)
 	public Endereco getEndereco() {
 		return endereco;
 	}
-	
+
+	//Usa-se o endereco.setPessoa(this); -> para persistir o pessoa_id na tabela de endereco.
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-	
-	@ManyToMany
-	public List<Grupo> getGrupo() {
-		return grupo;
+		endereco.setPessoa(this);
 	}
 
-	public void setGrupo(List<Grupo> grupo) {
-		this.grupo = grupo;
-	}
-	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy = "pessoa")
+	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "pessoa")
 	public ComplementoPessoa getComplementoPessoa() {
 		return complementoPessoa;
 	}
-
+	
+	//Usa-se o complementoPessoa.setPessoa(this); -> para persistir o pessoa_id na tabela de complementoPessoa.
 	public void setComplementoPessoa(ComplementoPessoa complementoPessoa) {
 		this.complementoPessoa = complementoPessoa;
+		complementoPessoa.setPessoa(this);
 	}
+	
+	@ManyToOne
+	@JoinColumn(name = "grupo_id")
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
 
 	// Define que o pessoa é unico pelo id
 	// botato direito/source/generete hashcode...

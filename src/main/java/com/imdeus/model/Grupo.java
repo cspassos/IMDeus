@@ -1,18 +1,14 @@
 package com.imdeus.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "grupo")
@@ -23,7 +19,6 @@ public class Grupo implements Serializable {
 	private Long id;
 	private String nome;
 	private StatusGrupo statusGrupo;
-	private List<Pessoa> pessoa = new ArrayList<>();
 
 	@Id
 	@GeneratedValue // id auto-incremento
@@ -43,16 +38,6 @@ public class Grupo implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	@ManyToMany
-	public List<Pessoa> getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(List<Pessoa> pessoa) {
-		this.pessoa = pessoa;
-	}
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "status_grupo_id", nullable = false)
@@ -90,13 +75,5 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Grupo [id=" + id + ", nome=" + nome + ", pessoa=" + pessoa + "]";
-	}
-	
-	
-
 
 }

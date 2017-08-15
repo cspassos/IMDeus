@@ -48,11 +48,13 @@
 		</p:selectOneMenu>
 
 		<p:outputLabel value="Grupo" for="nomeGrupo" />
-		<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}">
+		<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.pessoa.grupo}">
 			<f:selectItem itemLabel="Selecione um Status" />
 			<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo"
 				itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 		</p:selectOneMenu>
+		
+		
 
 	</p:panelGrid>
 
