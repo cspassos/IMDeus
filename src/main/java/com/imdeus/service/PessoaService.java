@@ -1,4 +1,4 @@
-package com.imdeus.controller.pessoa;
+package com.imdeus.service;
 
 import java.io.Serializable;
 

@@ -10,6 +10,7 @@ import javax.inject.Named;
 import com.imdeus.model.Grupo;
 import com.imdeus.model.StatusGrupo;
 import com.imdeus.repository.StatusGrupoRepository;
+import com.imdeus.service.GrupoService;
 import com.imdeus.util.jsf.FacesUtil;
 
 @Named
@@ -45,9 +46,9 @@ public class CadastroGrupoBean implements Serializable {
 	}
 
 	public void salvar() {
-		this.grupo = cadastroProdutoService.salvar(this.grupo);
-		limparFormulario();
+		grupo = cadastroProdutoService.salvar(grupo);
 		FacesUtil.addInfoMessage("Grupo salvo com sucesso!");
+		limparFormulario();
 	}
 	
 //************* GET E SET ************************************************************************************************************************//

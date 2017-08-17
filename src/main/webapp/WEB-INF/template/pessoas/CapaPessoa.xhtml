@@ -46,16 +46,22 @@
 	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
 	    	<p:ajax listener="#{cadastroPessoaBean.carregarNomeGrupo}" update="nomeGrupo"/>
 		</p:selectOneMenu>
-
+	
 		<p:outputLabel value="Grupo" for="nomeGrupo" />
-		<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.pessoa.grupo}">
-			<f:selectItem itemLabel="Selecione um Status" />
-			<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo"
-				itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
-		</p:selectOneMenu>
-		
-		
-
+		<h:panelGroup>
+			<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}">
+				<f:selectItem itemLabel="Selecione um Status" />
+				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
+			</p:selectOneMenu>
+			
+			<h:panelGroup>
+				<p:commandButton value="Salvar" id="botaoSalvarGrupo" action="#{cadastroPessoaBean.adicionarGrupo}" 
+					style="horizontal-align:center" 
+					update="addGrupoG cadastroPessoaForm:tabPanel:tabelaGrupos" process="@this, nomeGrupo"/>
+				<p:growl id="addGrupoG" for="addGrupo" closable="true" />
+			</h:panelGroup>
+		</h:panelGroup>
+	
 	</p:panelGrid>
 
 </ui:composition>

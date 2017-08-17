@@ -19,7 +19,11 @@ public class FacesUtil {
 	}
 	
 	public static void addInfoMessage(String message) {
-		FacesContext.getCurrentInstance().addMessage(null, 
+		addInfoMessage(null, message);
+	}
+	
+	public static void addInfoMessage(String key, String message) {
+		FacesContext.getCurrentInstance().addMessage(key, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
 	}
 	
