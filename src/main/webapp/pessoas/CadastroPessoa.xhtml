@@ -19,8 +19,7 @@
     	<h:form id="cadastroPessoaForm">
     		<h1>Nova Pessoa</h1>
     		
-    		<p:messages autoUpdate="true" closable="true"/>
-    		
+    		<p:messages closable="true"/>
     		
     		
     		<ui:include src="/WEB-INF/template/pessoas/BotoesPessoa.xhtml" />
@@ -39,6 +38,10 @@
     			
     			<p:tab title="Observação">
     				<ui:include src="/WEB-INF/template/pessoas/ObservacaoPessoa.xhtml" />
+    			</p:tab>
+    			
+    			<p:tab title="Grupos Pessoa" id="tabGrupoPessoa">
+    				<ui:include src="/WEB-INF/template/pessoas/TabelaGrupos.xhtml" />
     			</p:tab>
     			
     		</p:tabView>

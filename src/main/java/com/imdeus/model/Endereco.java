@@ -6,12 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "endereco")
@@ -27,9 +23,19 @@ public class Endereco implements Serializable {
 	private String cep;
 	private String complemento;
 	private Pessoa pessoa;
+	
+	protected Endereco() {
+	}
+
+	public Endereco(String numero, String logradouro, String cidade, String uf) {
+		this.numero = numero;
+		this.logradouro = logradouro;
+		this.cidade = cidade;
+		this.uf = uf;
+	}
 
 	@Id
-	@GeneratedValue //id auto-incremento
+	@GeneratedValue // id auto-incremento
 	public Long getId() {
 		return id;
 	}
@@ -37,8 +43,8 @@ public class Endereco implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-//	@NotBlank @Size(max = 150)
+
+	// @NotBlank @Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
@@ -47,8 +53,8 @@ public class Endereco implements Serializable {
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	
-//	@NotBlank @Size(max = 20)
+
+	// @NotBlank @Size(max = 20)
 	@Column(nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
@@ -57,8 +63,8 @@ public class Endereco implements Serializable {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
-//	@NotBlank @Size(max = 60)
+
+	// @NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -67,8 +73,8 @@ public class Endereco implements Serializable {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
-//	@NotBlank @Size(max = 150)
+
+	// @NotBlank @Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getUf() {
 		return uf;
@@ -77,8 +83,8 @@ public class Endereco implements Serializable {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	
-//	@NotBlank @Size(max = 9)
+
+	// @NotBlank @Size(max = 9)
 	@Column(length = 9)
 	public String getCep() {
 		return cep;
@@ -87,9 +93,9 @@ public class Endereco implements Serializable {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-//	@Size(max = 150)
-	@Column( length = 150)
+
+	// @Size(max = 150)
+	@Column(length = 150)
 	public String getComplemento() {
 		return complemento;
 	}
@@ -97,8 +103,8 @@ public class Endereco implements Serializable {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	
-	//muitos endereços possui um cliente
+
+	// muitos endereços possui um cliente
 	@OneToOne
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -136,7 +142,7 @@ public class Endereco implements Serializable {
 
 	public void add(Endereco endereco) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
+	
 }

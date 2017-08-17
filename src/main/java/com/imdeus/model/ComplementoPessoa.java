@@ -1,19 +1,13 @@
 package com.imdeus.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "complemento_pessoa")
@@ -30,9 +24,18 @@ public class ComplementoPessoa implements Serializable {
 	private String qualMedicamento;
 	private String qualAlergia;
 	private Pessoa pessoa;
+	
+	protected ComplementoPessoa() {
+	}
+
+	public ComplementoPessoa(String nomeMae, String nomePai, String observacao) {
+		this.nomeMae = nomeMae;
+		this.nomePai = nomePai;
+		this.observacao = observacao;
+	}
 
 	@Id
-	@GeneratedValue //id auto-incremento
+	@GeneratedValue // id auto-incremento
 	public Long getId() {
 		return id;
 	}
@@ -40,9 +43,9 @@ public class ComplementoPessoa implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-//	@NotBlank @Size(max = 100)
-	@Column(name = "nome_mae",nullable = false, length = 100)
+
+	// @NotBlank @Size(max = 100)
+	@Column(name = "nome_mae", nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
 	}
@@ -50,17 +53,18 @@ public class ComplementoPessoa implements Serializable {
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-//	@NotBlank @Size(max = 17)
+
+	// @NotBlank @Size(max = 17)
 	@Column(name = "celular_mae", length = 17)
 	public String getCelularMae() {
 		return celularMae;
 	}
-	
+
 	public void setCelularMae(String celularMae) {
 		this.celularMae = celularMae;
 	}
-	
-//	@NotBlank @Size(max = 100)
+
+	// @NotBlank @Size(max = 100)
 	@Column(name = "nome_pai", nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;
@@ -69,8 +73,8 @@ public class ComplementoPessoa implements Serializable {
 	public void setNomePai(String nomePai) {
 		this.nomePai = nomePai;
 	}
-	
-//	@NotBlank @Size(max = 17)
+
+	// @NotBlank @Size(max = 17)
 	@Column(name = "celular_pai", length = 17)
 	public String getCelularPai() {
 		return celularPai;
@@ -79,8 +83,8 @@ public class ComplementoPessoa implements Serializable {
 	public void setCelularPai(String celularPai) {
 		this.celularPai = celularPai;
 	}
-	
-//	@Size(max = 300)
+
+	// @Size(max = 300)
 	@Column(length = 300)
 	public String getObservacao() {
 		return observacao;
@@ -89,8 +93,8 @@ public class ComplementoPessoa implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
-//	@Size(max = 300)
+
+	// @Size(max = 300)
 	@Column(length = 255)
 	public String getQualMedicamento() {
 		return qualMedicamento;
@@ -99,8 +103,8 @@ public class ComplementoPessoa implements Serializable {
 	public void setQualMedicamento(String qualMedicamento) {
 		this.qualMedicamento = qualMedicamento;
 	}
-	
-//	@Size(max = 300)
+
+	// @Size(max = 300)
 	@Column(length = 255)
 	public String getQualAlergia() {
 		return qualAlergia;
@@ -109,7 +113,7 @@ public class ComplementoPessoa implements Serializable {
 	public void setQualAlergia(String qualAlergia) {
 		this.qualAlergia = qualAlergia;
 	}
-	
+
 	@OneToOne
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -118,7 +122,7 @@ public class ComplementoPessoa implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

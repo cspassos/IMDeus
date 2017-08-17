@@ -1,4 +1,4 @@
-package com.imdeus.controller.grupo;
+package com.imdeus.service;
 
 import java.io.Serializable;
 

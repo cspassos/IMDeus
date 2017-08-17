@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable id="tabelaGrupos"
+		value="#{cadastroPessoaBean.gruposDaPessoa}" var="grupo"
+		style="margin-top: 20px" emptyMessage="Nenhum grupo cadastrado."
+		rows="20" paginator="true" paginatorAlwaysVisible="false"
+		paginatorPosition="bottom">
+
+		<p:column headerText="Status" style="width:250px; text-align: center">
+			<h:outputText value="#{grupo.statusGrupo.nomeStatus}" />
+		</p:column>
+
+		<p:column headerText="Nome do grupo"
+			style="text-align: center; width: 100px">
+			<h:outputText value="#{grupo.nome}" />
+		</p:column>
+	</p:dataTable>
+
+</ui:composition>

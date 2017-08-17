@@ -1,6 +1,8 @@
 package com.imdeus.model;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +31,32 @@ public class Pessoa implements Serializable {
 	private Endereco endereco;
 	private ComplementoPessoa complementoPessoa;
 	private Grupo grupo;
+
+	private List<GrupoPessoa> gruposPessoas = new LinkedList<>();
+
+	protected Pessoa() {
+	}
+
+	public Pessoa(String nome, Integer idade, String email, String celular, Endereco endereco,
+			ComplementoPessoa complementoPessoa) {
+		this(nome, idade, email, celular);
+		this.endereco = endereco;
+		this.complementoPessoa = complementoPessoa;
+	}
 	
+	public Pessoa(String nome, Integer idade, String email, String celular) {
+		this.nome = nome;
+		this.idade = idade;
+		this.email = email;
+		this.celular = celular;
+	}
+	
+	public static Pessoa newInstance() {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setComplementoPessoa(new ComplementoPessoa());
+		pessoa.setEndereco(new Endereco());
+		return pessoa;
+	}
 
 	@Id
 	@GeneratedValue
@@ -85,28 +113,30 @@ public class Pessoa implements Serializable {
 	// entidade endereço.
 	// cascade -> quando salvar uma pessoa automaticamente vai persistir os
 	// endereços do cliente
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	//Usa-se o endereco.setPessoa(this); -> para persistir o pessoa_id na tabela de endereco.
+	// Usa-se o endereco.setPessoa(this); -> para persistir o pessoa_id na tabela de
+	// endereco.
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-		endereco.setPessoa(this);
+		// endereco.setPessoa(this);
 	}
 
 	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "pessoa")
 	public ComplementoPessoa getComplementoPessoa() {
 		return complementoPessoa;
 	}
-	
-	//Usa-se o complementoPessoa.setPessoa(this); -> para persistir o pessoa_id na tabela de complementoPessoa.
+
+	// Usa-se o complementoPessoa.setPessoa(this); -> para persistir o pessoa_id na
+	// tabela de complementoPessoa.
 	public void setComplementoPessoa(ComplementoPessoa complementoPessoa) {
 		this.complementoPessoa = complementoPessoa;
-		complementoPessoa.setPessoa(this);
+		// complementoPessoa.setPessoa(this);
 	}
-	
+
 	@ManyToOne
 	@JoinColumn(name = "grupo_id")
 	public Grupo getGrupo() {
@@ -117,6 +147,33 @@ public class Pessoa implements Serializable {
 		this.grupo = grupo;
 	}
 
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<GrupoPessoa> getGruposPessoas() {
+		return gruposPessoas;
+	}
+	
+	public void setGruposPessoas(List<GrupoPessoa> gruposPessoas) {
+		this.gruposPessoas = gruposPessoas;
+	}
+
+	public void adicionar(Grupo grupo) {
+		GrupoPessoa grupoPessoa = new GrupoPessoa(grupo, this);
+		gruposPessoas.add(grupoPessoa);
+		grupo.getGruposPessoas().add(grupoPessoa);
+	}
+
+	public void remover(Grupo grupo) {
+		for (Iterator<GrupoPessoa> iterator = gruposPessoas.iterator(); iterator.hasNext();) {
+			GrupoPessoa grupoPessoa = iterator.next();
+
+			if (grupoPessoa.getPessoa().equals(this) && grupoPessoa.getGrupo().equals(grupo)) {
+				iterator.remove();
+				grupoPessoa.getGrupo().getGruposPessoas().remove(grupoPessoa);
+				grupoPessoa.setPessoa(null);
+				grupoPessoa.setGrupo(null);
+			}
+		}
+	}
 
 	// Define que o pessoa é unico pelo id
 	// botato direito/source/generete hashcode...
