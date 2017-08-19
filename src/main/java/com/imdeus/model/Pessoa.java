@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,7 +31,6 @@ public class Pessoa implements Serializable {
 	private String celular;
 	private Endereco endereco;
 	private ComplementoPessoa complementoPessoa;
-	private Grupo grupo;
 
 	private List<GrupoPessoa> gruposPessoas = new LinkedList<>();
 
@@ -59,7 +59,7 @@ public class Pessoa implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -135,16 +135,6 @@ public class Pessoa implements Serializable {
 	public void setComplementoPessoa(ComplementoPessoa complementoPessoa) {
 		this.complementoPessoa = complementoPessoa;
 		// complementoPessoa.setPessoa(this);
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "grupo_id")
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
 	}
 
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +28,7 @@ public class Grupo implements Serializable {
 	private List<GrupoPessoa> gruposPessoas = new ArrayList<>();
 
 	@Id
-	@GeneratedValue // id auto-incremento
+	@GeneratedValue(strategy=GenerationType.IDENTITY) // id auto-incremento
 	public Long getId() {
 		return id;
 	}
