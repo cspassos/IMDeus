@@ -40,7 +40,7 @@
 			value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" />
 
 		<p:outputLabel value="Status Grupo" for="statusGrupo" />
-		<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}">
+		<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}" converter="statusGrupoConverter">
 			<f:selectItem itemLabel="Selecione um Status" />
 			<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
 	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
@@ -49,7 +49,7 @@
 	
 		<p:outputLabel value="Grupo" for="nomeGrupo" />
 		<h:panelGroup>
-			<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}">
+			<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}" converter="grupoConverter">
 				<f:selectItem itemLabel="Selecione um Status" />
 				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 			</p:selectOneMenu>

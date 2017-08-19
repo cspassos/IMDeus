@@ -38,7 +38,7 @@
     			columnClasses="rotulo, campo">
     			
     			<p:outputLabel value="Status Grupo" for="statusGrupo"/>
-	    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}">
+	    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}" converter="statusGrupoConverter">
 	    			<f:selectItems value="#{cadastroGrupoBean.statusGrupo}" var="statusGrupo"
 	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
 	    		</p:selectOneMenu>

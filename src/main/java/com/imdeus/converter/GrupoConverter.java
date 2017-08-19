@@ -4,39 +4,36 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 import com.imdeus.model.Grupo;
 import com.imdeus.repository.GrupoRepository;
-import com.imdeus.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Grupo.class)
-public class GrupoConverter implements Converter{
-	
+@FacesConverter(managed = true, value = "grupoConverter")
+public class GrupoConverter implements Converter<Grupo> {
+
+	@Inject
 	private GrupoRepository grupoRepository;
-	
-	public GrupoConverter(){
-		grupoRepository = CDIServiceLocator.getBean(GrupoRepository.class);
-	}
 
 	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+	public Grupo getAsObject(FacesContext context, UIComponent component, String value) {
 		Grupo retorno = null;
-		
-		if(value != null){
+
+		if (value != null) {
 			Long id = new Long(value);
 			retorno = grupoRepository.porId(id);
 		}
-		
+
 		return retorno;
 	}
 
 	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		
-		if(value != null){
-			Grupo grupo = (Grupo) value;
-			return grupo.getId() == null ? null: grupo.getId().toString();
+	public String getAsString(FacesContext context, UIComponent component, Grupo value) {
+
+		if (value != null) {
+			return value.getId().toString();
 		}
 		return "";
 	}
+
 }
