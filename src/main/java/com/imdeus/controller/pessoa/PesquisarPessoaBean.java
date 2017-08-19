@@ -1,25 +1,48 @@
 package com.imdeus.controller.pessoa;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
-@RequestScoped
-public class PesquisarPessoaBean {
+import com.imdeus.model.Pessoa;
+import com.imdeus.repository.filter.PessoaFilter;
+import com.imdeus.service.PessoaService;
 
-	private List<Integer> pessoasFiltrados;
+@Named
+@ViewScoped
+public class PesquisarPessoaBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
-	public PesquisarPessoaBean() {
-		pessoasFiltrados = new ArrayList<>();
-		for(int i=0; i < 50; i++) {
-			pessoasFiltrados.add(i);
-		}
+	@Inject
+	private PessoaService pessoaService;
+	
+	private PessoaFilter filtro;
+	
+	private List<Pessoa> pessoasFiltrados;
+	
+	@PostConstruct
+	public void init() {
+		filtro = new PessoaFilter();
 	}
 	
-	public List<Integer> getGruposFiltrados(){
+	public void consultaPessoa() {
+		pessoasFiltrados = pessoaService.todas(filtro);
+	}
+	
+	public PessoaFilter getFiltro() {
+		return filtro;
+	}
+	
+	public void setFiltro(PessoaFilter filtro) {
+		this.filtro = filtro;
+	}
+	
+	public List<Pessoa> getTodasPessoas(){
 		return pessoasFiltrados;
 	}
 }

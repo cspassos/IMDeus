@@ -15,7 +15,7 @@
     		
     		<p:toolbar style="margin-top: 20px">
     			<p:toolbarGroup>
-    				<p:commandButton value="Pesquisar"/>
+    				<p:commandButton value="Pesquisar" action="#{pesquisarPessoaBean.consultaPessoa}" update="@form"/>
     			</p:toolbarGroup>
     			
     			<p:toolbarGroup align="right">
@@ -28,13 +28,13 @@
     			columnClasses="rotulo, campo">
     			
     			<p:outputLabel value="Nome" for="nomePessoa"/>
-    			<p:inputText id="nomePessoa" size="50" />
+    			<p:inputText id="nomePessoa" value="#{pesquisarPessoaBean.filtro.nome}" size="50" />
     			
     			<p:outputLabel value="Idade" for="idade"/>
-    			<p:inputText id="idade" size="2" />
+    			<p:inputText id="idade" value="#{pesquisarPessoaBean.filtro.idade}" size="2" />
     			
     			<p:outputLabel value="Nome Mãe" for="nomeMae"/>
-    			<p:inputText id="nomeMae" size="50" />
+    			<p:inputText id="nomeMae" value="#{pesquisarPessoaBean.filtro.nomeMae}" size="50" />
     				  			
     		</p:panelGrid>
 			
@@ -53,24 +53,16 @@
     	
 			
 			    		
-    		<p:dataTable id="pessoasTable" value="#{pesquisarGruposBean.gruposFiltrados}" var="pessoa"
+    		<p:dataTable id="pessoasTable" value="#{pesquisarPessoaBean.todasPessoas}" var="pessoa"
     			style="margin-top: 20px" emptyMessage="Nenhuma pessoa encontrada." 
     			rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
     			
     			<p:column headerText="Nome Pessoa" style="text-align: center; width: 100px">
-    				<h:outputText value="Caic Souza Passos" />
+    				<h:outputText value="#{pessoa.nome}" />
     			</p:column>
     		
     			<p:column headerText="Idade" style="text-align: center">
-    				<h:outputText value="20" />
-    			</p:column>
-    			
-    			<p:column headerText="Nome Grupo" style="text-align: center; width: 100px">
-    				<h:outputText value="GAM" />
-    			</p:column>
-    			
-    			<p:column headerText="Status" style="width:250px; text-align: center">
-    				<h:outputText value="Pastoral" />
+    				<h:outputText value="#{pessoa.idade}" />
     			</p:column>
     			
     			<p:column headerText="Ações" style="text-align: center; width: 100px">
