@@ -3,7 +3,12 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+
 	<display-name>Imdeus</display-name>
+
+	<welcome-file-list>
+		<welcome-file>Home.xhtml</welcome-file>
+	</welcome-file-list>
 
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
@@ -14,9 +19,13 @@
 		<resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
 	</resource-env-ref>
 
-	<welcome-file-list>
-		<welcome-file>Home.xhtml</welcome-file>
-	</welcome-file-list>
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/ds_imdeus</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

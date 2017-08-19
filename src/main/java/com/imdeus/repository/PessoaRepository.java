@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.imdeus.model.Grupo;
 import com.imdeus.model.Pessoa;
 import com.imdeus.util.jpa.Transactional;
 

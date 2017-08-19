@@ -21,15 +21,14 @@ public class CadastroGrupoBean implements Serializable {
 
 	@Inject
 	private StatusGrupoRepository statusGrupoRepository;
-	
 	@Inject
 	private GrupoService cadastroProdutoService;
 
 	private Grupo grupo;
 
 	private List<StatusGrupo> statusGrupo;
-	
-//*********** METODOS **************************************************************************************************************************//
+
+	// *********** METODOS **********************************************//
 
 	public CadastroGrupoBean() {
 		limparFormulario();
@@ -50,8 +49,8 @@ public class CadastroGrupoBean implements Serializable {
 		FacesUtil.addInfoMessage("Grupo salvo com sucesso!");
 		limparFormulario();
 	}
-	
-//************* GET E SET ************************************************************************************************************************//
+
+	// ************* GET E SET ****************************************//
 
 	public Grupo getGrupo() {
 		return grupo;

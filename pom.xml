@@ -56,6 +56,11 @@
 			<version>6.0.6</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>8.0.36</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
@@ -97,18 +102,18 @@
 		</dependency>
 
 	</dependencies>
-	
-	<repositories> 
- 		<repository> 
- 			<id>prime-repo</id> 
- 			<name>PrimeFaces Maven Repository</name> 
- 			<url>http://repository.primefaces.org</url> 
- 			<layout>default</layout> 
- 		</repository> 
- 	</repositories> 
+
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 	<build>
-		<finalName>Imdeus</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
