@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "grupo")
@@ -38,6 +39,7 @@ public class Grupo implements Serializable {
 	}
 	
 	@Column(nullable = false, length = 100)
+	@NotBlank(message = "é obrigatório, seu zé")
 	public String getNome() {
 		return nome;
 	}
