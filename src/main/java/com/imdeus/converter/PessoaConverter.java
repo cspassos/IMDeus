@@ -6,11 +6,15 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
+import org.apache.log4j.Logger;
+
 import com.imdeus.model.Pessoa;
 import com.imdeus.repository.PessoaRepository;
 
 @FacesConverter(managed = true, value = "pessoaConverter")
 public class PessoaConverter implements Converter<Pessoa> {
+	
+	public static final Logger logger = Logger.getLogger(PessoaConverter.class);
 
 	@Inject
 	private PessoaRepository pessoaRepository;
@@ -21,6 +25,7 @@ public class PessoaConverter implements Converter<Pessoa> {
 
 		if (value != null) {
 			Long id = new Long(value);
+			logger.info("Converter getAsObject: " + getClass().getSimpleName());
 			retorno = pessoaRepository.porId(id);
 		}
 
@@ -31,6 +36,7 @@ public class PessoaConverter implements Converter<Pessoa> {
 	public String getAsString(FacesContext context, UIComponent component, Pessoa value) {
 
 		if (value != null) {
+			logger.info("Converter getAsString: " + getClass().getSimpleName());
 			return value.getId().toString();
 		}
 		return "";

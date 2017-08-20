@@ -1,6 +1,7 @@
 package com.imdeus.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,5 +19,9 @@ public class GrupoService implements Serializable{
 	@Transactional
 	public Grupo salvar(Grupo grupo) {
 		return grupoRepository.salvar(grupo);
+	}
+
+	public List<Grupo> comecadosCom(String nome) {
+		return grupoRepository.gruposContendo(nome);
 	}
 }

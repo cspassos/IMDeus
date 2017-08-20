@@ -31,7 +31,7 @@
     			<p:inputText id="nomePessoa" value="#{pesquisarPessoaBean.filtro.nome}" size="50" />
     			
     			<p:outputLabel value="Idade" for="idade"/>
-    			<p:inputText id="idade" value="#{pesquisarPessoaBean.filtro.idade}" size="2" />
+    			<p:spinner id="idade" value="#{pesquisarPessoaBean.filtro.idade}" min="0" max="999" />
     			
     			<p:outputLabel value="Nome Mãe" for="nomeMae"/>
     			<p:inputText id="nomeMae" value="#{pesquisarPessoaBean.filtro.nomeMae}" size="50" />
@@ -42,17 +42,20 @@
     			columnClasses="rotulo, campo">
     			
     			<p:outputLabel value="Nome Grupo" for="nomeGrupo"/>
-    			<p:inputText id="nomeGrupo" size="50" />
-    			
-    			<p:outputLabel value="Status do Grupo" for="statusGrupo"/>
-    			<p:selectOneMenu id="statusGrupo">
-    				<f:selectItem itemLabel="Selecione o status"/>
-    			</p:selectOneMenu>
-    				  			
+		        <p:autoComplete id="nomeGrupo" value="#{pesquisarPessoaBean.filtro.grupo}" completeMethod="#{pesquisarPessoaBean.grupoAutoComplete}"
+		                        var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" converter="grupoConverter" forceSelection="true">
+		            <f:facet name="itemtip">
+		                <h:panelGrid columns="2" cellpadding="5">
+		                    <h:outputText value="Grupo:" />
+		                    <h:outputText value="#{grupo.nome}" />
+		 
+		                    <h:outputText value="Status grupo:" />
+		                    <h:outputText value="#{grupo.statusGrupo.nomeStatus}" />
+		                </h:panelGrid>
+		            </f:facet>
+		        </p:autoComplete>
     		</p:panelGrid>
     	
-			
-			    		
     		<p:dataTable id="pessoasTable" value="#{pesquisarPessoaBean.todasPessoas}" var="pessoa"
     			style="margin-top: 20px" emptyMessage="Nenhuma pessoa encontrada." 
     			rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
