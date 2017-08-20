@@ -123,7 +123,7 @@ public class Pessoa implements Serializable {
 		// endereco.setPessoa(this);
 	}
 
-	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "pessoa")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public ComplementoPessoa getComplementoPessoa() {
 		return complementoPessoa;
 	}

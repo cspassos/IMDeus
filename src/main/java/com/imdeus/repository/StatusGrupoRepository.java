@@ -46,7 +46,7 @@ public class StatusGrupoRepository implements Serializable{
 		return resultList;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public List<Grupo> pesquisarGrupo(GrupoFilter filtro) {
 		Session session = manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Grupo.class);

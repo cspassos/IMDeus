@@ -33,11 +33,15 @@ public class PessoaRepository implements Serializable {
 		return pessoa;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public List<Pessoa> todasPessoas(PessoaFilter filtro) {
+		// TODO: refazer esta consulta, esta estranha
+		// esta realizando joins desnecessarios, e nao trazendo as informacoes de endereco e complemento
+		
 		Session session = manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Pessoa.class);
-		criteria.createAlias("gruposPessoas", "gruposPessoas");
+		criteria.createAlias("complementoPessoa", "complementoPessoa");
+		criteria.createAlias("endereco", "endereco");
 
 		if (StringUtils.isNotBlank(filtro.getNome())) {
 			criteria.add(Restrictions.eq("nome", filtro.getNome()));
@@ -52,11 +56,10 @@ public class PessoaRepository implements Serializable {
 		}
 
 		if (filtro.getGrupo() != null) {
+			criteria.createAlias("gruposPessoas", "gruposPessoas");
 			criteria.add(Restrictions.eq("gruposPessoas.grupo.id", filtro.getGrupo().getId()));
 		}
 
-		//TODO: refazer esta consulta, esta estranha
-		//esta realizando joins desnecessarios, e nao trazendo as informacoes de endereco
 		return criteria.list();
 	}
 

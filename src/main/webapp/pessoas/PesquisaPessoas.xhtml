@@ -31,11 +31,10 @@
     			<p:inputText id="nomePessoa" value="#{pesquisarPessoaBean.filtro.nome}" size="50" />
     			
     			<p:outputLabel value="Idade" for="idade"/>
-    			<p:spinner id="idade" value="#{pesquisarPessoaBean.filtro.idade}" min="0" max="999" />
+    			<p:spinner id="idade" value="#{pesquisarPessoaBean.filtro.idade}" min="1" max="999" />
     			
     			<p:outputLabel value="Nome Mãe" for="nomeMae"/>
     			<p:inputText id="nomeMae" value="#{pesquisarPessoaBean.filtro.nomeMae}" size="50" />
-    				  			
     		</p:panelGrid>
 			
 			<p:panelGrid columns="2" id="painel2" style="width: 100%; margin-top: 20px"
@@ -72,7 +71,6 @@
     				<p:button icon="ui-icon-pencil" title="Editar"/>
     				<p:commandButton icon="ui-icon-trash" title="Excluir"/>
     			</p:column>
-    		
     		</p:dataTable>
     	</h:form>
     </ui:define>
