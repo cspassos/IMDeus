@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,7 +26,7 @@ public class ComplementoPessoa implements Serializable {
 	private String qualMedicamento;
 	private String qualAlergia;
 	private Pessoa pessoa;
-	
+
 	protected ComplementoPessoa() {
 	}
 
@@ -36,7 +37,7 @@ public class ComplementoPessoa implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) // id auto-incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incremento
 	public Long getId() {
 		return id;
 	}
@@ -96,7 +97,7 @@ public class ComplementoPessoa implements Serializable {
 	}
 
 	// @Size(max = 300)
-	@Column(length = 255)
+	@Column(name = "qual_medicamento", length = 255)
 	public String getQualMedicamento() {
 		return qualMedicamento;
 	}
@@ -106,7 +107,7 @@ public class ComplementoPessoa implements Serializable {
 	}
 
 	// @Size(max = 300)
-	@Column(length = 255)
+	@Column(name = "qual_alergia", length = 255)
 	public String getQualAlergia() {
 		return qualAlergia;
 	}
@@ -116,6 +117,7 @@ public class ComplementoPessoa implements Serializable {
 	}
 
 	@OneToOne
+	@JoinColumn(name = "id_pessoa")
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

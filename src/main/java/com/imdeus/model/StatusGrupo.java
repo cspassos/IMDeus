@@ -32,7 +32,7 @@ public class StatusGrupo {
 	}
 
 	@NotBlank(message = "é obrigatorio")
-	@Column(nullable = false, length = 20)
+	@Column(name = "nome_status", nullable = false, length = 20)
 	public String getNomeStatus() {
 		return nomeStatus;
 	}

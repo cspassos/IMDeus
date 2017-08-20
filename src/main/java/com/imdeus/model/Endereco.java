@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,7 +25,7 @@ public class Endereco implements Serializable {
 	private String cep;
 	private String complemento;
 	private Pessoa pessoa;
-	
+
 	protected Endereco() {
 	}
 
@@ -36,7 +37,7 @@ public class Endereco implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) // id auto-incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incremento
 	public Long getId() {
 		return id;
 	}
@@ -55,8 +56,8 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 
-	// @NotBlank @Size(max = 20)
-	@Column(nullable = false, length = 20)
+	// @NotBlank @Size(max = 10)
+	@Column(nullable = false, length = 10)
 	public String getNumero() {
 		return numero;
 	}
@@ -75,8 +76,8 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	// @NotBlank @Size(max = 150)
-	@Column(nullable = false, length = 150)
+	// @NotBlank @Size(max = 10)
+	@Column(nullable = false, length = 10)
 	public String getUf() {
 		return uf;
 	}
@@ -107,6 +108,7 @@ public class Endereco implements Serializable {
 
 	// muitos endereços possui um cliente
 	@OneToOne
+	@JoinColumn(name = "id_pessoa")
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -145,5 +147,5 @@ public class Endereco implements Serializable {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 }

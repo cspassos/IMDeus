@@ -41,14 +41,14 @@ public class Pessoa implements Serializable {
 		this.endereco = endereco;
 		this.complementoPessoa = complementoPessoa;
 	}
-	
+
 	public Pessoa(String nome, Integer idade, String email, String celular) {
 		this.nome = nome;
 		this.idade = idade;
 		this.email = email;
 		this.celular = celular;
 	}
-	
+
 	public static Pessoa newInstance() {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setComplementoPessoa(new ComplementoPessoa());
@@ -57,7 +57,7 @@ public class Pessoa implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -139,7 +139,7 @@ public class Pessoa implements Serializable {
 	public List<GrupoPessoa> getGruposPessoas() {
 		return gruposPessoas;
 	}
-	
+
 	public void setGruposPessoas(List<GrupoPessoa> gruposPessoas) {
 		this.gruposPessoas = gruposPessoas;
 	}

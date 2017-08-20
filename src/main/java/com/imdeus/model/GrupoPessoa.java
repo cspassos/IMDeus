@@ -38,7 +38,7 @@ public class GrupoPessoa {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "grupo_id")
+	@JoinColumn(name = "id_grupo")
 	public Grupo getGrupo() {
 		return grupo;
 	}
@@ -48,7 +48,7 @@ public class GrupoPessoa {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pessoa_id")
+	@JoinColumn(name = "id_pessoa")
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

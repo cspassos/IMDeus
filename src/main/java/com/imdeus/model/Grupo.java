@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "grupo")
@@ -25,11 +27,11 @@ public class Grupo implements Serializable {
 	private Long id;
 	private String nome;
 	private StatusGrupo statusGrupo;
-	
+
 	private List<GrupoPessoa> gruposPessoas = new ArrayList<>();
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) // id auto-incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incremento
 	public Long getId() {
 		return id;
 	}
@@ -37,7 +39,7 @@ public class Grupo implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@Column(nullable = false, length = 100)
 	@NotBlank(message = "é obrigatório, seu zé")
 	public String getNome() {
@@ -47,9 +49,12 @@ public class Grupo implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name = "status_grupo_id", nullable = false)
+
+	// indicarei quando precisar de status grupo
+	// por padrao nao o trara junto de grupo
+	@NotNull(message = "Selecione um Status")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_status_grupo", nullable = false)
 	public StatusGrupo getStatusGrupo() {
 		return statusGrupo;
 	}
@@ -57,12 +62,12 @@ public class Grupo implements Serializable {
 	public void setStatusGrupo(StatusGrupo statusGrupo) {
 		this.statusGrupo = statusGrupo;
 	}
-	
+
 	@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<GrupoPessoa> getGruposPessoas() {
 		return gruposPessoas;
 	}
-	
+
 	public void setGruposPessoas(List<GrupoPessoa> gruposPessoas) {
 		this.gruposPessoas = gruposPessoas;
 	}
