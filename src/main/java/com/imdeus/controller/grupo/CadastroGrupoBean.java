@@ -28,8 +28,6 @@ public class CadastroGrupoBean implements Serializable {
 
 	private List<StatusGrupo> statusGrupo;
 
-	// *********** METODOS **********************************************//
-
 	public CadastroGrupoBean() {
 		limparFormulario();
 	}
@@ -50,14 +48,8 @@ public class CadastroGrupoBean implements Serializable {
 		limparFormulario();
 	}
 
-	// ************* GET E SET ****************************************//
-
 	public Grupo getGrupo() {
 		return grupo;
-	}
-
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
 	}
 
 	public List<StatusGrupo> getStatusGrupo() {

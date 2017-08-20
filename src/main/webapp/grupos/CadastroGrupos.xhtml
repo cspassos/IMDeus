@@ -9,8 +9,6 @@
     
     <ui:define name="corpo">
     	
-    	<!-- viewParam -> para executar o listener apenas uma vez no inicio. -->
-    	<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
     	<f:metadata>
     	<f:viewParam name="dummy" />
     		<f:event listener="#{cadastroGrupoBean.inicializar}" type="preRenderView" />
@@ -19,7 +17,6 @@
     	<h:form>
     	
     		<h1>Novo Grupo</h1>
-    		<!-- closable -> Permitir que a mensagem seja fechada. -->
     		<p:messages autoUpdate="true" closable="true"/>
     		
     		<p:toolbar style="margin-top: 20px" styleClass="toolbar-geral">
@@ -38,14 +35,17 @@
     			columnClasses="rotulo, campo">
     			
     			<p:outputLabel value="Status Grupo" for="statusGrupo"/>
-	    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}" converter="statusGrupoConverter">
+	    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}" 
+	    			converter="statusGrupoConverter">
+	    			<f:selectItem itemLabel="Selecione um status"/>
 	    			<f:selectItems value="#{cadastroGrupoBean.statusGrupo}" var="statusGrupo"
 	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
 	    		</p:selectOneMenu>
     			
     			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
     			<p:inputText id="nomeGrupo" size="80" maxlength="100"
-    				value="#{cadastroGrupoBean.grupo.nome}"/>
+    				value="#{cadastroGrupoBean.grupo.nome}" immediate="true">
+    			</p:inputText>
     			
     		</p:panelGrid>
     		
