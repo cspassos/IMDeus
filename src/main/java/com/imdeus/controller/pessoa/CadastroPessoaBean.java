@@ -52,7 +52,7 @@ public class CadastroPessoaBean implements Serializable {
 
 	public void consultaStatusGrupo() {
 		if (FacesUtil.isNotPostback()) {
-			statusGrupoRaizes = statusGrupoRepository.consultaStatusGrupo();
+			statusGrupoRaizes = statusGrupoRepository.todosStatusGrupos();
 		}
 	}
 

@@ -23,13 +23,12 @@ public class StatusGrupoRepository implements Serializable{
 	@Inject
 	private EntityManager manager;
 	
-	
 	//Buscar o status do grupo pelo ID
 	public StatusGrupo porId(Long id) {
 		return manager.find(StatusGrupo.class, id);
 	}
 	
-	public List<StatusGrupo> consultaStatusGrupo() {
+	public List<StatusGrupo> todosStatusGrupos() {
 		return manager.createQuery("from StatusGrupo", StatusGrupo.class).getResultList();
 	}
 	
@@ -49,7 +48,6 @@ public class StatusGrupoRepository implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	public List<Grupo> pesquisarGrupo(GrupoFilter filtro) {
-		
 		Session session = manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Grupo.class);
 		criteria.createAlias("statusGrupo", "statusGrupo");

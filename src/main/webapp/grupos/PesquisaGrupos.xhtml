@@ -13,7 +13,7 @@
 		<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
 		<f:metadata>
 			<f:viewParam name="dummy" />
-			<f:event listener="#{pesquisarGrupoBean.consultaStatusGrupo}"
+			<f:event listener="#{pesquisarGrupoBean.todosStatusGrupos}"
 				type="preRenderView" />
 		</f:metadata>
 
@@ -45,13 +45,11 @@
 					</p:selectOneMenu>
 
 				<p:outputLabel value="Grupo" for="nomeGrupo" />
-					<p:selectOneMenu id="nomeGrupo" value="#{pesquisarGrupoBean.filtro.nomeGrupo}">
-						<f:selectItem itemLabel="Selecione um Status" />
-						<f:selectItems value="#{pesquisarGrupoBean.grupos}" var="grupo"
-							itemValue="#{grupo.nome}" itemLabel="#{grupo.nome}"/>
-					</p:selectOneMenu>
-    			
-    					
+				<p:selectOneMenu id="nomeGrupo" value="#{pesquisarGrupoBean.filtro.nomeGrupo}">
+					<f:selectItem itemLabel="Selecione um Grupo" />
+					<f:selectItems value="#{pesquisarGrupoBean.grupos}" var="grupo"
+						itemValue="#{grupo.nome}" itemLabel="#{grupo.nome}"/>
+				</p:selectOneMenu>
     		</p:panelGrid>
     		
     		<p:dataTable id="gruposTable" value="#{pesquisarGrupoBean.pesquisaStatusGrupoFiltrados}" var="grupo"
@@ -70,7 +68,6 @@
     				<p:button icon="ui-icon-pencil" title="Editar"/>
     				<p:commandButton icon="ui-icon-trash" title="Excluir"/>
     			</p:column>
-    			
     		</p:dataTable>
     	</h:form>
     </ui:define>

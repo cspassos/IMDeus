@@ -38,7 +38,7 @@ public class CadastroGrupoBean implements Serializable {
 
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-			statusGrupo = statusGrupoRepository.consultaStatusGrupo();
+			statusGrupo = statusGrupoRepository.todosStatusGrupos();
 		}
 	}
 

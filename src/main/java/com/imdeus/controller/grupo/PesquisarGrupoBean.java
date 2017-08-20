@@ -45,13 +45,14 @@ public class PesquisarGrupoBean implements Serializable {
 		pesquisaStatusGrupoFiltrados = statusGrupoRepository.pesquisarGrupo(filtro);
 	}
 
-	public void consultaStatusGrupo() {
+	public void todosStatusGrupos() {
 		if (FacesUtil.isNotPostback()) {
-			statusGrupoRaizes = statusGrupoRepository.consultaStatusGrupo();
+			statusGrupoRaizes = statusGrupoRepository.todosStatusGrupos();
 		}
 	}
 
 	public void carregarNomeGrupo() {
+		//TODO: verificar quando deselecionamos um status grupo, nao gerar novamente uma consulta
 		grupos = statusGrupoRepository.carregarNomeGrupoDe(filtro);
 	}
 
