@@ -1,7 +1,7 @@
 package com.imdeus.util.jpa;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
@@ -17,8 +17,11 @@ public class EntityManagerProducer {
 		factory = Persistence.createEntityManagerFactory("ImDeusPU");
 	}
 
+	// com a nova versao do hibernate e cdi, o escopo request gera erro
+	// para resolver utilizaremos o dependent
+	// no qual pego o escopo que quem o chama
 	@Produces
-	@RequestScoped
+	@Dependent
 	public EntityManager createEntyManager() {
 		return factory.createEntityManager();
 	}
