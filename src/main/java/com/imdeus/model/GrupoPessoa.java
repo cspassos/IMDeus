@@ -2,6 +2,7 @@ package com.imdeus.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,7 @@ public class GrupoPessoa {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_grupo")
+	@JoinColumn(name = "id_grupo", foreignKey=@ForeignKey(name = "fk_grupo_pessoa_id_grupo"))
 	public Grupo getGrupo() {
 		return grupo;
 	}
@@ -48,7 +49,7 @@ public class GrupoPessoa {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa")
+	@JoinColumn(name = "id_pessoa", foreignKey=@ForeignKey(name = "fk_grupo_pessoa_id_pessoa"))
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

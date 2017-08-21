@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -118,7 +119,7 @@ public class ComplementoPessoa implements Serializable {
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa")
+	@JoinColumn(name = "id_pessoa", foreignKey=@ForeignKey(name = "fk_complemento_pessoa_id_pessoa"))
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

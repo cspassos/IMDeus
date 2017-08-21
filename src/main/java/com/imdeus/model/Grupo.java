@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +55,7 @@ public class Grupo implements Serializable {
 	// por padrao nao o trara junto de grupo
 	@NotNull(message = "Selecione um Status")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_status_grupo", nullable = false)
+	@JoinColumn(name = "id_status_grupo", nullable = false, foreignKey=@ForeignKey(name = "fk_grupo_id_status_grupo"))
 	public StatusGrupo getStatusGrupo() {
 		return statusGrupo;
 	}

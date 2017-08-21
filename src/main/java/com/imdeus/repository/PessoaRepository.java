@@ -39,9 +39,9 @@ public class PessoaRepository implements Serializable {
 		// esta realizando joins desnecessarios, e nao trazendo as informacoes de endereco e complemento
 		
 		Session session = manager.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Pessoa.class);
-		criteria.createAlias("complementoPessoa", "complementoPessoa");
-		criteria.createAlias("endereco", "endereco");
+		Criteria criteria = session.createCriteria(Pessoa.class,"pessoa");
+		criteria.createAlias("pessoa.complementoPessoa", "complementoPessoa");
+		criteria.createAlias("pessoa.endereco", "endereco");
 
 		if (StringUtils.isNotBlank(filtro.getNome())) {
 			criteria.add(Restrictions.eq("nome", filtro.getNome()));
