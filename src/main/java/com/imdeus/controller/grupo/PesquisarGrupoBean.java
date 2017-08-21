@@ -55,6 +55,10 @@ public class PesquisarGrupoBean implements Serializable {
 		//TODO: verificar quando deselecionamos um status grupo, nao gerar novamente uma consulta
 		grupos = statusGrupoRepository.carregarNomeGrupoDe(filtro);
 	}
+	
+	public void excluirGrupo() {
+		grupo = grupo;
+	}
 
 	// ********GET E
 	// SET*****************************************************************************************///

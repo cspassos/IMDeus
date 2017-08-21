@@ -69,9 +69,18 @@
     			
     			<p:column headerText="Ações">
     				<p:button icon="ui-icon-pencil" title="Editar"/>
-    				<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+    				<p:commandButton icon="ui-icon-trash" title="Excluir" process="@this"
+    					onclick="PF('confirmarcaoExclusao').show();">
+						<f:setPropertyActionListener target="#{pesquisarGrupoBean.grupo}" value="#{grupo}" />
+				    </p:commandButton>
     			</p:column>
     		</p:dataTable>
+
+		    <p:confirmDialog header="Exclusão de Grupo" widgetVar="confirmarcaoExclusao" resizable="false">
+	            <p:button value="Não" onclick="PF('confirmarcaoExclusao').hide(); return false;" />
+        		<p:commandButton value="Sim" update="gruposTable"
+        			onclick="confirmacaoExclusao.hide(); return false;" action="#{pesquisarGrupoBean.excluirGrupo}" />
+		    </p:confirmDialog> 		
     	</h:form>
     </ui:define>
  </ui:composition>
