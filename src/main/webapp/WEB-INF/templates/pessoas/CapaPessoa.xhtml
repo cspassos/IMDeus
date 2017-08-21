@@ -41,26 +41,26 @@
 			<p:outputLabel value="Celular Pai" for="celularPai" />
 			<p:inputText id="celularPai" size="15" maxlength="17"
 				value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" />
-				
-			<p:commandButton value="Adicionar um Grupo"
-				oncomplete="PF('grupoDialog').show()"
-				process="@this" update="grupoPanel">
-				<p:resetInput target="grupoPanel" />
-			</p:commandButton>
 		</p:panelGrid>
 	</div>
 	
+	<p:commandButton value="Adicionar um Grupo"
+		oncomplete="PF('grupoDialog').show()"
+		process="@this" update="grupoPanel">
+		<p:resetInput target="grupoPanel" />
+	</p:commandButton>
+	
 	<p:dialog widgetVar="grupoDialog" header="Adicionar Grupo"
-		resizable="false" style="width: 300px;" responsive="true">
+		resizable="false" style="width: 500px;" responsive="true">
 		<h:panelGroup id="grupoPanel" layout="block" styleClass="ui-fluid">
-			<p:messages id="msgDialog" autoUpdate="false" />
-			<p:growl id="addGrupoG" for="addGrupo" closable="true" />
+			<p:growl id="addGrupoG" closable="true" autoUpdate="false"/>
 			
 			<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
 				columnClasses="ui-grid-col-4, ui-grid-col-8">
 				
 				<p:outputLabel value="Status Grupo" for="statusGrupo" />
-				<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}" converter="statusGrupoConverter">
+				<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}" 
+					converter="statusGrupoConverter" required="true">
 					<f:selectItem itemLabel="Selecione um Status" />
 					<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
 			    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
@@ -68,7 +68,8 @@
 				</p:selectOneMenu>
 			
 				<p:outputLabel value="Grupo" for="nomeGrupo" />
-				<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}" converter="grupoConverter">
+				<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}" 
+					converter="grupoConverter" required="true">
 					<f:selectItem itemLabel="Selecione um Status" />
 					<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
 				</p:selectOneMenu>

@@ -71,7 +71,7 @@ public class CadastroPessoaBean implements Serializable {
 			gruposDaPessoa = new ArrayList<>();
 
 		gruposDaPessoa.add(grupo);
-		FacesUtil.addInfoMessage("addGrupo", "Grupo adicionado com sucesso!");
+		FacesUtil.addInfoMessage("Grupo adicionado com sucesso!");
 	}
 
 	// ************* GET E SET
