@@ -4,64 +4,83 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
-		columnClasses="rotulo, campo, rotulo, campo">
-
-		<p:outputLabel value="Nome Completo" for="nomeCompleto" />
-		<p:inputText id="nomeCompleto" size="50" maxlength="150"
-			value="#{cadastroPessoaBean.pessoa.nome}" />
-
-		<p:outputLabel value="Idade" for="idade" />
-		<p:inputText id="idade" size="2" maxlength="2"
-			value="#{cadastroPessoaBean.pessoa.idade}" />
-
-		<p:outputLabel value="Celular" for="celularPessoa" />
-		<p:inputText id="celularPessoa" size="15" maxlength="17"
-			value="#{cadastroPessoaBean.pessoa.celular}" />
-
-		<p:outputLabel value="E-mail" for="email" />
-		<p:inputText id="email" size="30" maxlength="255"
-			value="#{cadastroPessoaBean.pessoa.email}" />
-
-		<p:outputLabel value="Nome Mãe" for="nomeMae" />
-		<p:inputText id="nomeMae" size="50" maxlength="150"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}" />
-
-		<p:outputLabel value="Celular Mãe" for="celularMae" />
-		<p:inputText id="celularMae" size="15" maxlength="17"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}" />
-
-		<p:outputLabel value="Nome Pai" for="nomePai" />
-		<p:inputText id="nomePai" size="50" maxlength="150"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}" />
-
-		<p:outputLabel value="Celular Pai" for="celularPai" />
-		<p:inputText id="celularPai" size="15" maxlength="17"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" />
-
-		<p:outputLabel value="Status Grupo" for="statusGrupo" />
-		<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}" converter="statusGrupoConverter">
-			<f:selectItem itemLabel="Selecione um Status" />
-			<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
-	    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
-	    	<p:ajax listener="#{cadastroPessoaBean.carregarNomeGrupo}" update="nomeGrupo"/>
-		</p:selectOneMenu>
-	
-		<p:outputLabel value="Grupo" for="nomeGrupo" />
-		<h:panelGroup>
-			<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}" converter="grupoConverter">
-				<f:selectItem itemLabel="Selecione um Status" />
-				<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
-			</p:selectOneMenu>
+	<div class="ui-fluid">
+		<p:panelGrid columns="4" layout="grid"
+			style="margin-top: 20px; margin-bottom: 40px;"
+			styleClass="panelgrid-noborder"
+			columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
 			
-			<h:panelGroup>
-				<p:commandButton value="Salvar" id="botaoSalvarGrupo" action="#{cadastroPessoaBean.adicionarGrupo}" 
-					style="horizontal-align:center" 
-					update="addGrupoG cadastroPessoaForm:tabPanel:tabelaGrupos" process="@this, nomeGrupo"/>
-				<p:growl id="addGrupoG" for="addGrupo" closable="true" />
-			</h:panelGroup>
-		</h:panelGroup>
+			<p:outputLabel value="Nome Completo" for="nomeCompleto" />
+			<p:inputText id="nomeCompleto" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.nome}" />
 	
-	</p:panelGrid>
+			<p:outputLabel value="Idade" for="idade" />
+			<p:inputText id="idade" size="2" maxlength="2"
+				value="#{cadastroPessoaBean.pessoa.idade}" />
+	
+			<p:outputLabel value="Celular" for="celularPessoa" />
+			<p:inputText id="celularPessoa" size="15" maxlength="17"
+				value="#{cadastroPessoaBean.pessoa.celular}" />
+	
+			<p:outputLabel value="E-mail" for="email" />
+			<p:inputText id="email" size="30" maxlength="255"
+				value="#{cadastroPessoaBean.pessoa.email}" />
+	
+			<p:outputLabel value="Nome Mãe" for="nomeMae" />
+			<p:inputText id="nomeMae" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}" />
+	
+			<p:outputLabel value="Celular Mãe" for="celularMae" />
+			<p:inputText id="celularMae" size="15" maxlength="17"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}" />
+	
+			<p:outputLabel value="Nome Pai" for="nomePai" />
+			<p:inputText id="nomePai" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}" />
+	
+			<p:outputLabel value="Celular Pai" for="celularPai" />
+			<p:inputText id="celularPai" size="15" maxlength="17"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" />
+				
+			<p:commandButton value="Adicionar um Grupo"
+				oncomplete="PF('grupoDialog').show()"
+				process="@this" update="grupoPanel">
+				<p:resetInput target="grupoPanel" />
+			</p:commandButton>
+		</p:panelGrid>
+	</div>
+	
+	<p:dialog widgetVar="grupoDialog" header="Adicionar Grupo"
+		resizable="false" style="width: 300px;" responsive="true">
+		<h:panelGroup id="grupoPanel" layout="block" styleClass="ui-fluid">
+			<p:messages id="msgDialog" autoUpdate="false" />
+			<p:growl id="addGrupoG" for="addGrupo" closable="true" />
+			
+			<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
+				columnClasses="ui-grid-col-4, ui-grid-col-8">
+				
+				<p:outputLabel value="Status Grupo" for="statusGrupo" />
+				<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}" converter="statusGrupoConverter">
+					<f:selectItem itemLabel="Selecione um Status" />
+					<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
+			    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
+			    	<p:ajax listener="#{cadastroPessoaBean.carregarNomeGrupo}" update="nomeGrupo"/>
+				</p:selectOneMenu>
+			
+				<p:outputLabel value="Grupo" for="nomeGrupo" />
+				<p:selectOneMenu id="nomeGrupo" value="#{cadastroPessoaBean.grupo}" converter="grupoConverter">
+					<f:selectItem itemLabel="Selecione um Status" />
+					<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
+				</p:selectOneMenu>
+				
+				<!-- Se a validação dos campos não falhou ele fecha o diálogo -->						
+				<p:outputLabel />
+				<p:commandButton value="Adicionar" 
+					action="#{cadastroPessoaBean.adicionarGrupo}"
+					process="grupoPanel" update="grupoPanel addGrupoG cadastroPessoaForm:tabPanel:tabelaGrupos"
+					oncomplete="if (!args.validationFailed) PF('grupoDialog').hide()"/>
+			</p:panelGrid>
+		</h:panelGroup>
+	</p:dialog>
 
 </ui:composition>
