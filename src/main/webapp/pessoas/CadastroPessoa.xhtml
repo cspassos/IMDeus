@@ -8,13 +8,6 @@
 	<ui:define name="content">
 		<h1 class="aw-page-title">Cadastro de Pessoas</h1>
     
-    	<!-- viewParam -> para executar o listener apenas uma vez no inicio. -->
-    	<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
-    	<f:metadata>
-    	<f:viewParam name="dummy" />
-    		<f:event listener="#{cadastroPessoaBean.consultaStatusGrupo}" type="preRenderView" />
-    	</f:metadata>
-    	
     	<h:form id="cadastroPessoaForm">
     		<p:messages closable="true"/>
     		
@@ -23,7 +16,6 @@
     		<ui:include src="/WEB-INF/templates/pessoas/CapaPessoa.xhtml" />
     		
     		<p:tabView style="margin-top: 20px" id="tabPanel" cache="false">
-    		
     			<p:tab title="Restrições">
     				<ui:include src="/WEB-INF/templates/pessoas/Restricoes.xhtml" />
     			</p:tab>
@@ -39,9 +31,7 @@
     			<p:tab title="Grupos Pessoa" id="tabGrupoPessoa">
     				<ui:include src="/WEB-INF/templates/pessoas/TabelaGrupos.xhtml" />
     			</p:tab>
-    			
     		</p:tabView>
-    		
     	</h:form>
     </ui:define>
  </ui:composition>

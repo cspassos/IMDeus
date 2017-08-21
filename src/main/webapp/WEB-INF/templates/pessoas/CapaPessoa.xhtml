@@ -45,6 +45,7 @@
 	</div>
 	
 	<p:commandButton value="Adicionar um Grupo"
+		actionListener="#{cadastroPessoaBean.consultaStatusGrupo}"
 		oncomplete="PF('grupoDialog').show()"
 		process="@this" update="grupoPanel">
 		<p:resetInput target="grupoPanel" />
@@ -60,7 +61,7 @@
 				
 				<p:outputLabel value="Status Grupo" for="statusGrupo" />
 				<p:selectOneMenu id="statusGrupo" value="#{cadastroPessoaBean.statusGrupoSelecionado}" 
-					converter="statusGrupoConverter" required="true">
+					converter="statusGrupoConverter" required="true" immediate="false">
 					<f:selectItem itemLabel="Selecione um Status" />
 					<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
 			    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>

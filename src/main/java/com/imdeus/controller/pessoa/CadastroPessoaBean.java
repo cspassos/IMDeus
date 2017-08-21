@@ -23,7 +23,6 @@ public class CadastroPessoaBean implements Serializable {
 
 	@Inject
 	private StatusGrupoRepository statusGrupoRepository;
-
 	@Inject
 	private PessoaService pessoaService;
 
@@ -43,17 +42,12 @@ public class CadastroPessoaBean implements Serializable {
 
 	private boolean tipoCadastroIntolerancia = true;
 
-	// *********** METODOS
-	// ********************************************************************************************//
-
 	public CadastroPessoaBean() {
 		pessoa = Pessoa.newInstance();
 	}
 
 	public void consultaStatusGrupo() {
-		if (FacesUtil.isNotPostback()) {
-			statusGrupoRaizes = statusGrupoRepository.todosStatusGrupos();
-		}
+		statusGrupoRaizes = statusGrupoRepository.todosStatusGrupos();
 	}
 
 	public void carregarNomeGrupo() {
@@ -73,9 +67,6 @@ public class CadastroPessoaBean implements Serializable {
 		gruposDaPessoa.add(grupo);
 		FacesUtil.addInfoMessage("Grupo adicionado com sucesso!");
 	}
-
-	// ************* GET E SET
-	// ***********************************************************************************//
 
 	public Pessoa getPessoa() {
 		return pessoa;
