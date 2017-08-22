@@ -28,22 +28,20 @@ public class CadastroGrupoBean implements Serializable {
 
 	private List<StatusGrupo> statusGrupo;
 
-	public CadastroGrupoBean() {
-		limparFormulario();
-	}
-
-	private void limparFormulario() {
-		grupo = new Grupo();
-	}
-
 	public void inicializar() {
+		limparFormulario();
+		
 		if (FacesUtil.isNotPostback()) {
 			statusGrupo = statusGrupoRepository.todosStatusGrupos();
 		}
 	}
+	
+	private void limparFormulario() {
+		grupo = new Grupo();
+	}
 
 	public void salvar() {
-		grupo = cadastroProdutoService.salvar(grupo);
+		cadastroProdutoService.salvar(grupo);
 		FacesUtil.addInfoMessage("Grupo salvo com sucesso!");
 		limparFormulario();
 	}
