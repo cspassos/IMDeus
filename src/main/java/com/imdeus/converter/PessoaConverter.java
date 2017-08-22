@@ -25,8 +25,8 @@ public class PessoaConverter implements Converter<Pessoa> {
 
 		if (value != null) {
 			Long id = new Long(value);
-			logger.info("Converter getAsObject: " + getClass().getSimpleName());
 			retorno = pessoaRepository.porId(id);
+			logger.info("value: " + retorno);
 		}
 
 		return retorno;
@@ -36,7 +36,7 @@ public class PessoaConverter implements Converter<Pessoa> {
 	public String getAsString(FacesContext context, UIComponent component, Pessoa value) {
 
 		if (value != null) {
-			logger.info("Converter getAsString: " + getClass().getSimpleName());
+			logger.info("value: " + value);
 			return value.getId().toString();
 		}
 		return "";

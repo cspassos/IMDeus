@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "status_grupo")
 public class StatusGrupo {
@@ -77,7 +79,9 @@ public class StatusGrupo {
 
 	@Override
 	public String toString() {
-		return "StatusGrupo [id=" + id + ", nomeStatus=" + nomeStatus + ", grupo=" + grupo + "]";
+		return new ToStringBuilder(this)
+				.append(id)
+				.append(nomeStatus).toString();
 	}
 
 }

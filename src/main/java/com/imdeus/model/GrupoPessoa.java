@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "grupo_pessoa")
 public class GrupoPessoa {
@@ -93,6 +95,12 @@ public class GrupoPessoa {
 		} else if (!pessoa.equals(other.pessoa))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append(id).toString();
 	}
 
 }

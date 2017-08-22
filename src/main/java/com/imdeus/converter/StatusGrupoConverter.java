@@ -25,8 +25,8 @@ public class StatusGrupoConverter implements Converter<StatusGrupo> {
 
 		if (value != null) {
 			Long id = new Long(value);
-			logger.info("Converter getAsObject: " + getClass().getSimpleName());
 			retorno = statusGrupoRepository.porId(id);
+			logger.info("value: " + retorno);
 		}
 
 		return retorno;
@@ -36,7 +36,7 @@ public class StatusGrupoConverter implements Converter<StatusGrupo> {
 	public String getAsString(FacesContext context, UIComponent component, StatusGrupo value) {
 
 		if (value != null) {
-			logger.info("Converter getAsString: " + getClass().getSimpleName());
+			logger.info("value: " + value);
 			return value.getId().toString();
 		}
 		return "";

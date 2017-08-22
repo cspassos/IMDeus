@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "grupo")
 public class Grupo implements Serializable {
@@ -98,6 +100,13 @@ public class Grupo implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append(id)
+				.append(nome).toString();
 	}
 
 }

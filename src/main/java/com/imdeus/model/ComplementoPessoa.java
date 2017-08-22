@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "complemento_pessoa")
 public class ComplementoPessoa implements Serializable {
@@ -151,6 +153,12 @@ public class ComplementoPessoa implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append(id).toString();
 	}
 
 }

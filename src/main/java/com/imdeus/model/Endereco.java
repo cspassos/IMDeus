@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "endereco")
 public class Endereco implements Serializable {
@@ -148,6 +150,13 @@ public class Endereco implements Serializable {
 	public void add(Endereco endereco) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append(id)
+				.append(cep).toString();
 	}
 
 }

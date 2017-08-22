@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "pessoa")
 public class Pessoa implements Serializable {
@@ -187,6 +189,13 @@ public class Pessoa implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append(id)
+				.append(nome).toString();
 	}
 
 }

@@ -25,8 +25,8 @@ public class GrupoConverter implements Converter<Grupo> {
 
 		if (value != null) {
 			Long id = new Long(value);
-			logger.info("Converter getAsObject: " + getClass().getSimpleName());
 			retorno = grupoRepository.porId(id);
+			logger.info("value: " + retorno);
 		}
 
 		return retorno;
@@ -36,7 +36,7 @@ public class GrupoConverter implements Converter<Grupo> {
 	public String getAsString(FacesContext context, UIComponent component, Grupo value) {
 
 		if (value != null) {
-			logger.info("Converter getAsString: " + getClass().getSimpleName());
+			logger.info("value: " + value);
 			return value.getId().toString();
 		}
 		return "";
