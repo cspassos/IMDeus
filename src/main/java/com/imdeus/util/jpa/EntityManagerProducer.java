@@ -1,7 +1,7 @@
 package com.imdeus.util.jpa;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
@@ -21,7 +21,7 @@ public class EntityManagerProducer {
 	// para resolver utilizaremos o dependent
 	// no qual pego o escopo que quem o chama
 	@Produces
-	@Dependent
+	@RequestScoped
 	public EntityManager createEntyManager() {
 		return factory.createEntityManager();
 	}
