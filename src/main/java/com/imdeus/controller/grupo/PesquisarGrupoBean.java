@@ -22,7 +22,7 @@ public class PesquisarGrupoBean implements Serializable {
 
 	@Inject
 	private StatusGrupoRepository statusGrupoRepository;
-	
+
 	@Inject
 	private GrupoService grupoService;
 
@@ -41,10 +41,6 @@ public class PesquisarGrupoBean implements Serializable {
 	@Inject
 	private GrupoFilter filtro;
 
-	public PesquisarGrupoBean() {
-		grupo = new Grupo();
-	}
-
 	public void pesquisar() {
 		pesquisaStatusGrupoFiltrados = statusGrupoRepository.pesquisarGrupo(filtro);
 	}
@@ -56,18 +52,15 @@ public class PesquisarGrupoBean implements Serializable {
 	}
 
 	public void carregarNomeGrupo() {
-		//TODO: verificar quando deselecionamos um status grupo, nao gerar novamente uma consulta
+		// TODO: verificar quando deselecionamos um status grupo, nao gerar novamente uma consulta
 		grupos = statusGrupoRepository.carregarNomeGrupoDe(filtro);
 	}
-	
+
 	public void excluirGrupo() {
 		grupoService.deletar(grupo);
 		pesquisaStatusGrupoFiltrados.remove(grupo);
 		FacesUtil.addInfoMessage("Grupo removido com sucesso!");
 	}
-
-	// ********GET E
-	// SET*****************************************************************************************///
 
 	public StatusGrupoRepository getStatusGrupoRepository() {
 		return statusGrupoRepository;

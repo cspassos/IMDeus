@@ -3,6 +3,7 @@ package com.imdeus.controller.grupo;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,18 +25,16 @@ public class CadastroGrupoBean implements Serializable {
 	@Inject
 	private GrupoService cadastroProdutoService;
 
-	private Grupo grupo;
-
 	private List<StatusGrupo> statusGrupo;
 
+	private Grupo grupo;
+	
+	@PostConstruct
 	public void inicializar() {
 		limparFormulario();
-		
-		if (FacesUtil.isNotPostback()) {
-			statusGrupo = statusGrupoRepository.todosStatusGrupos();
-		}
+		statusGrupo = statusGrupoRepository.todosStatusGrupos();
 	}
-	
+
 	private void limparFormulario() {
 		grupo = new Grupo();
 	}
@@ -48,6 +47,11 @@ public class CadastroGrupoBean implements Serializable {
 
 	public Grupo getGrupo() {
 		return grupo;
+	}
+
+	// Por causa da edicao
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 	public List<StatusGrupo> getStatusGrupo() {

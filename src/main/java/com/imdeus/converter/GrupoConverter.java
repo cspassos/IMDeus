@@ -6,6 +6,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.imdeus.model.Grupo;
@@ -23,7 +24,7 @@ public class GrupoConverter implements Converter<Grupo> {
 	public Grupo getAsObject(FacesContext context, UIComponent component, String value) {
 		Grupo retorno = null;
 
-		if (value != null) {
+		if (StringUtils.isNotBlank(value)) {
 			Long id = new Long(value);
 			retorno = grupoRepository.porId(id);
 			logger.info("value: " + retorno);
@@ -37,7 +38,9 @@ public class GrupoConverter implements Converter<Grupo> {
 
 		if (value != null) {
 			logger.info("value: " + value);
-			return value.getId().toString();
+			//TODO: Rever isso, devido a ação de editar grupo
+			Long codigo = ((Grupo) value).getId();
+			return (codigo == null ? null : codigo.toString());
 		}
 		return "";
 	}

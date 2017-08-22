@@ -12,8 +12,7 @@
 		<!-- Antes de iniciar a view ele chama esse metodo que vai carregar os ststaus do grupo -->
 		<f:metadata>
 			<f:viewParam name="dummy" />
-			<f:event listener="#{pesquisarGrupoBean.todosStatusGrupos}"
-				type="preRenderView" />
+			<f:event listener="#{pesquisarGrupoBean.todosStatusGrupos}" type="preRenderView" />
 		</f:metadata>
 
 		<h:form id="frmBuscaGruposForm">
@@ -68,7 +67,9 @@
     			</p:column>
     			
     			<p:column headerText="Ações">
-    				<p:button icon="ui-icon-pencil" title="Editar"/>
+    				<p:button icon="ui-icon-pencil" title="Editar" outcome="CadastroGrupos">
+    					<f:param name="grupo" value="#{grupo.id}"/>
+    				</p:button>
     				<p:commandButton icon="ui-icon-trash" title="Excluir" process="@this"
     					oncomplete="PF('confirmarcaoExclusao').show();"
     					update=":frmBuscaGruposForm:confirmarExclusaGrupo">

@@ -9,8 +9,7 @@
 		<h1 class="aw-page-title">Cadastro de Grupos</h1>
     	
     	<f:metadata>
-    		<f:viewParam name="dummy" />
-    		<f:event listener="#{cadastroGrupoBean.inicializar}" type="preRenderView" />
+    		<f:viewParam name="grupo" value="#{cadastroGrupoBean.grupo}" converter="grupoConverter"/>
     	</f:metadata>
     	
     	<h:form>
