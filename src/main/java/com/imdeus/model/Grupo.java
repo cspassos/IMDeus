@@ -31,7 +31,11 @@ public class Grupo implements Serializable {
 	private String nome;
 	private StatusGrupo statusGrupo;
 
-	private List<GrupoPessoa> gruposPessoas = new ArrayList<>();
+	private List<GrupoPessoa> gruposPessoas;
+	
+	public Grupo() {
+		gruposPessoas = new ArrayList<>();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incremento

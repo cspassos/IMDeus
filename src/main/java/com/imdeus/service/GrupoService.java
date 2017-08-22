@@ -24,4 +24,12 @@ public class GrupoService implements Serializable{
 	public List<Grupo> comecadosCom(String nome) {
 		return grupoRepository.gruposContendo(nome);
 	}
+
+	@Transactional
+	public void deletar(Grupo grupo) {
+		grupo = grupoRepository.porId(grupo.getId());
+		//TODO: porque inferno está trazendo grupopessoa no delete
+		if(grupo != null) 
+			grupoRepository.deletar(grupo);
+	}
 }

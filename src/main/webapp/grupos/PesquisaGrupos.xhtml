@@ -16,7 +16,7 @@
 				type="preRenderView" />
 		</f:metadata>
 
-		<h:form>
+		<h:form id="frmBuscaGruposForm">
     		<p:messages autoUpdate="true" closable="true"/>
     		
     		<p:toolbar>
@@ -70,16 +70,19 @@
     			<p:column headerText="Ações">
     				<p:button icon="ui-icon-pencil" title="Editar"/>
     				<p:commandButton icon="ui-icon-trash" title="Excluir" process="@this"
-    					onclick="PF('confirmarcaoExclusao').show();">
+    					oncomplete="PF('confirmarcaoExclusao').show();"
+    					update=":frmBuscaGruposForm:confirmarExclusaGrupo">
 						<f:setPropertyActionListener target="#{pesquisarGrupoBean.grupo}" value="#{grupo}" />
 				    </p:commandButton>
     			</p:column>
     		</p:dataTable>
 
-		    <p:confirmDialog header="Exclusão de Grupo" widgetVar="confirmarcaoExclusao" resizable="false">
+		    <p:confirmDialog id="confirmarExclusaGrupo" global="true" widgetVar="confirmarcaoExclusao" resizable="false"
+		    	header="Exclusão de Grupo" severity="alert"
+		    	message="Deseja excluir o grupo #{pesquisarGrupoBean.grupo.nome} ?">
 	            <p:button value="Não" onclick="PF('confirmarcaoExclusao').hide(); return false;" />
-        		<p:commandButton value="Sim" update="gruposTable"
-        			onclick="confirmacaoExclusao.hide(); return false;" action="#{pesquisarGrupoBean.excluirGrupo}" />
+        		<p:commandButton value="Sim" update=":frmBuscaGruposForm:confirmarExclusaGrupo :frmBuscaGruposForm:gruposTable"
+        			onclick="PF('confirmarcaoExclusao').hide();" action="#{pesquisarGrupoBean.excluirGrupo}" />
 		    </p:confirmDialog> 		
     	</h:form>
     </ui:define>

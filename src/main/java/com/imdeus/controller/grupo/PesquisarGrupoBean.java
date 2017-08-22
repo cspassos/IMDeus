@@ -11,6 +11,7 @@ import com.imdeus.model.Grupo;
 import com.imdeus.model.StatusGrupo;
 import com.imdeus.repository.StatusGrupoRepository;
 import com.imdeus.repository.filter.GrupoFilter;
+import com.imdeus.service.GrupoService;
 import com.imdeus.util.jsf.FacesUtil;
 
 @Named
@@ -21,6 +22,9 @@ public class PesquisarGrupoBean implements Serializable {
 
 	@Inject
 	private StatusGrupoRepository statusGrupoRepository;
+	
+	@Inject
+	private GrupoService grupoService;
 
 	private List<StatusGrupo> statusGrupoRaizes;
 
@@ -57,7 +61,9 @@ public class PesquisarGrupoBean implements Serializable {
 	}
 	
 	public void excluirGrupo() {
-		grupo = grupo;
+		grupoService.deletar(grupo);
+		pesquisaStatusGrupoFiltrados.remove(grupo);
+		FacesUtil.addInfoMessage("Grupo removido com sucesso!");
 	}
 
 	// ********GET E

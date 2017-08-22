@@ -16,7 +16,6 @@ public class GrupoRepository implements Serializable {
 	@Inject
 	private EntityManager manager;
 
-	// Buscar o status do grupo pelo ID
 	public Grupo porId(Long id) {
 		return manager.find(Grupo.class, id);
 	}
@@ -43,6 +42,11 @@ public class GrupoRepository implements Serializable {
 
 	public List<Grupo> todos() {
 		return manager.createQuery("from Grupo", Grupo.class).getResultList();
+	}
+
+	public void deletar(Grupo grupo) {
+		manager.remove(grupo);
+		manager.flush();
 	}
 
 }
