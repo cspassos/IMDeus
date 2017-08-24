@@ -1,22 +1,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
-	
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
 	<nav class="aw-menu">
-		<ul>
-			<li>
-				<h:link><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
-			</li>
-			<li>
-				<h:link><i class="fa  fa-fw  fa-user"></i>Grupos</h:link>
-			</li>
-			<li class="is-selected">
-				<h:link><i class="fa  fa-fw  fa-file-text"></i>Pessoas</h:link>
-			</li>
-			<li>
-				<h:link><i class="fa  fa-fw  fa-cog"></i>Relatórios</h:link>
-			</li>
-		</ul>
+		<h:form>
+			<p:slideMenu>
+				<p:menuitem value="Dashboard" icon="fa-calendar-o" outcome="/Home" ajax="false"/>
+				<p:submenu label="Grupo" icon="ui-icon-refresh">
+					<p:menuitem value="Cadastrar" icon="ui-icon-disk" outcome="/grupos/CadastroGrupos" ajax="false"/>
+					<p:menuitem value="Pesquisar" icon="fa-search" outcome="/grupos/PesquisaGrupos" ajax="true"/>
+				</p:submenu>
+				<p:submenu label="Pessoa" icon="ui-icon-newwin">
+					<p:menuitem value="Cadastrar" icon="ui-icon-disk" outcome="/pessoas/CadastroPessoa" ajax="true"/>
+					<p:menuitem value="Pesquisar" icon="fa-search" outcome="/pessoas/PesquisaPessoas" ajax="true"/>
+				</p:submenu>
+				<p:separator />
+				<p:submenu label="Relatórios" icon="fa-file-text">
+					<p:submenu label="Grupo">
+						<p:menuitem value="Grupos" />
+					</p:submenu>
+					<p:menuitem value="Pessoa" />
+				</p:submenu>
+			</p:slideMenu>
+		</h:form>
 	</nav>
-	
+
 </ui:composition>
