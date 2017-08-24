@@ -6,6 +6,9 @@
 
 	<application>
 		<message-bundle>com.imdeus.Messages</message-bundle>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+		</locale-config>
 	</application>
 
 	<factory>
