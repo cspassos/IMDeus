@@ -7,6 +7,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.imdeus.model.Grupo;
 import com.imdeus.model.StatusGrupo;
 import com.imdeus.repository.StatusGrupoRepository;
@@ -52,8 +54,8 @@ public class PesquisarGrupoBean implements Serializable {
 	}
 
 	public void carregarNomeGrupo() {
-		// TODO: verificar quando deselecionamos um status grupo, nao gerar novamente uma consulta
-		grupos = statusGrupoRepository.carregarNomeGrupoDe(filtro);
+		if(StringUtils.isNotBlank(filtro.getNomeStatus()))
+			grupos = statusGrupoRepository.carregarNomeGrupoDe(filtro);
 	}
 
 	public void excluirGrupo() {
