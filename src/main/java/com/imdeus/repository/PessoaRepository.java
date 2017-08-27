@@ -22,7 +22,6 @@ public class PessoaRepository implements Serializable {
 	@Inject
 	private EntityManager manager;
 
-	// Buscar o status do pessoa pelo ID
 	public Pessoa porId(Long id) {
 		return manager.find(Pessoa.class, id);
 	}
@@ -33,7 +32,7 @@ public class PessoaRepository implements Serializable {
 		return pessoa;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	public List<Pessoa> todasPessoas(PessoaFilter filtro) {
 		// TODO: refazer esta consulta, esta estranha
 		// esta realizando joins desnecessarios, e nao trazendo as informacoes de endereco e complemento

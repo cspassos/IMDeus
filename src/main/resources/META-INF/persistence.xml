@@ -9,6 +9,8 @@
 		<non-jta-data-source>java:comp/env/jdbc/ds_imdeus</non-jta-data-source>
 		
 		<properties>
+			<property name="javax.persistence.sql-load-script-source" value="META-INF/inserts/inserts.sql" />
+			
 			<property name="hibernate.hbm2ddl.auto" value="none"/>
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
