@@ -48,7 +48,7 @@ public class Grupo implements Serializable {
 	}
 
 	@Column(nullable = false, length = 100)
-	@NotBlank(message = "é obrigatório, seu zé")
+	@NotBlank(message = "é obrigatório")
 	public String getNome() {
 		return nome;
 	}
@@ -59,7 +59,7 @@ public class Grupo implements Serializable {
 
 	// indicarei quando precisar de status grupo
 	// por padrao nao o trara junto de grupo
-	@NotNull(message = "Selecione um Status")
+	@NotNull(message = "é obrigatório")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_status_grupo", nullable = false, foreignKey=@ForeignKey(name = "fk_grupo_id_status_grupo"))
 	public StatusGrupo getStatusGrupo() {
