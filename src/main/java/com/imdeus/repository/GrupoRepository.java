@@ -35,6 +35,12 @@ public class GrupoRepository implements Serializable {
 				.setParameter("nomeGrupo", "%" + nome + "%")
 				.getResultList();
 	}
+	
+	public Grupo comStatusPorId(Long id) {
+		return manager.createQuery("from Grupo grupo join fetch grupo.statusGrupo where grupo.id = :id", Grupo.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
 
 	public Optional<Grupo> porNome(String nomes) {
 		return gruposPor(nomes).stream().findFirst();

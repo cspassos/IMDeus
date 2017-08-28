@@ -26,7 +26,7 @@ public class GrupoConverter implements Converter<Grupo> {
 
 		if (StringUtils.isNotBlank(value)) {
 			Long id = new Long(value);
-			retorno = grupoRepository.porId(id);
+			retorno = grupoRepository.comStatusPorId(id);
 			logger.info("value: " + retorno);
 		}
 
@@ -38,7 +38,7 @@ public class GrupoConverter implements Converter<Grupo> {
 
 		if (value != null) {
 			logger.info("value: " + value);
-			//TODO: Rever isso, devido a ação de editar grupo
+			//TODO: Rever isso, devido a aÃ§Ã£o de editar grupo
 			Long codigo = ((Grupo) value).getId();
 			return (codigo == null ? null : codigo.toString());
 		}
