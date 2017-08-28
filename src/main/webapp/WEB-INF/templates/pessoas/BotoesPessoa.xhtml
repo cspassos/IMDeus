@@ -7,7 +7,8 @@
 	<p:toolbar>
 		<p:toolbarGroup>
 			<p:button value="Cancelar" outcome="/pessoas/CadastroPessoa" />
-			<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroPessoaBean.salvar}" />
+			<p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}" actionListener="#{cadastroPessoaBean.salvar}" ajax="true"/>
+			<p:commandLink value="Salvar" action="#{cadastroPessoaBean.salvar}" actionListener="#{cadastroPessoaBean.salvar}" ajax="true"/>
 		</p:toolbarGroup>
 
 		<p:toolbarGroup align="right">

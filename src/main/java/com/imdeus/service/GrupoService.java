@@ -29,6 +29,8 @@ public class GrupoService implements Serializable{
 	public void deletar(Grupo grupo) {
 		grupo = grupoRepository.porId(grupo.getId());
 		//TODO: porque inferno está trazendo grupopessoa no delete
+		//Como grupo tem relacao com grupo pessoa ao excluir um grupo, seu relacionamento
+		//Sera desfeito, por isso a consulta adicional, tenho que analisar mais
 		if(grupo != null) 
 			grupoRepository.deletar(grupo);
 	}

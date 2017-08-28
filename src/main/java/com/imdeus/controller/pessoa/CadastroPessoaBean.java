@@ -8,6 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.log4j.Logger;
+
 import com.imdeus.model.Grupo;
 import com.imdeus.model.Pessoa;
 import com.imdeus.model.StatusGrupo;
@@ -20,6 +22,7 @@ import com.imdeus.util.jsf.FacesUtil;
 public class CadastroPessoaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(CadastroPessoaBean.class);
 
 	@Inject
 	private StatusGrupoRepository statusGrupoRepository;
@@ -55,7 +58,8 @@ public class CadastroPessoaBean implements Serializable {
 	}
 
 	public void salvar() {
-		pessoa = pessoaService.salvar(pessoa);
+//		pessoa = pessoaService.salvar(pessoa);
+		logger.debug(pessoa);
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}
 
