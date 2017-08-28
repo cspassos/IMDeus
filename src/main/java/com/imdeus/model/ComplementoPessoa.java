@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -51,7 +53,8 @@ public class ComplementoPessoa implements Serializable {
 		this.id = id;
 	}
 
-	// @NotBlank @Size(max = 100)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 100)
 	@Column(name = "nome_mae", nullable = false, length = 100)
 	public String getNomeMae() {
 		return nomeMae;
@@ -61,7 +64,8 @@ public class ComplementoPessoa implements Serializable {
 		this.nomeMae = nomeMae;
 	}
 
-	// @NotBlank @Size(max = 17)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 17)
 	@Column(name = "celular_mae", length = 17)
 	public String getCelularMae() {
 		return celularMae;
@@ -71,7 +75,8 @@ public class ComplementoPessoa implements Serializable {
 		this.celularMae = celularMae;
 	}
 
-	// @NotBlank @Size(max = 100)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 100)
 	@Column(name = "nome_pai", nullable = false, length = 100)
 	public String getNomePai() {
 		return nomePai;
@@ -81,7 +86,8 @@ public class ComplementoPessoa implements Serializable {
 		this.nomePai = nomePai;
 	}
 
-	// @NotBlank @Size(max = 17)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 17)
 	@Column(name = "celular_pai", length = 17)
 	public String getCelularPai() {
 		return celularPai;
@@ -91,7 +97,7 @@ public class ComplementoPessoa implements Serializable {
 		this.celularPai = celularPai;
 	}
 
-	// @Size(max = 300)
+	@Size(max = 300)
 	@Column(length = 300)
 	public String getObservacao() {
 		return observacao;
@@ -101,7 +107,7 @@ public class ComplementoPessoa implements Serializable {
 		this.observacao = observacao;
 	}
 
-	// @Size(max = 300)
+	@Size(max = 300)
 	@Column(name = "qual_medicamento", length = 255)
 	public String getQualMedicamento() {
 		return qualMedicamento;
@@ -111,7 +117,7 @@ public class ComplementoPessoa implements Serializable {
 		this.qualMedicamento = qualMedicamento;
 	}
 
-	// @Size(max = 300)
+	@Size(max = 300)
 	@Column(name = "qual_alergia", length = 255)
 	public String getQualAlergia() {
 		return qualAlergia;
@@ -122,7 +128,7 @@ public class ComplementoPessoa implements Serializable {
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa", foreignKey=@ForeignKey(name = "fk_complemento_pessoa_id_pessoa"))
+	@JoinColumn(name = "id_pessoa", foreignKey = @ForeignKey(name = "fk_complemento_pessoa_id_pessoa"))
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -155,11 +161,10 @@ public class ComplementoPessoa implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append(id).toString();
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(id).toString();
 	}
 
 }

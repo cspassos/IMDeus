@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -30,9 +33,9 @@ public class Pessoa implements Serializable {
 	private Integer idade;
 	private String email;
 	private String celular;
+	
 	private Endereco endereco;
 	private ComplementoPessoa complementoPessoa;
-
 	private List<GrupoPessoa> gruposPessoas = new LinkedList<>();
 
 	protected Pessoa() {
@@ -69,7 +72,8 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 
-	// @NotBlank @Size(max = 100)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 100)
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -79,7 +83,7 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 
-	// @NotNull
+	@NotNull(message = "é obrigatório")
 	@Column(nullable = false, length = 11)
 	public Integer getIdade() {
 		return idade;
@@ -89,7 +93,8 @@ public class Pessoa implements Serializable {
 		this.idade = idade;
 	}
 
-	// @NotBlank @Size(max = 255)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 255)
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
 		return email;
@@ -99,7 +104,8 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 
-	// @NotBlank @Size(max = 17)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 17)
 	@Column(nullable = false, length = 17)
 	public String getCelular() {
 		return celular;
@@ -114,30 +120,35 @@ public class Pessoa implements Serializable {
 	// entidade endereço.
 	// cascade -> quando salvar uma pessoa automaticamente vai persistir os
 	// endereços do cliente
+	@NotNull(message = "é obrigatório")
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	// Usa-se o endereco.setPessoa(this); -> para persistir o pessoa_id na tabela de
+	// Usa-se o endereco.setPessoa(this); -> para persistir o pessoa_id na
+	// tabela de
 	// endereco.
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 		// endereco.setPessoa(this);
 	}
 
+	@NotNull(message = "é obrigatório")
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public ComplementoPessoa getComplementoPessoa() {
 		return complementoPessoa;
 	}
 
-	// Usa-se o complementoPessoa.setPessoa(this); -> para persistir o pessoa_id na
+	// Usa-se o complementoPessoa.setPessoa(this); -> para persistir o pessoa_id
+	// na
 	// tabela de complementoPessoa.
 	public void setComplementoPessoa(ComplementoPessoa complementoPessoa) {
 		this.complementoPessoa = complementoPessoa;
 		// complementoPessoa.setPessoa(this);
 	}
 
+	@NotNull(message = "é obrigatório")
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<GrupoPessoa> getGruposPessoas() {
 		return gruposPessoas;
@@ -166,37 +177,9 @@ public class Pessoa implements Serializable {
 		}
 	}
 
-	// Define que o pessoa é unico pelo id
-	// botato direito/source/generete hashcode...
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	// Define que a pessoa é unico pelo id
-	// botato direito/source/generete hashcode...
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-	
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append(id)
-				.append(nome).toString();
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }

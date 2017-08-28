@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -51,7 +53,8 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 
-	// @NotBlank @Size(max = 150)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
@@ -61,7 +64,8 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 
-	// @NotBlank @Size(max = 10)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 10)
 	@Column(nullable = false, length = 10)
 	public String getNumero() {
 		return numero;
@@ -71,7 +75,8 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 
-	// @NotBlank @Size(max = 60)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -81,7 +86,8 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	// @NotBlank @Size(max = 10)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 10)
 	@Column(nullable = false, length = 10)
 	public String getUf() {
 		return uf;
@@ -91,7 +97,8 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 	}
 
-	// @NotBlank @Size(max = 9)
+	@NotBlank(message = "é obrigatório")
+	@Size(max = 9)
 	@Column(length = 9)
 	public String getCep() {
 		return cep;
@@ -101,7 +108,7 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
-	// @Size(max = 150)
+	@Size(max = 150)
 	@Column(length = 150)
 	public String getComplemento() {
 		return complemento;
@@ -113,7 +120,7 @@ public class Endereco implements Serializable {
 
 	// muitos endereços possui um cliente
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pessoa", foreignKey=@ForeignKey(name = "fk_endereco_id_pessoa"))
+	@JoinColumn(name = "id_pessoa", foreignKey = @ForeignKey(name = "fk_endereco_id_pessoa"))
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -152,12 +159,10 @@ public class Endereco implements Serializable {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append(id)
-				.append(cep).toString();
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(id).append(cep).toString();
 	}
 
 }

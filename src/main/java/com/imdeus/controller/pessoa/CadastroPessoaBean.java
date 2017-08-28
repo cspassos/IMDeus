@@ -58,8 +58,8 @@ public class CadastroPessoaBean implements Serializable {
 	}
 
 	public void salvar() {
-//		pessoa = pessoaService.salvar(pessoa);
-		logger.debug(pessoa);
+		pessoa = pessoaService.salvar(pessoa);
+		logger.info(pessoa);
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}
 
