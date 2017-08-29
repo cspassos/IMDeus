@@ -1,0 +1,22 @@
+
+IMDEUS
+	Grupos
+		CadastrosGrupos - 100%
+		PesquisaGrupos - 100%
+			Editar grupo ao pesquisar - 90%
+				Está realizando muitas consultas
+			Excluir grupo ao pesquisar - 100%
+				Duvidas
+					Ao excluir um grupo, também excluir o registro de que pessoas pertenceram aquele grupo?
+
+	Pessoas
+		CadastrosPessoas 
+
+
+
+
+
+	TODOS
+		Implementar caches de 2° nível e de querys do hibernate
+		Inicializar conexão com o banco ao inicializar a aplicação
+		Implementar consulta paginada dos resultados de pesquisas de grupos e pessoas

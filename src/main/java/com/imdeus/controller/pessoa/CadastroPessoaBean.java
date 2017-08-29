@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.apache.log4j.Logger;
 
@@ -73,9 +74,14 @@ public class CadastroPessoaBean implements Serializable {
 		if (gruposDaPessoa == null)
 			gruposDaPessoa = new ArrayList<>();
 
-		gruposDaPessoa.add(grupo);
+		atualizarGruposPessoa();
 		grupo = new Grupo();
 		FacesUtil.addInfoMessage("addGrupoMsg", "Grupo adicionado com sucesso!");
+	}
+
+	private void atualizarGruposPessoa() {
+		gruposDaPessoa.clear();
+		gruposDaPessoa.addAll(pessoa.getGrupos());
 	}
 
 	public Pessoa getPessoa() {

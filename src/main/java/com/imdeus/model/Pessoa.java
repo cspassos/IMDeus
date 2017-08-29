@@ -2,9 +2,11 @@ package com.imdeus.model;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -39,7 +41,7 @@ public class Pessoa implements Serializable {
 	
 	private Endereco endereco;
 	private ComplementoPessoa complementoPessoa;
-	private List<GrupoPessoa> gruposPessoas = new LinkedList<>();
+	private Set<GrupoPessoa> gruposPessoas;
 
 	protected Pessoa() {
 	}
@@ -62,6 +64,7 @@ public class Pessoa implements Serializable {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setComplementoPessoa(new ComplementoPessoa());
 		pessoa.setEndereco(new Endereco());
+		pessoa.setGruposPessoas(new HashSet<>());
 		return pessoa;
 	}
 
@@ -153,11 +156,11 @@ public class Pessoa implements Serializable {
 
 	@NotNull(message = "é obrigatório")
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<GrupoPessoa> getGruposPessoas() {
+	public Set<GrupoPessoa> getGruposPessoas() {
 		return gruposPessoas;
 	}
 
-	public void setGruposPessoas(List<GrupoPessoa> gruposPessoas) {
+	public void setGruposPessoas(Set<GrupoPessoa> gruposPessoas) {
 		this.gruposPessoas = gruposPessoas;
 	}
 
