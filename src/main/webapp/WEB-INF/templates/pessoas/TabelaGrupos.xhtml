@@ -8,14 +8,14 @@
 		value="#{cadastroPessoaBean.gruposDaPessoa}" var="grupo"
 		style="margin-top: 20px" emptyMessage="Nenhum grupo cadastrado."
 		rows="20" paginator="true" paginatorAlwaysVisible="false"
-		paginatorPosition="bottom">
+		paginatorPosition="bottom"
+		reflow="true">
 
-		<p:column headerText="Status" style="width:250px; text-align: center">
+		<p:column headerText="Status">
 			<h:outputText value="#{grupo.statusGrupo.nomeStatus}" />
 		</p:column>
 
-		<p:column headerText="Nome do grupo"
-			style="text-align: center; width: 100px">
+		<p:column headerText="Nome do grupo">
 			<h:outputText value="#{grupo.nome}" />
 		</p:column>
 	</p:dataTable>

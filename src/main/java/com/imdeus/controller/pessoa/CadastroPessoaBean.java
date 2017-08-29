@@ -46,7 +46,12 @@ public class CadastroPessoaBean implements Serializable {
 	private boolean tipoCadastroIntolerancia = true;
 
 	public CadastroPessoaBean() {
+		limparFormulario();
+	}
+
+	private void limparFormulario() {
 		pessoa = Pessoa.newInstance();
+		gruposDaPessoa = pessoa.getGrupos();
 	}
 
 	public void consultaStatusGrupo() {
@@ -59,7 +64,7 @@ public class CadastroPessoaBean implements Serializable {
 
 	public void salvar() {
 		pessoa = pessoaService.salvar(pessoa);
-		logger.info(pessoa);
+		limparFormulario();
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}
 
@@ -69,6 +74,7 @@ public class CadastroPessoaBean implements Serializable {
 			gruposDaPessoa = new ArrayList<>();
 
 		gruposDaPessoa.add(grupo);
+		grupo = new Grupo();
 		FacesUtil.addInfoMessage("addGrupoMsg", "Grupo adicionado com sucesso!");
 	}
 
@@ -76,16 +82,8 @@ public class CadastroPessoaBean implements Serializable {
 		return pessoa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
 	public List<StatusGrupo> getStatusGrupoRaizes() {
 		return statusGrupoRaizes;
-	}
-
-	public void setStatusGrupoRaizes(List<StatusGrupo> statusGrupoRaizes) {
-		this.statusGrupoRaizes = statusGrupoRaizes;
 	}
 
 	public Grupo getGrupo() {

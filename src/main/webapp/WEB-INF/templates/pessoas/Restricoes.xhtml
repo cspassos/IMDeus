@@ -4,13 +4,13 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
 
-	<p:panelGrid columns="2" style="width: 100%" columnClasses="rotulo, campo">
+	<p:panelGrid columns="2" layout="grid">
 	
 		<p:outputLabel value="Toma algum medicamento?" />
 		<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroMedicamento}">
 			<f:selectItem itemLabel="Sim" itemValue="#{true}" />
 			<f:selectItem itemLabel="Não" itemValue="#{false}" />
-			<p:ajax event="change" update=":cadastroPessoaForm:tabPanel" />
+			<p:ajax event="change" update="medicamento" />
 		</p:selectOneRadio>
 
 		<p:outputLabel value="Qual?" for="medicamento" />
@@ -23,7 +23,7 @@
 		<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroIntolerancia}">
 			<f:selectItem itemLabel="Sim" itemValue="#{true}" />
 			<f:selectItem itemLabel="Não" itemValue="#{false}" />
-			<p:ajax event="change" update=":cadastroPessoaForm:tabPanel" />
+			<p:ajax event="change" update="alergia" />
 		</p:selectOneRadio>
 		
 		<p:outputLabel value="Qual?" for="alergia" />

@@ -1,9 +1,11 @@
 package com.imdeus.model;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -175,6 +178,13 @@ public class Pessoa implements Serializable {
 				grupoPessoa.setGrupo(null);
 			}
 		}
+	}
+	
+	@Transient
+	public List<Grupo> getGrupos() {
+		if(gruposPessoas == null)
+			return Collections.emptyList();
+		return gruposPessoas.stream().map(GrupoPessoa::getGrupo).collect(Collectors.toList());
 	}
 
 	@Override
