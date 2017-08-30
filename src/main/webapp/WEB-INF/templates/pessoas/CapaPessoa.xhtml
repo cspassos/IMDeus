@@ -13,34 +13,34 @@
 			<p:outputLabel value="Nome Completo" for="nomeCompleto" />
 			<p:inputText id="nomeCompleto" size="50" maxlength="150"
 				value="#{cadastroPessoaBean.pessoa.nome}" />
+				
+			<p:outputLabel value="Nome Pai" for="nomePai" />
+			<p:inputText id="nomePai" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}" />	
 	
 			<p:outputLabel value="Idade" for="idade" />
 			<p:inputText id="idade" size="2" maxlength="2"
 				value="#{cadastroPessoaBean.pessoa.idade}" />
-	
-			<p:outputLabel value="Celular" for="celularPessoa" />
-			<p:inputText id="celularPessoa" size="15" maxlength="17"
-				value="#{cadastroPessoaBean.pessoa.celular}" />
-	
-			<p:outputLabel value="E-mail" for="email" />
-			<p:inputText id="email" size="30" maxlength="255"
-				value="#{cadastroPessoaBean.pessoa.email}" />
-	
-			<p:outputLabel value="Nome Mãe" for="nomeMae" />
-			<p:inputText id="nomeMae" size="50" maxlength="150"
-				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}" />
-	
-			<p:outputLabel value="Celular Mãe" for="celularMae" />
-			<p:inputText id="celularMae" size="15" maxlength="17"
-				value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}" />
-	
-			<p:outputLabel value="Nome Pai" for="nomePai" />
-			<p:inputText id="nomePai" size="50" maxlength="150"
-				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}" />
-	
+				
 			<p:outputLabel value="Celular Pai" for="celularPai" />
 			<p:inputText id="celularPai" size="15" maxlength="17"
 				value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" />
+				
+			<p:outputLabel value="E-mail" for="email" />
+			<p:inputText id="email" size="30" maxlength="255"
+				value="#{cadastroPessoaBean.pessoa.email}" />
+				
+			<p:outputLabel value="Nome Mãe" for="nomeMae" />
+			<p:inputText id="nomeMae" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}" />
+				
+			<p:outputLabel value="Celular" for="celularPessoa" />
+			<p:inputText id="celularPessoa" size="15" maxlength="17"
+				value="#{cadastroPessoaBean.pessoa.celular}" />
+
+			<p:outputLabel value="Celular Mãe" for="celularMae" />
+			<p:inputText id="celularMae" size="15" maxlength="17"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}" />
 		</p:panelGrid>
 	</div>
 	
