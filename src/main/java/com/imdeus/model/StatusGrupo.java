@@ -34,7 +34,7 @@ public class StatusGrupo {
 		this.id = id;
 	}
 
-	@NotBlank(message = "é obrigatorio")
+	@NotBlank
 	@Column(name = "nome_status", nullable = false, length = 20)
 	public String getNomeStatus() {
 		return nomeStatus;
@@ -80,9 +80,7 @@ public class StatusGrupo {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append(id)
-				.append(nomeStatus).toString();
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(id).append(nomeStatus).toString();
 	}
 
 }

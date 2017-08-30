@@ -53,7 +53,7 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
@@ -64,7 +64,7 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 10)
 	@Column(nullable = false, length = 10)
 	public String getNumero() {
@@ -75,7 +75,7 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
@@ -86,7 +86,7 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 10)
 	@Column(nullable = false, length = 10)
 	public String getUf() {
@@ -97,7 +97,7 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 9)
 	@Column(length = 9)
 	public String getCep() {

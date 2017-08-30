@@ -33,7 +33,7 @@ public class Grupo implements Serializable {
 	private StatusGrupo statusGrupo;
 
 	private List<GrupoPessoa> gruposPessoas;
-	
+
 	public Grupo() {
 		gruposPessoas = new ArrayList<>();
 	}
@@ -49,7 +49,7 @@ public class Grupo implements Serializable {
 	}
 
 	@Column(nullable = false, length = 100)
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	public String getNome() {
 		return nome;
 	}
@@ -60,9 +60,9 @@ public class Grupo implements Serializable {
 
 	// indicarei quando precisar de status grupo
 	// por padrao nao o trara junto de grupo
-	@NotNull(message = "é obrigatório")
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_status_grupo", nullable = false, foreignKey=@ForeignKey(name = "fk_grupo_id_status_grupo"))
+	@JoinColumn(name = "id_status_grupo", nullable = false, foreignKey = @ForeignKey(name = "fk_grupo_id_status_grupo"))
 	public StatusGrupo getStatusGrupo() {
 		return statusGrupo;
 	}
@@ -106,12 +106,10 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append(id)
-				.append(nome).toString();
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(id).append(nome).toString();
 	}
 
 }

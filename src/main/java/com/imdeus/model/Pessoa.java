@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -78,7 +77,7 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 100)
 	@Column(nullable = false, length = 100)
 	public String getNome() {
@@ -89,7 +88,7 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 
-	@NotNull(message = "é obrigatório")
+	@NotNull
 	@Column(nullable = false, length = 11)
 	public Integer getIdade() {
 		return idade;
@@ -99,7 +98,7 @@ public class Pessoa implements Serializable {
 		this.idade = idade;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 255)
 	@Column(nullable = false, length = 255)
 	public String getEmail() {
@@ -110,7 +109,7 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 
-	@NotBlank(message = "é obrigatório")
+	@NotBlank
 	@Size(max = 17)
 	@Column(nullable = false, length = 17)
 	public String getCelular() {
@@ -126,7 +125,7 @@ public class Pessoa implements Serializable {
 	// entidade endereço.
 	// cascade -> quando salvar uma pessoa automaticamente vai persistir os
 	// endereços do cliente
-	@NotNull(message = "é obrigatório")
+	@NotNull
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public Endereco getEndereco() {
 		return endereco;
@@ -140,7 +139,7 @@ public class Pessoa implements Serializable {
 		// endereco.setPessoa(this);
 	}
 
-	@NotNull(message = "é obrigatório")
+	@NotNull
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public ComplementoPessoa getComplementoPessoa() {
 		return complementoPessoa;
@@ -154,7 +153,7 @@ public class Pessoa implements Serializable {
 		// complementoPessoa.setPessoa(this);
 	}
 
-	@NotNull(message = "é obrigatório")
+	@NotNull
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<GrupoPessoa> getGruposPessoas() {
 		return gruposPessoas;
