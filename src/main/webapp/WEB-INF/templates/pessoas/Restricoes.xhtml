@@ -1,37 +1,37 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-	<p:panelGrid columns="2" layout="grid">
-	
-		<p:outputLabel value="Toma algum medicamento?" />
-		<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroMedicamento}">
-			<f:selectItem itemLabel="Sim" itemValue="#{true}" />
-			<f:selectItem itemLabel="Não" itemValue="#{false}" />
-			<p:ajax event="change" update="medicamento" />
-		</p:selectOneRadio>
+	<div class="ui-fluid">
+		<p:panelGrid columns="2" layout="grid">
+
+			<p:outputLabel value="Toma algum medicamento?" />
+			<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroMedicamento}">
+				<f:selectItem itemLabel="Sim" itemValue="#{true}" />
+				<f:selectItem itemLabel="Não" itemValue="#{false}" />
+				<p:ajax event="change" update="medicamento" />
+			</p:selectOneRadio>
 
 		<p:outputLabel value="Qual?" for="medicamento" />
 		<p:inputText id="medicamento" size="60" maxlength="255"
 			disabled="#{!cadastroPessoaBean.tipoCadastroMedicamento}"
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualMedicamento}" />
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualMedicamento}" />
 
 
-		<p:outputLabel value="Tem alergia, intolerância ou restrições a algum alimento?" />
-		<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroIntolerancia}">
-			<f:selectItem itemLabel="Sim" itemValue="#{true}" />
-			<f:selectItem itemLabel="Não" itemValue="#{false}" />
-			<p:ajax event="change" update="alergia" />
-		</p:selectOneRadio>
-		
+			<p:outputLabel value="Tem alergia, intolerância ou restrições a algum alimento?" />
+			<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroIntolerancia}">
+				<f:selectItem itemLabel="Sim" itemValue="#{true}" />
+				<f:selectItem itemLabel="Não" itemValue="#{false}" />
+				<p:ajax event="change" update="alergia" />
+			</p:selectOneRadio>
+
 		<p:outputLabel value="Qual?" for="alergia" />
 		<p:inputText id="alergia" size="60" maxlength="255"
 			disabled="#{!cadastroPessoaBean.tipoCadastroIntolerancia}" 
-			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}" />
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}" />
+		</p:panelGrid>
+	</div>
 
-	
-	</p:panelGrid>
-  	
 </ui:composition>

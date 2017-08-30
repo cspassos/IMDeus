@@ -3,26 +3,27 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
-
-	<p:panelGrid columns="4" layout="grid">
+    
+    <div class="ui-fluid">
+    	<p:panelGrid columns="4" layout="grid">
+	        <p:outputLabel value="Logradouro" for="logradouro" />
+	        <p:inputText id="logradouro" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.endereco.logradouro}"/>
 	
-        <p:outputLabel value="Logradouro" for="logradouro" />
-        <p:inputText id="logradouro" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.endereco.logradouro}"/>
+	        <p:outputLabel value="Número" for="numero" />
+	        <p:inputText id="numero" size="5" maxlength="20" value="#{cadastroPessoaBean.pessoa.endereco.numero}"/>
+	
+	        <p:outputLabel value="Complemento" for="complemento" />
+	        <p:inputText id="complemento" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.endereco.complemento}"/>
+	
+	        <p:outputLabel value="Cidade" for="cidade" />
+	        <p:inputText id="cidade" size="30" maxlength="60" value="#{cadastroPessoaBean.pessoa.endereco.cidade}"/>
+	
+	        <p:outputLabel value="Estado" for="estado" />
+	        <p:inputText id="estado" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.endereco.uf}"/>
+	
+	        <p:outputLabel value="CEP" for="cep" />
+	        <p:inputText id="cep" size="7" maxlength="9" value="#{cadastroPessoaBean.pessoa.endereco.cep}"/>
+		</p:panelGrid>
+    </div>
 
-        <p:outputLabel value="Número" for="numero" />
-        <p:inputText id="numero" size="5" maxlength="20" value="#{cadastroPessoaBean.pessoa.endereco.numero}"/>
-
-        <p:outputLabel value="Complemento" for="complemento" />
-        <p:inputText id="complemento" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.endereco.complemento}"/>
-
-        <p:outputLabel value="Cidade" for="cidade" />
-        <p:inputText id="cidade" size="30" maxlength="60" value="#{cadastroPessoaBean.pessoa.endereco.cidade}"/>
-
-        <p:outputLabel value="Estado" for="estado" />
-        <p:inputText id="estado" size="50" maxlength="150" value="#{cadastroPessoaBean.pessoa.endereco.uf}"/>
-
-        <p:outputLabel value="CEP" for="cep" />
-        <p:inputText id="cep" size="7" maxlength="9" value="#{cadastroPessoaBean.pessoa.endereco.cep}"/>
-	</p:panelGrid>
-  	
 </ui:composition>
