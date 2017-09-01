@@ -25,12 +25,19 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
 	private String logradouro;
+	
 	private String numero;
+	
 	private String cidade;
+	
 	private String uf;
+	
 	private String cep;
+	
 	private String complemento;
+	
 	private Pessoa pessoa;
 
 	protected Endereco() {

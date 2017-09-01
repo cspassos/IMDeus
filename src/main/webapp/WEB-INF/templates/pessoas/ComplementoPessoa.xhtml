@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="ui-fluid">
+		<p:panelGrid columns="4" layout="grid"
+			style="margin-top: 20px; margin-bottom: 40px;"
+			styleClass="panelgrid-noborder"
+			columnClasses="ui-grid-col-2, ui-grid-col-3, ui-grid-col-2, ui-grid-col-3">
+			
+			<p:outputLabel value="Nome Pai" for="nomePai" />
+			<p:inputText id="nomePai" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomePai}" />	
+
+			<p:outputLabel value="Nome Mãe" for="nomeMae" />
+			<p:inputText id="nomeMae" size="50" maxlength="150"
+				value="#{cadastroPessoaBean.pessoa.complementoPessoa.nomeMae}" />
+					
+			<p:outputLabel value="Celular Pai" for="celularPai" />
+			<p:inputMask id="celularPai" value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularPai}" mask="(99) 99999-9999"/>
+			
+			<p:outputLabel value="Celular Mãe" for="celularMae" />
+			<p:inputMask id="celularMae" value="#{cadastroPessoaBean.pessoa.complementoPessoa.celularMae}" mask="(99) 99999-9999"/>
+		</p:panelGrid>
+	</div>
+	
+</ui:composition>

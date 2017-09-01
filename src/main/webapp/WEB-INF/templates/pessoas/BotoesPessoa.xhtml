@@ -6,7 +6,7 @@
 
 	<p:toolbar>
 		<p:toolbarGroup>
-			<p:button value="Cancelar" outcome="/pessoas/CadastroPessoa" />
+			<p:commandButton value="Cancelar" type="reset"/>
 			<p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}" 
 				update="@form"/>
 		</p:toolbarGroup>

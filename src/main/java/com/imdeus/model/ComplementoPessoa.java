@@ -25,13 +25,21 @@ public class ComplementoPessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
 	private String nomeMae;
+	
 	private String nomePai;
+	
 	private String celularMae;
+	
 	private String celularPai;
+	
 	private String observacao;
+	
 	private String qualMedicamento;
+	
 	private String qualAlergia;
+	
 	private Pessoa pessoa;
 
 	protected ComplementoPessoa() {

@@ -1,6 +1,7 @@
 package com.imdeus.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,12 +20,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "pessoa")
@@ -33,38 +36,24 @@ public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
 	private String nome;
-	private Integer idade;
+
 	private String email;
+
 	private String celular;
+
+	private String cpf;
 	
+	private LocalDate nascimento;
+
 	private Endereco endereco;
+
 	private ComplementoPessoa complementoPessoa;
+
 	private Set<GrupoPessoa> gruposPessoas;
 
 	protected Pessoa() {
-	}
-
-	public Pessoa(String nome, Integer idade, String email, String celular, Endereco endereco,
-			ComplementoPessoa complementoPessoa) {
-		this(nome, idade, email, celular);
-		this.endereco = endereco;
-		this.complementoPessoa = complementoPessoa;
-	}
-
-	public Pessoa(String nome, Integer idade, String email, String celular) {
-		this.nome = nome;
-		this.idade = idade;
-		this.email = email;
-		this.celular = celular;
-	}
-
-	public static Pessoa newInstance() {
-		Pessoa pessoa = new Pessoa();
-		pessoa.setComplementoPessoa(new ComplementoPessoa());
-		pessoa.setEndereco(new Endereco());
-		pessoa.setGruposPessoas(new HashSet<>());
-		return pessoa;
 	}
 
 	@Id
@@ -88,19 +77,9 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 
-	@NotNull
-	@Column(nullable = false, length = 11)
-	public Integer getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Integer idade) {
-		this.idade = idade;
-	}
-
+	@Email
 	@NotBlank
-	@Size(max = 255)
-	@Column(nullable = false, length = 255)
+	@Column(nullable = false, length = 150)
 	public String getEmail() {
 		return email;
 	}
@@ -118,6 +97,26 @@ public class Pessoa implements Serializable {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	@NotNull
+	@Column(nullable = false, length = 15)
+	public LocalDate getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(LocalDate nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	@CPF
+	@Column(nullable = false, length = 20)
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	// uma pessoa possui muitos endereços
@@ -163,6 +162,44 @@ public class Pessoa implements Serializable {
 		this.gruposPessoas = gruposPessoas;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
+	public static Pessoa newInstance() {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setComplementoPessoa(new ComplementoPessoa());
+		pessoa.setEndereco(new Endereco());
+		pessoa.setGruposPessoas(new HashSet<>());
+		return pessoa;
+	}
+
 	public void adicionar(Grupo grupo) {
 		GrupoPessoa grupoPessoa = new GrupoPessoa(grupo, this);
 		gruposPessoas.add(grupoPessoa);
@@ -181,17 +218,12 @@ public class Pessoa implements Serializable {
 			}
 		}
 	}
-	
+
 	@Transient
 	public List<Grupo> getGrupos() {
-		if(gruposPessoas == null)
+		if (gruposPessoas == null)
 			return Collections.emptyList();
 		return gruposPessoas.stream().map(GrupoPessoa::getGrupo).collect(Collectors.toList());
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }

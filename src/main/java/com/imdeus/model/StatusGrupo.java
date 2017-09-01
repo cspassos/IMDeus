@@ -21,7 +21,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class StatusGrupo {
 
 	private Long id;
+	
 	private String nomeStatus;
+	
 	private List<Grupo> grupo = new ArrayList<>();
 
 	@Id
