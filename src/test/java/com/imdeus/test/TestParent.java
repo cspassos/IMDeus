@@ -15,7 +15,7 @@ public class TestParent {
 
 	@BeforeClass
 	public static void init() {
-		factory = Persistence.createEntityManagerFactory("ImDeusPU");
+		factory = Persistence.createEntityManagerFactory("ImDeusTestPU");
 	}
 
 	@Before
@@ -34,6 +34,14 @@ public class TestParent {
 
 	public static EntityManagerFactory getFactory() {
 		return factory;
+	}
+	
+	public void beginTransaction() {
+		manager.getTransaction().begin();
+	}
+	
+	public void commitTransaction() {
+		manager.getTransaction().commit();
 	}
 
 }

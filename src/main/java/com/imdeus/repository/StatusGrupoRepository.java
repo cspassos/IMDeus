@@ -43,6 +43,11 @@ public class StatusGrupoRepository implements Serializable {
 				.setParameter("status", filtro.getNomeStatus())
 				.getResultList();
 	}
+	
+	public List<GrupoGraph> statusComTotalDeGrupos(){
+		return manager.createQuery("select new com.imdeus.repository.GrupoGraph(s.nomeStatus, count(*) as qtdeGrupos) from StatusGrupo s join s.grupo g group by s.nomeStatus", GrupoGraph.class)
+			.getResultList();
+	}
 
 	@SuppressWarnings({ "unchecked" })
 	public List<Grupo> pesquisarGrupo(GrupoFilter filtro) {
