@@ -2,6 +2,7 @@ package com.imdeus.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -52,6 +53,8 @@ public class Pessoa implements Serializable {
 	private ComplementoPessoa complementoPessoa;
 
 	private Set<GrupoPessoa> gruposPessoas;
+	
+	private LocalDateTime criacao;
 
 	protected Pessoa() {
 	}
@@ -161,7 +164,15 @@ public class Pessoa implements Serializable {
 	public void setGruposPessoas(Set<GrupoPessoa> gruposPessoas) {
 		this.gruposPessoas = gruposPessoas;
 	}
-
+	
+	public LocalDateTime getCriacao() {
+		return criacao;
+	}
+	
+	public void setCriacao(LocalDateTime criacao) {
+		this.criacao = criacao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

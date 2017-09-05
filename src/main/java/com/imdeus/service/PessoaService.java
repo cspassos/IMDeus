@@ -1,6 +1,7 @@
 package com.imdeus.service;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ public class PessoaService implements Serializable{
 	
 	@Transactional
 	public Pessoa salvar(Pessoa pessoa){
+		pessoa.setCriacao(LocalDateTime.now());
 		return pessoaRepository.salvar(pessoa);
 	}
 
