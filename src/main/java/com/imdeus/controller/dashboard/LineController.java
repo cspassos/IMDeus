@@ -1,18 +1,18 @@
 package com.imdeus.controller.dashboard;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalLong;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.event.internal.AbstractFlushingEventListener;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.ChartSeries;
 
 import com.imdeus.repository.GrupoPessoaGraph;
@@ -23,35 +23,6 @@ import com.imdeus.repository.GrupoRepository;
 public class LineController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-//	private BarChartModel yearModel;
-//
-//	public LineController() {
-//		yearModel = new BarChartModel();
-//		setAxisInfo();
-//		ChartData sampleData = new ChartData();
-//		BarChartSeries primeFacesSeries = sampleData.primeFacesSeries2();
-//		yearModel.addSeries(primeFacesSeries);
-//		BarChartSeries richFacesSeries = sampleData.richFacesSeries2();
-//		yearModel.addSeries(richFacesSeries);
-//		BarChartSeries iceFacesSeries = sampleData.iceFacesSeries2();
-//		yearModel.addSeries(iceFacesSeries);
-//	}
-//
-//	public BarChartModel getYearModel() {
-//		return (yearModel);
-//	}
-//
-//	private void setAxisInfo() {
-//		yearModel.setTitle("Search Volume By Year");
-//		yearModel.setLegendPosition("e");
-//		Axis xAxis = yearModel.getAxis(AxisType.X);
-//		xAxis.setLabel("Year");
-//		Axis yAxis = yearModel.getAxis(AxisType.Y);
-//		yAxis.setMin(0);
-//		yAxis.setMax(100);
-//		yAxis.setLabel("Search Volume");
-//	}
 
 	private BarChartModel barModel;
 
@@ -72,14 +43,21 @@ public class LineController implements Serializable {
 
 	private BarChartModel initBarModel() {
 		BarChartModel model = new BarChartModel();
+		List<ChartSeries> charts = new ArrayList<>();
 
-		ChartSeries boys = new ChartSeries();
-		boys.setLabel("Boys");
 		dadosGrafico.stream().forEach(g -> {
-			boys.set(g.getCriacao(), g.getQtdePessoas());
+			ChartSeries chart = new ChartSeries();
+			chart.setLabel(g.getNomeGrupo());
+			System.out.println(g.getNomeGrupo());
+			chart.set(g.getCriacao(), g.getQtdePessoas());
+			System.out.println(g.getCriacao() + " - "+ g.getQtdePessoas());
+			charts.add(chart);
 		});
-
-		model.addSeries(boys);
+		
+		charts.forEach(ch -> model.addSeries(ch));
+//		model.addSeries(chart);
+		
+		System.out.println(dadosGrafico.stream().count());
 
 		return model;
 	}
@@ -93,8 +71,13 @@ public class LineController implements Serializable {
 
 		barModel.setTitle("Quantidades de pessoas por Grupo");
 		barModel.setLegendPosition("ne");
+		
+		Axis xAxis = barModel.getAxis(AxisType.X); 
+		xAxis.setLabel("Year");
 
-		long maiorQuantidade = dadosGrafico.stream().mapToLong(g -> g.getQtdePessoas()).max().getAsLong() + 10;
+		long maiorQuantidade = dadosGrafico.stream().mapToLong(g -> g.getQtdePessoas()).max().getAsLong();
+		
+		maiorQuantidade += maiorQuantidade / 2;
 
 		Axis yAxis = barModel.getAxis(AxisType.Y);
 		yAxis.setLabel("Quantidade de pessoas");

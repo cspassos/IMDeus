@@ -46,26 +46,10 @@ public class GrupoRepository implements Serializable {
 	}
 	
 	public List<GrupoPessoaGraph> grupoPessoaGrafico(){
-		return manager.createQuery("select new com.imdeus.repository.GrupoPessoaGraph(count(*), year(p.criacao), gp.grupo.nome) from Pessoa p join p.gruposPessoas gp"
-				+ "	group by gp.grupo.nome order by gp.grupo.nome", GrupoPessoaGraph.class)
+		return manager.createQuery("select new com.imdeus.repository.GrupoPessoaGraph(count(*), year(p.criacao) as ano_criacao, gp.grupo.nome) from Pessoa p join p.gruposPessoas gp"
+				+ "	group by year(p.criacao), gp.grupo.nome order by gp.grupo.nome asc, year(p.criacao) asc", GrupoPessoaGraph.class)
+				.setMaxResults(5)
 				.getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<GrupoPessoaGraph> grupoPessoaGrafico2(){
-		Session session = manager.unwrap(Session.class);
-		return session.createQuery("select count(*) as qtdePessoas, gp.grupo.nome as nomeGrupo from Pessoa p join p.gruposPessoas gp"
-				+ "	group by gp.grupo.nome order by gp.grupo.nome")
-			.setResultTransformer(Transformers.aliasToBean(GrupoPessoaGraph.class))
-			.list();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<GrupoPessoaGraph> grupoPessoaGrafico3(){
-		Session session = manager.unwrap(Session.class);
-		return session.createQuery("select map(gp.grupo.nome, map(year(p.criacao), count(*))) from Pessoa p join p.gruposPessoas gp"
-				+ "	group by gp.grupo.nome order by gp.grupo.nome")
-				.list();
 	}
 	
 	public Optional<Grupo> porNome(String nomes) {
