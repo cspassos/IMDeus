@@ -46,7 +46,7 @@ public class GrupoRepository implements Serializable {
 	}
 	
 	public List<GrupoPessoaGraph> grupoPessoaGrafico(){
-		return manager.createQuery("select new com.imdeus.repository.GrupoPessoaGraph(count(*) as qtdePessoas, gp.grupo.nome as nomeGrupo) from Pessoa p join p.gruposPessoas gp"
+		return manager.createQuery("select new com.imdeus.repository.GrupoPessoaGraph(count(*), year(p.criacao), gp.grupo.nome) from Pessoa p join p.gruposPessoas gp"
 				+ "	group by gp.grupo.nome order by gp.grupo.nome", GrupoPessoaGraph.class)
 				.getResultList();
 	}
