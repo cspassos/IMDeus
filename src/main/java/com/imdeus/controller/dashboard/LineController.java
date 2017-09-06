@@ -1,15 +1,14 @@
 package com.imdeus.controller.dashboard;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.hibernate.event.internal.AbstractFlushingEventListener;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -43,21 +42,22 @@ public class LineController implements Serializable {
 
 	private BarChartModel initBarModel() {
 		BarChartModel model = new BarChartModel();
-		List<ChartSeries> charts = new ArrayList<>();
+
+		List<Integer> anos = dadosGrafico.stream().map(GrupoPessoaGraph::getCriacao).collect(Collectors.toList());
 
 		dadosGrafico.stream().forEach(g -> {
 			ChartSeries chart = new ChartSeries();
-			chart.setLabel(g.getNomeGrupo());
-			System.out.println(g.getNomeGrupo());
-			chart.set(g.getCriacao(), g.getQtdePessoas());
-			System.out.println(g.getCriacao() + " - "+ g.getQtdePessoas());
-			charts.add(chart);
+			anos.forEach(a -> {
+				if (g.getCriacao() == a) {
+					chart.setLabel(g.getNomeGrupo());
+					chart.set(a, g.getQtdePessoas());
+				} else {
+					chart.setLabel("");
+					chart.set(a, 0);
+				}
+			});
+			model.addSeries(chart);
 		});
-		
-		charts.forEach(ch -> model.addSeries(ch));
-//		model.addSeries(chart);
-		
-		System.out.println(dadosGrafico.stream().count());
 
 		return model;
 	}
@@ -71,13 +71,11 @@ public class LineController implements Serializable {
 
 		barModel.setTitle("Quantidades de pessoas por Grupo");
 		barModel.setLegendPosition("ne");
-		
-		Axis xAxis = barModel.getAxis(AxisType.X); 
+
+		Axis xAxis = barModel.getAxis(AxisType.X);
 		xAxis.setLabel("Year");
 
-		long maiorQuantidade = dadosGrafico.stream().mapToLong(g -> g.getQtdePessoas()).max().getAsLong();
-		
-		maiorQuantidade += maiorQuantidade / 2;
+		long maiorQuantidade = dadosGrafico.stream().mapToLong(GrupoPessoaGraph::getQtdePessoas).max().getAsLong() + 2;
 
 		Axis yAxis = barModel.getAxis(AxisType.Y);
 		yAxis.setLabel("Quantidade de pessoas");

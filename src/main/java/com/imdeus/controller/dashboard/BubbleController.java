@@ -55,8 +55,10 @@ public class BubbleController implements Serializable{
 		BubbleChartModel model = new BubbleChartModel();
 		
 		statusComGrupos.stream().forEach(s -> {
-			model.add(new BubbleChartSeries(s.getNomeStatus(), new Random().nextInt(2) - 200,
-					new Random().nextInt(2) - 300, (int) s.getQtdeGrupos()));
+			model.add(new BubbleChartSeries(s.getNomeStatus(), 
+					new Random().nextInt(2) - 200,
+					new Random().nextInt(2) - 300, 
+					(int) s.getQtdeGrupos()));
 		});
 
 		return model;
