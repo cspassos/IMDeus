@@ -7,9 +7,6 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import org.hibernate.Session;
-import org.hibernate.transform.Transformers;
-
 import com.imdeus.model.Grupo;
 
 public class GrupoRepository implements Serializable {

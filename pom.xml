@@ -60,6 +60,11 @@
 			<artifactId>tomcat-jdbc</artifactId>
 			<version>8.0.36</version>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>4.2.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
@@ -133,6 +138,26 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>4.2.0</version>
+				<configuration>
+					<url>jdbc:mysql://localhost:3306/imdeus?serverTimezone=America/Sao_Paulo&amp;useSSL=false&amp;createDatabaseIfNotExist=true</url>
+					<user>jkavdev</user>
+					<password>123456</password>
+					<schemas>
+						<schema>imdeus</schema>
+					</schemas>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>6.0.6</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

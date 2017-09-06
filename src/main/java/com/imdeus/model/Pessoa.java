@@ -103,7 +103,7 @@ public class Pessoa implements Serializable {
 	}
 
 	@NotNull
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false)
 	public LocalDate getNascimento() {
 		return nascimento;
 	}
