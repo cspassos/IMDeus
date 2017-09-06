@@ -38,28 +38,19 @@ public class BubbleController implements Serializable{
 		return bubbleModel;
 	}
 	
-	public long maiorQtdeDeGruposPorStatus() {
-		return statusComGrupos.stream()
-				.mapToLong(g -> g.getQtdeGrupos())
-				.count();
-	}
-
 	private void createBubbleModels() {
 		bubbleModel = initBubbleModel();
+		long maiorQtdeDeGruposPorStatus = statusComGrupos.stream()
+				.mapToLong(g -> g.getQtdeGrupos()).count();
+		
 		bubbleModel.setTitle("Status Grupos cadastrados");
 		bubbleModel.getAxis(AxisType.X).setLabel("Status Grupos");
 		Axis yAxis = bubbleModel.getAxis(AxisType.Y);
 		yAxis.setMin(0);
-		yAxis.setMax(maiorQtdeDeGruposPorStatus());
+		yAxis.setMax(maiorQtdeDeGruposPorStatus);
 		yAxis.setLabel("Ingresos");
 	}
 	
-	public static void main(String[] args) {
-		for (int i = 0; i < 100; i++) {
-			System.out.println(new Random().nextInt(2));
-		}
-	}
-
 	private BubbleChartModel initBubbleModel() {
 		BubbleChartModel model = new BubbleChartModel();
 		
