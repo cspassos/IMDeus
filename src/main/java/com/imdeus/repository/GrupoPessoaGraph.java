@@ -1,5 +1,8 @@
 package com.imdeus.repository;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class GrupoPessoaGraph {
 
 	private long qtdePessoas;
@@ -45,5 +48,12 @@ public class GrupoPessoaGraph {
 	public void setNomeGrupo(String nomeGrupo) {
 		this.nomeGrupo = nomeGrupo;
 	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+	}
+	
+	
 
 }

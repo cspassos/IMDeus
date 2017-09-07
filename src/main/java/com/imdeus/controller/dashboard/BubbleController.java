@@ -2,7 +2,6 @@ package com.imdeus.controller.dashboard;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -21,12 +20,12 @@ public class BubbleController implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private BubbleChartModel bubbleModel;
-
-	private List<GrupoGraph> statusComGrupos;
-
 	@Inject
 	private StatusGrupoRepository statusRepository;
+	
+	private BubbleChartModel bubbleModel;
+	
+	private List<GrupoGraph> statusComGrupos;
 
 	@PostConstruct
 	public void init() {
@@ -40,15 +39,20 @@ public class BubbleController implements Serializable{
 	
 	private void createBubbleModels() {
 		bubbleModel = initBubbleModel();
-		long maiorQtdeDeGruposPorStatus = statusComGrupos.stream()
-				.mapToLong(g -> g.getQtdeGrupos()).count();
 		
-		bubbleModel.setTitle("Status Grupos cadastrados");
-		bubbleModel.getAxis(AxisType.X).setLabel("Status Grupos");
+		bubbleModel.setTitle("Status Grupos");
 		Axis yAxis = bubbleModel.getAxis(AxisType.Y);
 		yAxis.setMin(0);
-		yAxis.setMax(maiorQtdeDeGruposPorStatus);
-		yAxis.setLabel("Ingresos");
+		yAxis.setMax(total());
+		
+		Axis xAxis = bubbleModel.getAxis(AxisType.X);
+		xAxis.setMin(0);
+		xAxis.setMax(10);
+		
+	}
+
+	private long total() {
+		return statusComGrupos.stream().mapToLong(GrupoGraph::getQtdeGrupos).sum();
 	}
 	
 	private BubbleChartModel initBubbleModel() {
@@ -56,8 +60,8 @@ public class BubbleController implements Serializable{
 		
 		statusComGrupos.stream().forEach(s -> {
 			model.add(new BubbleChartSeries(s.getNomeStatus(), 
-					new Random().nextInt(2) - 200,
-					new Random().nextInt(2) - 300, 
+					(int) s.getQtdeGrupos() * 2,
+					(int) s.getQtdeGrupos(), 
 					(int) s.getQtdeGrupos()));
 		});
 

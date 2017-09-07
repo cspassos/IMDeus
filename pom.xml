@@ -117,6 +117,17 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.chartistjsf</groupId>
+			<artifactId>ChartistJSF</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.highfaces</groupId>
+			<artifactId>highfaces</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<repositories>

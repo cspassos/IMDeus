@@ -45,7 +45,9 @@ public class StatusGrupoRepository implements Serializable {
 	}
 	
 	public List<GrupoGraph> statusComTotalDeGrupos(){
-		return manager.createQuery("select new com.imdeus.repository.GrupoGraph(s.nomeStatus, count(*) as qtdeGrupos) from StatusGrupo s join s.grupo g group by s.nomeStatus", GrupoGraph.class)
+		return manager.createQuery("select new com.imdeus.repository.GrupoGraph(s.nomeStatus, count(*) as qtdeGrupos) "
+				+ "from StatusGrupo s join s.grupo g group by s.nomeStatus", GrupoGraph.class)
+			.setMaxResults(5)
 			.getResultList();
 	}
 
