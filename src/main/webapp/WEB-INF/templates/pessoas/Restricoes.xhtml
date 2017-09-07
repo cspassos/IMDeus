@@ -6,7 +6,6 @@
 
 	<div class="ui-fluid">
 		<p:panelGrid columns="2" layout="grid">
-
 			<p:outputLabel value="Toma algum medicamento?" />
 			<p:selectOneRadio value="#{cadastroPessoaBean.tipoCadastroMedicamento}">
 				<f:selectItem itemLabel="Sim" itemValue="#{true}" />
@@ -14,9 +13,9 @@
 				<p:ajax event="change" update="medicamento" />
 			</p:selectOneRadio>
 
-		<p:outputLabel value="Qual?" for="medicamento" />
-		<p:inputText id="medicamento" size="60" maxlength="255"
-			disabled="#{!cadastroPessoaBean.tipoCadastroMedicamento}"
+			<p:outputLabel value="Qual?" for="medicamento" />
+			<p:inputText id="medicamento" size="60" maxlength="255"
+				disabled="#{!cadastroPessoaBean.tipoCadastroMedicamento}"
 				value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualMedicamento}" />
 
 
@@ -30,7 +29,7 @@
 		<p:outputLabel value="Qual?" for="alergia" />
 		<p:inputText id="alergia" size="60" maxlength="255"
 			disabled="#{!cadastroPessoaBean.tipoCadastroIntolerancia}" 
-				value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}" />
+			value="#{cadastroPessoaBean.pessoa.complementoPessoa.qualAlergia}" />
 		</p:panelGrid>
 	</div>
 
