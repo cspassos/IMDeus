@@ -40,10 +40,11 @@ public class BubbleController implements Serializable{
 	private void createBubbleModels() {
 		bubbleModel = initBubbleModel();
 		
-		bubbleModel.setTitle("Status Grupos");
+		bubbleModel.setTitle("Status Grupos existentes");
 		Axis yAxis = bubbleModel.getAxis(AxisType.Y);
 		yAxis.setMin(0);
 		yAxis.setMax(total());
+		yAxis.setLabel("Quantidade de grupos cadastrados");
 		
 		Axis xAxis = bubbleModel.getAxis(AxisType.X);
 		xAxis.setMin(0);

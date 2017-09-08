@@ -1,10 +1,10 @@
 package com.imdeus.controller.dashboard;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -45,9 +45,13 @@ public class LineController implements Serializable {
 
 	private BarChartModel initBarModel() {
 		BarChartModel model = new BarChartModel();
-
-		List<Integer> anos = Arrays.asList(2007, 2012, 2014, 2016);
-
+		
+		List<Integer> anos = dadosGrafico.stream()
+				.sorted((a, a2) -> Integer.compare(a.getCriacao(), a2.getCriacao()))
+				.map(GrupoPessoaGraph::getCriacao)
+				.distinct()
+				.collect(Collectors.toList());
+		
 		Map<String, ChartSeries> chars = new HashMap<>();
 
 		for (GrupoPessoaGraph pg : dadosGrafico) {
@@ -97,7 +101,7 @@ public class LineController implements Serializable {
 		barModel.setLegendPosition("ne");
 
 		Axis xAxis = barModel.getAxis(AxisType.X);
-		xAxis.setLabel("Year");
+		xAxis.setLabel("Por ano");
 
 		long maiorQuantidade = dadosGrafico.stream().mapToLong(GrupoPessoaGraph::getQtdePessoas).max().getAsLong() + 2;
 
