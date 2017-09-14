@@ -27,7 +27,9 @@
         	<p:inputMask id="celularPessoa" value="#{cadastroPessoaBean.pessoa.celular}" mask="(99) 99999-9999"/>
 				
 			<p:outputLabel for="cpf" value="CPF" />
-        	<p:inputMask id="cpf" value="#{cadastroPessoaBean.pessoa.cpf}" mask="999.999.999-99"/>
+        	<p:inputMask id="cpf" value="#{cadastroPessoaBean.pessoa.cpf}" mask="999.999.999-99">
+        		<f:validator validatorId="CadastroPessoaValidator"/>
+        	</p:inputMask>
 		</p:panelGrid>
 	</div>
 	

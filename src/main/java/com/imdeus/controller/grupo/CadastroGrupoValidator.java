@@ -10,26 +10,27 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.imdeus.repository.GrupoRepository;
+import com.imdeus.repository.PessoaRepository;
 
-@FacesValidator(value = "CadastroGrupoValidator", managed = true)
+@FacesValidator(value = "CadastroPessoaValidator", managed = true)
 public class CadastroGrupoValidator implements Validator {
 
 	@Inject
-	private GrupoRepository repository;
+	private PessoaRepository repository;
 
 	@Override
-	public void validate(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
+	public void validate(FacesContext arg0, UIComponent arg1, Object cpf) throws ValidatorException {
 		FacesMessage message = new FacesMessage();
-		if (StringUtils.isBlank((String) arg2)) {
-			message.setSummary("Nome obrigatório: ");
+		String cpfConvertido = (String) cpf;
+		if (StringUtils.isBlank(cpfConvertido)) {
+			message.setSummary("CPF obrigatório: ");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}
 
-		if (StringUtils.isNotBlank((String) arg2)) {
-			repository.porNome((String) arg2).ifPresent(g -> {
-				message.setSummary("Nome do Grupo " + g.getNome() + " já existe!");
+		if (StringUtils.isNotBlank(cpfConvertido)) {
+			repository.porCpf(cpfConvertido).ifPresent(p -> {
+				message.setSummary("CPF " + cpfConvertido + " já existe!");
 				message.setSeverity(FacesMessage.SEVERITY_ERROR);
 				throw new ValidatorException(message);
 			});

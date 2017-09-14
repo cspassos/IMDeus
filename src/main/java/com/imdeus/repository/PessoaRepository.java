@@ -2,6 +2,7 @@ package com.imdeus.repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -60,6 +61,10 @@ public class PessoaRepository implements Serializable {
 		}
 
 		return criteria.list();
+	}
+
+	public Optional<Pessoa> porCpf(String cpf) {
+		return manager.createQuery("from Pessoa where cpf = :cpf", Pessoa.class).setParameter("cpf", cpf).getResultList().stream().findFirst();
 	}
 
 }
