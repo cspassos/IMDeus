@@ -14,7 +14,11 @@ public class FacesUtil {
 	}
 	
 	public static void addErrorMessage(String message) {
-		FacesContext.getCurrentInstance().addMessage(null, 
+		addErrorMessage(message);
+	}
+	
+	public static void addErrorMessage(String key, String message) {
+		FacesContext.getCurrentInstance().addMessage(key, 
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
 	}
 	

@@ -15,7 +15,8 @@
     		
     		<ui:include src="/WEB-INF/templates/pessoas/CapaPessoa.xhtml" />
     		
-    		<p:tabView style="margin-top: 20px" id="tabPanel" cache="false">
+    		<p:tabView style="margin-top: 20px" id="tabPanel" cache="false"
+    			activeIndex="#{cadastroPessoaBean.tabIndex}">
     			<p:tab title="Restrições">
     				<ui:include src="/WEB-INF/templates/pessoas/Restricoes.xhtml" />
     			</p:tab>
