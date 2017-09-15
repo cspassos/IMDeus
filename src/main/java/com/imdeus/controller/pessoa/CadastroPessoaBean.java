@@ -1,8 +1,8 @@
 package com.imdeus.controller.pessoa;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -44,14 +44,16 @@ public class CadastroPessoaBean implements Serializable {
 	private boolean tipoCadastroMedicamento = true;
 
 	private boolean tipoCadastroIntolerancia = true;
+	
+	private int tabIndex = 0;
 
 	public CadastroPessoaBean() {
-		limparFormulario();
+		iniciarTela();
 	}
 
-	private void limparFormulario() {
+	private void iniciarTela() {
 		pessoa = Pessoa.newInstance();
-		gruposDaPessoa = pessoa.getGrupos();
+		atualizarGruposPessoa();
 	}
 
 	public void consultaStatusGrupo() {
@@ -64,23 +66,30 @@ public class CadastroPessoaBean implements Serializable {
 
 	public void salvar() {
 		pessoa = pessoaService.salvar(pessoa);
-		limparFormulario();
+		iniciarTela();
 		FacesUtil.addInfoMessage("Pessoa cadastrada com sucesso!");
 	}
 
 	public void adicionarGrupo() {
-		pessoa.adicionar(grupo);
-		if (gruposDaPessoa == null)
-			gruposDaPessoa = new ArrayList<>();
+		boolean anyMatch = gruposDaPessoa.stream().anyMatch(g -> Objects.equals(g, grupo));
+		if(anyMatch) {
+			FacesUtil.addErrorMessage("addGrupoMsg", "Grupo já adicionado!");
+		}else {
+			pessoa.adicionar(grupo);
+			atualizarGruposPessoa();
+			atualizaTab();
+			grupo = new Grupo();
+			FacesUtil.addInfoMessage("addGrupoMsg", "Grupo adicionado com sucesso!");
+		}
+	}
 
-		atualizarGruposPessoa();
-		grupo = new Grupo();
-		FacesUtil.addInfoMessage("addGrupoMsg", "Grupo adicionado com sucesso!");
+	private void atualizaTab() {
+		int tabGrupoPessoa = 4;
+		tabIndex = tabGrupoPessoa;
 	}
 
 	private void atualizarGruposPessoa() {
-		gruposDaPessoa.clear();
-		gruposDaPessoa.addAll(pessoa.getGrupos());
+		gruposDaPessoa = pessoa.getGrupos();
 	}
 
 	public Pessoa getPessoa() {
@@ -105,6 +114,14 @@ public class CadastroPessoaBean implements Serializable {
 
 	public StatusGrupo getStatusGrupoSelecionado() {
 		return statusGrupoSelecionado;
+	}
+	
+	public int getTabIndex() {
+		return tabIndex;
+	}
+	
+	public void setTabIndex(int tabIndex) {
+		this.tabIndex = tabIndex;
 	}
 
 	public List<Grupo> getGrupos() {
