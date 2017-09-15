@@ -62,14 +62,17 @@
 					converter="grupoConverter">
 					<f:selectItem itemLabel="Selecione um Status" />
 					<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
+			    	<p:ajax listener="#{cadastroPessoaBean.exibeBtnAddGrupo}" update="btnAddGrupo"/>
 				</p:selectOneMenu>
 				
 				<!-- Se a validação dos campos não falhou ele fecha o diálogo -->						
 				<p:outputLabel />
 				<p:commandButton value="Adicionar" 
+					id="btnAddGrupo"
 					action="#{cadastroPessoaBean.adicionarGrupo}"
 					process="grupoPanel" update="grupoPanel addGrupoG cadastroPessoaForm:tabPanel"
-					oncomplete="if (!args.validationFailed) PF('grupoDialog').hide()"/>
+					oncomplete="if (!args.validationFailed) PF('grupoDialog').hide()"
+					disabled="#{cadastroPessoaBean.exibirBtnAddGrupo}"/>
 			</p:panelGrid>
 		</h:panelGroup>
 	</p:dialog>

@@ -46,6 +46,8 @@ public class CadastroPessoaBean implements Serializable {
 	private boolean tipoCadastroIntolerancia = true;
 	
 	private int tabIndex = 0;
+	
+	private boolean exibirBtnAddGrupo;
 
 	public CadastroPessoaBean() {
 		iniciarTela();
@@ -91,6 +93,11 @@ public class CadastroPessoaBean implements Serializable {
 	private void atualizarGruposPessoa() {
 		gruposDaPessoa = pessoa.getGrupos();
 	}
+	
+	public void exibeBtnAddGrupo() {
+		boolean exibirBotao = true;
+		exibirBtnAddGrupo = exibirBotao;
+	}
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -122,6 +129,10 @@ public class CadastroPessoaBean implements Serializable {
 	
 	public void setTabIndex(int tabIndex) {
 		this.tabIndex = tabIndex;
+	}
+	
+	public boolean isExibirBtnAddGrupo() {
+		return exibirBtnAddGrupo;
 	}
 
 	public List<Grupo> getGrupos() {
