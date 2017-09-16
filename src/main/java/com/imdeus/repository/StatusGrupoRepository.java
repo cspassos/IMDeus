@@ -24,31 +24,29 @@ public class StatusGrupoRepository implements Serializable {
 	private EntityManager manager;
 
 	public StatusGrupo porId(Long id) {
-		return manager.find(StatusGrupo.class, id);
+		return (StatusGrupo) manager.unwrap(Session.class).createQuery("from StatusGrupo where id = :id")
+				.setCacheable(true).setParameter("id", id).uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<StatusGrupo> todosStatusGrupos() {
-		return manager.createQuery("from StatusGrupo", StatusGrupo.class)
-				.getResultList();
+		return manager.unwrap(Session.class).createQuery("from StatusGrupo").setCacheable(true).list();
 	}
 
 	public List<Grupo> carregarNomeGrupo(StatusGrupo statusGrupoPai) {
 		return manager.createQuery("from Grupo grupo where grupo.statusGrupo = :status", Grupo.class)
-				.setParameter("status", statusGrupoPai)
-				.getResultList();
+				.setParameter("status", statusGrupoPai).getResultList();
 	}
 
 	public List<Grupo> carregarNomeGrupoDe(GrupoFilter filtro) {
 		return manager.createQuery("from Grupo grupo where grupo.statusGrupo.nomeStatus = :status", Grupo.class)
-				.setParameter("status", filtro.getNomeStatus())
-				.getResultList();
+				.setParameter("status", filtro.getNomeStatus()).getResultList();
 	}
 	
 	public List<GrupoGraph> statusComTotalDeGrupos(){
 		return manager.createQuery("select new com.imdeus.repository.GrupoGraph(s.nomeStatus, count(*) as qtdeGrupos) "
 				+ "from StatusGrupo s join s.grupo g group by s.nomeStatus", GrupoGraph.class)
-			.setMaxResults(5)
-			.getResultList();
+			.setMaxResults(5).getResultList();
 	}
 
 	@SuppressWarnings({ "unchecked" })

@@ -18,8 +18,7 @@
     		<p:toolbar>
     			<p:toolbarGroup>
     				<p:commandButton value="Cancelar" type="reset"/>
-    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroGrupoBean.salvar}"
-    					update="@form"/>
+    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroGrupoBean.salvar}" update="@form"/>
     			</p:toolbarGroup>
     			
     			<p:toolbarGroup align="right">
@@ -34,16 +33,13 @@
 					columnClasses="ui-grid-col-2, ui-grid-col-3">
 	    			
 	    			<p:outputLabel value="Status Grupo" for="statusGrupo"/>
-		    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}" 
-		    			converter="statusGrupoConverter">
+		    		<p:selectOneMenu id="statusGrupo" value="#{cadastroGrupoBean.grupo.statusGrupo}" converter="statusGrupoConverter">
 		    			<f:selectItem itemLabel="Selecione um Status"/>
-		    			<f:selectItems value="#{cadastroGrupoBean.statusGrupo}" var="statusGrupo"
-		    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
+		    			<f:selectItems value="#{cadastroGrupoBean.statusGrupo}" var="statusGrupo" itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
 		    		</p:selectOneMenu>
 	    			
 	    			<p:outputLabel value="Nome do grupo" for="nomeGrupo"/>
-	    			<p:inputText id="nomeGrupo" size="80" maxlength="100"
-	    				value="#{cadastroGrupoBean.grupo.nome}" immediate="true">
+	    			<p:inputText id="nomeGrupo" size="80" maxlength="100" value="#{cadastroGrupoBean.grupo.nome}" immediate="true">
 	    			</p:inputText>
 	    			
 	    		</p:panelGrid>
