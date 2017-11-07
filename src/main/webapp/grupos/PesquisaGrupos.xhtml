@@ -20,7 +20,9 @@
     		
     		<p:toolbar>
     			<p:toolbarGroup>
-    				<p:commandButton value="Cancelar" outcome="/grupos/PesquisaGrupos"/>
+    				<p:commandButton value="Cancelar" >
+    					<p:ajax update="@form" resetValues="true"/>
+    				</p:commandButton>
     				<p:commandButton value="Pesquisar" action="#{pesquisarGrupoBean.pesquisar}"
     					update="@form"/>
     			</p:toolbarGroup>
