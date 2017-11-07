@@ -17,7 +17,9 @@
     		
     		<p:toolbar>
     			<p:toolbarGroup>
-    				<p:commandButton value="Cancelar" type="reset"/>
+    				<p:commandButton value="Cancelar" type="reset">
+    					<p:ajax update="@form" resetValues="true"/>
+    				</p:commandButton>
     				<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroGrupoBean.salvar}" update="@form"/>
     			</p:toolbarGroup>
     			
