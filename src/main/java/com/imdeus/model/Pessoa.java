@@ -45,7 +45,7 @@ public class Pessoa implements Serializable {
 	private String celular;
 
 	private String cpf;
-	
+
 	private LocalDate nascimento;
 
 	private Endereco endereco;
@@ -53,7 +53,7 @@ public class Pessoa implements Serializable {
 	private ComplementoPessoa complementoPessoa;
 
 	private Set<GrupoPessoa> gruposPessoas;
-	
+
 	private LocalDateTime criacao;
 
 	protected Pessoa() {
@@ -122,20 +122,12 @@ public class Pessoa implements Serializable {
 		this.cpf = cpf;
 	}
 
-	// uma pessoa possui muitos endereços
-	// mappedBy -> esse relacionamento que criei é o inverso do que mapiei na
-	// entidade endereço.
-	// cascade -> quando salvar uma pessoa automaticamente vai persistir os
-	// endereços do cliente
 	@NotNull
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	// Usa-se o endereco.setPessoa(this); -> para persistir o pessoa_id na
-	// tabela de
-	// endereco.
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 		// endereco.setPessoa(this);
@@ -147,9 +139,6 @@ public class Pessoa implements Serializable {
 		return complementoPessoa;
 	}
 
-	// Usa-se o complementoPessoa.setPessoa(this); -> para persistir o pessoa_id
-	// na
-	// tabela de complementoPessoa.
 	public void setComplementoPessoa(ComplementoPessoa complementoPessoa) {
 		this.complementoPessoa = complementoPessoa;
 		// complementoPessoa.setPessoa(this);
@@ -164,15 +153,15 @@ public class Pessoa implements Serializable {
 	public void setGruposPessoas(Set<GrupoPessoa> gruposPessoas) {
 		this.gruposPessoas = gruposPessoas;
 	}
-	
+
 	public LocalDateTime getCriacao() {
 		return criacao;
 	}
-	
+
 	public void setCriacao(LocalDateTime criacao) {
 		this.criacao = criacao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

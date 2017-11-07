@@ -29,9 +29,9 @@ public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	
+
 	private String nome;
-	
+
 	private StatusGrupo statusGrupo;
 
 	private List<GrupoPessoa> gruposPessoas;
@@ -41,7 +41,7 @@ public class Grupo implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -90,8 +90,6 @@ public class Grupo implements Serializable {
 		return result;
 	}
 
-	// Define que o endereço é unico pelo id
-	// botato direito/source/generete hashcode...
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

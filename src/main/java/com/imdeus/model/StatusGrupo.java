@@ -26,9 +26,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class StatusGrupo {
 
 	private Long id;
-	
+
 	private String nomeStatus;
-	
+
 	private List<Grupo> grupo = new ArrayList<>();
 
 	@Id

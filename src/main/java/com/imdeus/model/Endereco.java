@@ -25,19 +25,19 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	
+
 	private String logradouro;
-	
+
 	private String numero;
-	
+
 	private String cidade;
-	
+
 	private String uf;
-	
+
 	private String cep;
-	
+
 	private String complemento;
-	
+
 	private Pessoa pessoa;
 
 	protected Endereco() {
@@ -51,7 +51,7 @@ public class Endereco implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -136,8 +136,6 @@ public class Endereco implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	// Define que o endereço é unico pelo id
-	// botato direito/source/generete hashcode...
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -146,8 +144,6 @@ public class Endereco implements Serializable {
 		return result;
 	}
 
-	// Define que o endereço é unico pelo id
-	// botato direito/source/generete hashcode...
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -160,11 +156,6 @@ public class Endereco implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
-	}
-
-	public void add(Endereco endereco) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

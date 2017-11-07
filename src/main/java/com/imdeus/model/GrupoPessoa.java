@@ -22,7 +22,7 @@ public class GrupoPessoa {
 
 	private Pessoa pessoa;
 
-	private GrupoPessoa() {
+	protected GrupoPessoa() {
 	}
 
 	public GrupoPessoa(Grupo grupo, Pessoa pessoa) {

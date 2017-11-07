@@ -36,7 +36,7 @@
 	<p:commandButton value="Adicionar um Grupo"
 		actionListener="#{cadastroPessoaBean.consultaStatusGrupo}"
 		oncomplete="PF('grupoDialog').show()"
-		process="@this" update="grupoPanel">
+		process="@this" update="grupoPanel btnAddGrupo">
 		<p:resetInput target="grupoPanel" />
 	</p:commandButton>
 	
@@ -54,7 +54,7 @@
 					<f:selectItem itemLabel="Selecione um Status" />
 					<f:selectItems value="#{cadastroPessoaBean.statusGrupoRaizes}" var="statusGrupo"
 			    				itemValue="#{statusGrupo}" itemLabel="#{statusGrupo.nomeStatus}"/>
-			    	<p:ajax listener="#{cadastroPessoaBean.carregarNomeGrupo}" update="nomeGrupo"/>
+			    	<p:ajax listener="#{cadastroPessoaBean.carregarNomeGrupo}" update="nomeGrupo addGrupoG"/>
 				</p:selectOneMenu>
 			
 				<p:outputLabel value="Grupo" for="nomeGrupo" />
@@ -62,7 +62,7 @@
 					converter="grupoConverter">
 					<f:selectItem itemLabel="Selecione um Status" />
 					<f:selectItems value="#{cadastroPessoaBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
-			    	<p:ajax listener="#{cadastroPessoaBean.exibeBtnAddGrupo}" update="btnAddGrupo"/>
+			    	<p:ajax listener="#{cadastroPessoaBean.exibeBtnAddGrupo}" update="btnAddGrupo addGrupoG" />
 				</p:selectOneMenu>
 				
 				<!-- Se a validação dos campos não falhou ele fecha o diálogo -->						
@@ -70,7 +70,7 @@
 				<p:commandButton value="Adicionar" 
 					id="btnAddGrupo"
 					action="#{cadastroPessoaBean.adicionarGrupo}"
-					process="grupoPanel" update="grupoPanel addGrupoG cadastroPessoaForm:tabPanel"
+					process="grupoPanel" update="grupoPanel addGrupoG cadastroPessoaForm:tabPanel addGrupoG"
 					oncomplete="if (!args.validationFailed) PF('grupoDialog').hide()"
 					disabled="#{cadastroPessoaBean.exibirBtnAddGrupo}"/>
 			</p:panelGrid>

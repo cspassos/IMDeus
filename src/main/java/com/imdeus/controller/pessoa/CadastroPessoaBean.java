@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.apache.log4j.Logger;
 
@@ -47,7 +48,7 @@ public class CadastroPessoaBean implements Serializable {
 	
 	private int tabIndex = 0;
 	
-	private boolean exibirBtnAddGrupo;
+	private boolean exibirBtnAddGrupo = false;
 
 	public CadastroPessoaBean() {
 		iniciarTela();
@@ -107,6 +108,7 @@ public class CadastroPessoaBean implements Serializable {
 		return statusGrupoRaizes;
 	}
 
+	@NotNull(message=" é obrigatório")
 	public Grupo getGrupo() {
 		return grupo;
 	}
@@ -119,6 +121,7 @@ public class CadastroPessoaBean implements Serializable {
 		this.statusGrupoSelecionado = statusGrupoSelecionado;
 	}
 
+	@NotNull(message=" é obrigatório")
 	public StatusGrupo getStatusGrupoSelecionado() {
 		return statusGrupoSelecionado;
 	}
